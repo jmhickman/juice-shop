@@ -38,7 +38,7 @@ function createSequelize (options?: { inMemory?: boolean }) {
       max: 5
     },
     transactionType: Transaction.TYPES.IMMEDIATE,
-    storage: options?.inMemory ? ':memory:' : 'data/juiceshop.sqlite',
+    storage: options?.inMemory ? ':memory:' : 'data/lollo.sqlite',
     logging: false
   })
 }

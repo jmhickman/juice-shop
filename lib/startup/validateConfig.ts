@@ -42,7 +42,7 @@ const validateConfig = async ({ products, memories, exitOnFailure = true }: { pr
     logger.info(`Configuration ${colors.bold(process.env.NODE_ENV ?? 'default')} validated (${colors.green('SUCCESS')})`)
   } else {
     logger.warn(`Configuration ${colors.bold(process.env.NODE_ENV ?? 'default')} validated (${colors.red('ERROR')})`)
-    logger.warn(`Visit ${colors.yellow('https://pwning.owasp-juice.shop/companion-guide/latest/part4/customization.html#_yaml_configuration_file')} for the configuration schema definition.`)
+    logger.warn(`Visit ${colors.yellow('https://lollo-logistics.example.com/docs/configuration')} for the configuration schema definition.`)
     if (exitOnFailure) {
       logger.error(colors.red('Exiting due to configuration errors!'))
       process.exit(1)

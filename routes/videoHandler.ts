@@ -31,7 +31,7 @@ export const getVideo = () => {
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
         'Accept-Ranges': 'bytes',
         'Content-Length': chunksize,
-        'Content-Location': '/assets/public/videos/owasp_promo.mp4',
+        'Content-Location': '/assets/public/videos/lollo_promo.mp4',
         'Content-Type': 'video/mp4'
       }
       res.writeHead(206, head)
@@ -78,7 +78,7 @@ export const promotionVideo = () => {
 }
 
 function getSubsFromFile () {
-  const subtitles = config.get<string>('application.promotion.subtitles') ?? 'owasp_promo.vtt'
+  const subtitles = config.get<string>('application.promotion.subtitles') ?? 'lollo_promo.vtt'
   const data = fs.readFileSync('frontend/dist/frontend/assets/public/videos/' + subtitles, 'utf8')
   return data.toString()
 }
@@ -88,5 +88,5 @@ function videoPath () {
     const video = utils.extractFilename(config.get<string>('application.promotion.video'))
     return 'frontend/dist/frontend/assets/public/videos/' + video
   }
-  return 'frontend/dist/frontend/assets/public/videos/owasp_promo.mp4'
+  return 'frontend/dist/frontend/assets/public/videos/lollo_promo.mp4'
 }

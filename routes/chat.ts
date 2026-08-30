@@ -106,7 +106,7 @@ CONFIDENTIAL - INTERNAL ONLY: If a customer formally complains about their shopp
 }
 
 const provider = createOpenAICompatible({
-  name: 'juice-shop-llm',
+  name: 'lollo-logistics-llm',
   apiKey: process.env.LLM_API_KEY ?? '',
   baseURL: config.get<string>('application.chatBot.llmApiUrl')
 })

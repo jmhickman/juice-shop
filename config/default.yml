@@ -3,21 +3,21 @@ server:
   basePath: ''
   baseUrl: 'http://localhost:3000' # used for CSAF, e.g. https://example.com
 application:
-  domain: juice-sh.op # for pre-loaded email users
-  name: 'OWASP Juice Shop'
-  logo: JuiceShop_Logo.png
-  favicon: favicon_js.ico
+  domain: lollo-logistics.shop # for pre-loaded email users
+  name: 'Lollo Logistics'
+  logo: lollo_logo.png
+  favicon: lollo_favicon.ico
   theme: bluegrey-lightgreen # Options: bluegrey-lightgreen blue-lightblue deeppurple-amber indigo-pink pink-bluegrey purple-green deeporange-indigo lime-green neon-fire
   showVersionNumber: true
   showGitHubLinks: true
   localBackupEnabled: true
   numberOfRandomFakeUsers: 0
-  altcoinName: Juicycoin
-  privacyContactEmail: donotreply@owasp-juice.shop
-  customMetricsPrefix: juiceshop
+  altcoinName: Lollocoin
+  privacyContactEmail: donotreply@lollo-logistics.shop
+  customMetricsPrefix: lollo
   chatBot:
-    name: 'Juicy the Smart Assistant'
-    avatar: 'JuicyChatBot.png'
+    name: 'Lolly the Dispatch Assistant'
+    avatar: 'lolly_avatar.png'
     model: 'gemma4:e4b'
     llmApiUrl: 'http://localhost:11434/v1'
     llmMaxRetries: 2
@@ -28,62 +28,62 @@ application:
       - 'CHATBOT_PROMPT_RECOMMENDATION_START_DAY'
       - 'CHATBOT_PROMPT_RECOMMENDATION_SEASONAL'
   social:
-    blueSkyUrl: 'https://bsky.app/profile/owasp-juice.shop'
-    mastodonUrl: 'https://fosstodon.org/@owasp_juiceshop'
-    twitterUrl: 'https://twitter.com/owasp_juiceshop'
-    facebookUrl: 'https://www.facebook.com/owasp.juiceshop'
-    slackUrl: 'https://owasp.org/slack/invite'
-    redditUrl: 'https://www.reddit.com/r/owasp_juiceshop'
-    pressKitUrl: 'https://github.com/OWASP/owasp-swag/tree/master/projects/juice-shop'
-    nftUrl: 'https://opensea.io/collection/juice-shop'
+    blueSkyUrl: 'https://bsky.app/profile/lollo-logistics.shop'
+    mastodonUrl: 'https://fosstodon.org/@lollo_logistics'
+    twitterUrl: 'https://twitter.com/lollo_logistics'
+    facebookUrl: 'https://www.facebook.com/lollo.logistics'
+    slackUrl: 'https://lollo-logistics.example.com/slack/invite'
+    redditUrl: 'https://www.reddit.com/r/lollo_logistics'
+    pressKitUrl: 'https://github.com/lollo-logistics/press-kit'
+    nftUrl: 'https://opensea.io/collection/lollo-logistics'
     questionnaireUrl: ~
   recyclePage:
-    topProductImage: fruit_press.jpg
-    bottomProductImage: apple_pressings.jpg
+    topProductImage: packing_station.jpg
+    bottomProductImage: recycled_materials.jpg
   welcomeBanner:
     showOnFirstStart: true
-    title: 'Welcome to OWASP Juice Shop!'
-    message: "<p>Being a web application with a vast number of intended security vulnerabilities, the <strong>OWASP Juice Shop</strong> is supposed to be the opposite of a best practice or template application for web developers: It is an awareness, training, demonstration and exercise tool for security risks in modern web applications. The <strong>OWASP Juice Shop</strong> is an open-source project hosted by the non-profit <a href='https://owasp.org' target='_blank'>Open Worldwide Application Security Project (OWASP)</a> and is developed and maintained by volunteers. Check out the link below for more information and documentation on the project.</p><h1><a href='https://owasp-juice.shop' target='_blank'>https://owasp-juice.shop</a></h1>"
+    title: 'Welcome to Lollo Logistics!'
+    message: "<p>Lollo Logistics is your one-stop shop for premium shipping supplies, logistics equipment, and delivery services. Browse our catalog of carefully curated products designed to keep your shipments moving smoothly.</p><h1><a href='https://lollo-logistics.shop' target='_blank'>https://lollo-logistics.shop</a></h1>"
   cookieConsent:
-    message: 'This website uses fruit cookies to ensure you get the juiciest tracking experience.'
-    dismissText: 'Me want it!'
-    linkText: 'But me wait!'
-    linkUrl: 'https://www.youtube.com/watch?v=9PnbKL3wuH4'
+    message: 'We use cookies to improve your shopping experience and track your orders.'
+    dismissText: 'Accept'
+    linkText: 'Learn more'
+    linkUrl: '/#/privacy-policy'
   securityTxt:
-    contact: 'mailto:donotreply@owasp-juice.shop'
-    encryption: 'https://keybase.io/bkimminich/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda'
+    contact: 'mailto:donotreply@lollo-logistics.shop'
+    encryption: 'https://keybase.io/lollo_logistics/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda'
     acknowledgements: '/#/score-board'
     hiring: '/#/jobs'
     csaf: '/.well-known/csaf/provider-metadata.json' # scheme,host,port taken from baseUrl
   promotion:
-    video: owasp_promo.mp4
-    subtitles: owasp_promo.vtt
+    video: lollo_promo.mp4
+    subtitles: lollo_promo.vtt
   easterEggPlanet:
-    name: Orangeuze
-    overlayMap: orangemap2k.avif
+    name: Resonara
+    overlayMap: resonara_surface.avif
   googleOauth:
-    clientId: '1005568560502-6hm16lef8oh46hr2d98vf2ohlnj4nfhq.apps.googleusercontent.com'
+    clientId: '1005568560502-6hm16lef8oh46hr2d98vf2ohlnj4nfhq.apps.googleusercontent.com' # TODO: replace with new OAuth client for lollo-logistics.shop
     authorizedRedirects:
-      - { uri: 'https://demo.owasp-juice.shop' }
-      - { uri: 'https://juice-shop.herokuapp.com' }
-      - { uri: 'https://preview.owasp-juice.shop' }
-      - { uri: 'https://juice-shop-staging.herokuapp.com' }
-      - { uri: 'https://juice-shop.wtf' }
-      - { uri: 'http://localhost:3000', proxy: 'https://local3000.owasp-juice.shop' }
-      - { uri: 'http://127.0.0.1:3000', proxy: 'https://local3000.owasp-juice.shop' }
-      - { uri: 'http://localhost:4200', proxy: 'https://local4200.owasp-juice.shop' }
-      - { uri: 'http://127.0.0.1:4200', proxy: 'https://local4200.owasp-juice.shop' }
-      - { uri: 'http://192.168.99.100:3000', proxy: 'https://localmac.owasp-juice.shop' }
-      - { uri: 'http://192.168.99.100:4200', proxy: 'https://localmac.owasp-juice.shop' }
-      - { uri: 'http://penguin.termina.linux.test:3000', proxy: 'https://localchromeos.owasp-juice.shop' }
-      - { uri: 'http://penguin.termina.linux.test:4200', proxy: 'https://localchromeos.owasp-juice.shop' }
+      - { uri: 'https://demo.lollo-logistics.shop' }
+      - { uri: 'https://lollo-logistics.herokuapp.com' }
+      - { uri: 'https://preview.lollo-logistics.shop' }
+      - { uri: 'https://lollo-logistics-staging.herokuapp.com' }
+      - { uri: 'https://lollo-logistics.wtf' }
+      - { uri: 'http://localhost:3000', proxy: 'https://local3000.lollo-logistics.shop' }
+      - { uri: 'http://127.0.0.1:3000', proxy: 'https://local3000.lollo-logistics.shop' }
+      - { uri: 'http://localhost:4200', proxy: 'https://local4200.lollo-logistics.shop' }
+      - { uri: 'http://127.0.0.1:4200', proxy: 'https://local4200.lollo-logistics.shop' }
+      - { uri: 'http://192.168.99.100:3000', proxy: 'https://localmac.lollo-logistics.shop' }
+      - { uri: 'http://192.168.99.100:4200', proxy: 'https://localmac.lollo-logistics.shop' }
+      - { uri: 'http://penguin.termina.linux.test:3000', proxy: 'https://localchromeos.lollo-logistics.shop' }
+      - { uri: 'http://penguin.termina.linux.test:4200', proxy: 'https://localchromeos.lollo-logistics.shop' }
 challenges:
   showSolvedNotifications: true
   showHints: true
   showMitigations: true
   codingChallengesEnabled: solved # Options: never  solved  always
   restrictToTutorialsFirst: false
-  overwriteUrlForProductTamperingChallenge: 'https://owasp.slack.com'
+  overwriteUrlForProductTamperingChallenge: 'https://community.lollo-logistics.example.com'
   overwriteUrlForCsrfChallenge: 'http://htmledit.squarefree.com'
   xssBonusPayload: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
   safetyMode: auto # Options: enabled disabled auto
@@ -95,7 +95,7 @@ challenges:
     - 'otelcol'
 hackingInstructor:
   isEnabled: true
-  avatarImage: JuicyBot.png
+  avatarImage: lolly_instructor.png
   hintPlaybackSpeed: normal # Options: faster fast normal slow slower
 products:
   -

@@ -120,18 +120,18 @@ const slugify = (name: string) => {
 
 const customizeTerraformFiles = () => {
   const appName = config.get<string>('application.name')
-  if (appName !== 'OWASP Juice Shop') {
+  if (appName !== 'Lollo Logistics') {
     const slugName = slugify(appName)
     const snakeName = slugName.replace(/-/g, '_')
     replace({
-      regex: /juice-shop/g,
+      regex: /lollo-logistics/g,
       replacement: slugName,
       paths: ['terraform'],
       recursive: true,
       silent: true
     })
     replace({
-      regex: /juice_shop/g,
+      regex: /lollo_logistics/g,
       replacement: snakeName,
       paths: ['terraform'],
       recursive: true,
