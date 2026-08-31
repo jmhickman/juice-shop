@@ -21,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { getLanguageExtension } from '../shared/codemirror-extensions'
-import { juiceShopTheme } from '../shared/codemirror-theme'
+import { lolloTheme } from '../shared/codemirror-theme'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const client = createClient({
@@ -90,7 +90,7 @@ contract HelloWorld {
         doc: this.code,
         extensions: [
           basicSetup,
-          ...juiceShopTheme(),
+          ...lolloTheme(),
           getLanguageExtension('solidity'),
           EditorView.lineWrapping,
           EditorView.updateListener.of(update => {

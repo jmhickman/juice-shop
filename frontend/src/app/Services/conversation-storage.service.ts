@@ -6,7 +6,7 @@
 import { Injectable } from '@angular/core'
 import { type StoredConversation } from '../chatbot/chat.model'
 
-const STORAGE_KEY = 'juiceshop_chat_conversations'
+const STORAGE_KEY = 'lollo_chat_conversations'
 
 @Injectable({
   providedIn: 'root'

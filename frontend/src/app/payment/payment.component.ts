@@ -70,7 +70,7 @@ export class PaymentComponent implements OnInit {
   public card: any = {}
   public blueSkyUrl = null
   public redditUrl = null
-  public applicationName = 'OWASP Juice Shop'
+  public applicationName = 'Lollo Logistics'
   private campaignCoupon: string
   public couponControl: UntypedFormControl = new UntypedFormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)])
   public clientDate: any

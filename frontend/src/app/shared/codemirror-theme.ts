@@ -7,7 +7,7 @@ import { EditorView } from '@codemirror/view'
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { tags } from '@lezer/highlight'
 
-const juiceShopEditorTheme = EditorView.theme({
+const lolloEditorTheme = EditorView.theme({
   '&': {
     backgroundColor: 'var(--theme-background-darker)',
     color: 'var(--theme-text)',
@@ -64,7 +64,7 @@ const juiceShopEditorTheme = EditorView.theme({
   }
 }, { dark: true })
 
-const juiceShopHighlightStyle = HighlightStyle.define([
+const lolloHighlightStyle = HighlightStyle.define([
   { tag: tags.keyword, color: '#c678dd' },
   { tag: [tags.name, tags.deleted, tags.character, tags.macroName], color: '#e06c75' },
   { tag: [tags.function(tags.variableName), tags.labelName], color: '#61afef' },
@@ -83,6 +83,6 @@ const juiceShopHighlightStyle = HighlightStyle.define([
   { tag: tags.invalid, color: '#ffffff', backgroundColor: '#e06c75' }
 ])
 
-export function juiceShopTheme () {
-  return [juiceShopEditorTheme, syntaxHighlighting(juiceShopHighlightStyle)]
+export function lolloTheme () {
+  return [lolloEditorTheme, syntaxHighlighting(lolloHighlightStyle)]
 }

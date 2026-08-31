@@ -75,7 +75,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
       text: "Supply Bender's email address in the **email field**.",
       fixture: '#email',
       unskippable: true,
-      resolved: waitForInputToHaveValue('#email', 'bender@juice-sh.op', { replacement: ['juice-sh.op', 'application.domain'] })
+      resolved: waitForInputToHaveValue('#email', 'bender@lollo-logistics.shop', { replacement: ['lollo-logistics.shop', 'application.domain'] })
     },
     {
       text: "Now put anything in the **password field**. Let's assume we don't know it yet, even if you happen to already do.",
@@ -98,7 +98,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
       text: "You can comment out the entire password check clause of the DB query by adding `'--` to Bender's email address!",
       fixture: '#email',
       unskippable: true,
-      resolved: waitForInputToHaveValue('#email', "bender@juice-sh.op'--", { replacement: ['juice-sh.op', 'application.domain'] })
+      resolved: waitForInputToHaveValue('#email', "bender@lollo-logistics.shop'--", { replacement: ['lollo-logistics.shop', 'application.domain'] })
     },
     {
       text: 'Now click the _Log in_ button again.',

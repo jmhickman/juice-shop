@@ -15,7 +15,7 @@ import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
 import { bracketMatching, defaultHighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { highlightSelectionMatches, searchKeymap } from '@codemirror/search'
 import { getLanguageExtension, readOnlyExtensions, detectLanguage } from '../../../shared/codemirror-extensions'
-import { juiceShopTheme } from '../../../shared/codemirror-theme'
+import { lolloTheme } from '../../../shared/codemirror-theme'
 
 import { type CodeSnippet } from '../../../Services/code-snippet.service'
 import { VulnLinesService, type result } from '../../../Services/vuln-lines.service'
@@ -212,7 +212,7 @@ export class CodingChallengeFindItComponent implements OnInit, AfterViewInit, On
           bracketMatching(),
           highlightSelectionMatches(),
           keymap.of([...defaultKeymap, ...historyKeymap, ...searchKeymap]),
-          ...juiceShopTheme(),
+          ...lolloTheme(),
           getLanguageExtension(lang),
           ...readOnlyExtensions(),
           lineHighlightField,

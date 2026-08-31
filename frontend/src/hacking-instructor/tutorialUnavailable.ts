@@ -19,7 +19,7 @@ export const TutorialUnavailableInstruction: ChallengeInstruction = {
     },
     {
       text:
-        '✍️ Do you want to contribute a tutorial for this challenge? [Check out our documentation](https://pwning.owasp-juice.shop/companion-guide/latest/part5/tutorials.html) to learn how! 🏫',
+        '✍️ Do you want to contribute a tutorial for this challenge? [Check out our documentation](https://lollo-logistics.example.com/docs/tutorials) to learn how! 🏫',
       fixture: 'app-navbar',
       resolved: waitInMs(15000)
     },

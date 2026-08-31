@@ -15,7 +15,7 @@ import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { unifiedMergeView } from '@codemirror/merge'
 import { readOnlyExtensions, getLanguageExtension, detectLanguage } from '../../../shared/codemirror-extensions'
-import { juiceShopTheme } from '../../../shared/codemirror-theme'
+import { lolloTheme } from '../../../shared/codemirror-theme'
 
 import { type CodeSnippet } from '../../../Services/code-snippet.service'
 import { CodeFixesService } from '../../../Services/code-fixes.service'
@@ -87,7 +87,7 @@ export class CodingChallengeFixItComponent implements OnInit, AfterViewInit, OnD
         doc: fix.fix,
         extensions: [
           basicSetup,
-          ...juiceShopTheme(),
+          ...lolloTheme(),
           getLanguageExtension(lang),
           unifiedMergeView({
             original: this.snippet().snippet,

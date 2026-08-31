@@ -51,7 +51,7 @@ export const ExposedCredentialsInstruction: ChallengeInstruction = {
       text: 'Write the email address in the **email field**.',
       fixture: '#email',
       unskippable: true,
-      resolved: waitForInputToHaveValue('#email', 'testing@juice-sh.op', { replacement: ['juice-sh.op', 'application.domain'] })
+      resolved: waitForInputToHaveValue('#email', 'testing@lollo-logistics.shop', { replacement: ['lollo-logistics.shop', 'application.domain'] })
     },
     {
       text: 'Now write the password in the **password field**.',

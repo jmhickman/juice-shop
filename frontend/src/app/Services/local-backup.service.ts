@@ -25,7 +25,7 @@ export class LocalBackupService {
 
   private readonly VERSION = 1
 
-  async save (fileName = 'owasp_juice_shop'): Promise<void> {
+  async save (fileName = 'lollo_logistics'): Promise<void> {
     const backup: Backup = { version: this.VERSION }
 
     backup.banners = {
