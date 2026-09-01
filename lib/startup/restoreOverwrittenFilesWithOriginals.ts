@@ -6,7 +6,7 @@
 import path from 'node:path'
 import * as utils from '../utils'
 import logger from '../logger'
-import { copyFileSync, existsSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 import { globSync } from 'glob'
 
 let restorationPromise: Promise<void> | null = null
@@ -23,9 +23,11 @@ const restoreOverwrittenFilesWithOriginals = async () => {
       copyFileSync(path.resolve('data/static/legal.md'), path.resolve('ftp/legal.md'))
 
       if (existsSync(path.resolve('frontend/dist'))) {
+        const videoDir = path.resolve('frontend/dist/frontend/assets/public/videos')
+        mkdirSync(videoDir, { recursive: true })
         copyFileSync(
           path.resolve('data/static/lollo_promo.vtt'),
-          path.resolve('frontend/dist/frontend/assets/public/videos/lollo_promo.vtt')
+          path.join(videoDir, 'lollo_promo.vtt')
         )
       }
 

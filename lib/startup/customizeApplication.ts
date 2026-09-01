@@ -5,6 +5,7 @@
 
 import fs from 'node:fs'
 import config from 'config'
+import logger from '../logger'
 import * as utils from '../utils'
 // @ts-expect-error FIXME due to non-existing type definitions for replace
 import replace from 'replace'
@@ -44,12 +45,21 @@ const customizeLogo = async () => {
 
 const customizeChatbotAvatar = async () => {
   const avatarImage = await retrieveCustomFile('application.chatBot.avatar', 'frontend/dist/frontend/assets/public/images')
-  fs.copyFileSync('frontend/dist/frontend/assets/public/images/' + avatarImage, 'frontend/dist/frontend/assets/public/images/ChatbotAvatar.png')
+  copyAvatar(avatarImage, 'ChatbotAvatar.png')
 }
 
 const customizeHackingInstructorAvatar = async () => {
   const avatarImage = await retrieveCustomFile('hackingInstructor.avatarImage', 'frontend/dist/frontend/assets/public/images')
-  fs.copyFileSync('frontend/dist/frontend/assets/public/images/' + avatarImage, 'frontend/dist/frontend/assets/public/images/hackingInstructor.png')
+  copyAvatar(avatarImage, 'hackingInstructor.png')
+}
+
+const copyAvatar = (source: string, target: string) => {
+  const sourcePath = 'frontend/dist/frontend/assets/public/images/' + source
+  if (!fs.existsSync(sourcePath)) {
+    logger.warn(`Avatar image ${source} not found, keeping default avatar in place`)
+    return
+  }
+  fs.copyFileSync(sourcePath, 'frontend/dist/frontend/assets/public/images/' + target)
 }
 
 const customizeFavicon = async () => {
