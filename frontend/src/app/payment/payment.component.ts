@@ -256,9 +256,9 @@ export class PaymentComponent implements OnInit {
   showBitcoinQrCode () {
     this.dialog.open(QrCodeComponent, {
       data: {
-        data: 'bitcoin:1AbKfgvw9psQ41NbLi8kufDQTezwG8DRZm',
-        url: './redirect?to=https://blockchain.info/address/1AbKfgvw9psQ41NbLi8kufDQTezwG8DRZm',
-        address: '1AbKfgvw9psQ41NbLi8kufDQTezwG8DRZm',
+        data: 'bitcoin:3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5',
+        url: './redirect?to=https://blockchain.info/address/3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5',
+        address: '3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5',
         title: 'TITLE_BITCOIN_ADDRESS'
       }
     })
@@ -267,9 +267,9 @@ export class PaymentComponent implements OnInit {
   showDashQrCode () {
     this.dialog.open(QrCodeComponent, {
       data: {
-        data: 'dash:Xr556RzuwX6hg5EGpkybbv5RanJoZN17kW',
-        url: './redirect?to=https://explorer.dash.org/address/Xr556RzuwX6hg5EGpkybbv5RanJoZN17kW',
-        address: 'Xr556RzuwX6hg5EGpkybbv5RanJoZN17kW',
+        data: 'dash:XqK7mNz3vTgWpLd9sYbUoEcHfJiA2rVtS6',
+        url: './redirect?to=https://explorer.dash.org/address/XqK7mNz3vTgWpLd9sYbUoEcHfJiA2rVtS6',
+        address: 'XqK7mNz3vTgWpLd9sYbUoEcHfJiA2rVtS6',
         title: 'TITLE_DASH_ADDRESS'
       }
     })
@@ -278,9 +278,9 @@ export class PaymentComponent implements OnInit {
   showEtherQrCode () {
     this.dialog.open(QrCodeComponent, {
       data: {
-        data: '0x0f933ab9fCAAA782D0279C300D73750e1311EAE6',
-        url: './redirect?to=https://etherscan.io/address/0x0f933ab9fcaaa782d0279c300d73750e1311eae6',
-        address: '0x0f933ab9fCAAA782D0279C300D73750e1311EAE6',
+        data: '0x7A3F9C2E4B1D8E6A5C0B27D94F1E83A6D5C0B7E2',
+        url: './redirect?to=https://etherscan.io/address/0x7a3f9c2e4b1d8e6a5c0b27d94f1e83a6d5c0b7e2',
+        address: '0x7A3F9C2E4B1D8E6A5C0B27D94F1E83A6D5C0B7E2',
         title: 'TITLE_ETHER_ADDRESS'
       }
     })

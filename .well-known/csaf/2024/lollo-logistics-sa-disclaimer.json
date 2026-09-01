@@ -2,7 +2,7 @@
   "document": {
     "acknowledgments": [
       {
-        "organization": "OWASP Juice Shop",
+        "organization": "Lollo Logistics",
         "summary": "Probably the most modern and sophisticated insecure web application"
       }
     ],
@@ -10,33 +10,38 @@
       "text": "Critical"
     },
     "category": "csaf_security_advisory",
-    "csaf_version": "2.0",
+    "csaf_version": "2.1",
+    "distribution": {
+      "tlp": {
+        "label": "WHITE"
+      }
+    },
     "lang": "en",
     "notes": [
       {
         "category": "legal_disclaimer",
-        "text": "The Juice Shop contains vulnerabilities. Only use it in an isolated. ONLY run the Juice Shop in a training environment.",
+        "text": "The Lollo Logistics contains vulnerabilities. ONLY run the Lollo Logistics in an isolated training environment.",
         "title": "Isolated Env."
       }
     ],
     "publisher": {
       "category": "vendor",
-      "contact_details": "timo.pagel@owasp.org",
-      "issuing_authority": "OWASP Juice Shop",
-      "name": "OWASP Juice Shop Core Team",
-      "namespace": "https://github.com/juice-shop/juice-shop"
+      "contact_details": "security@lollo-logistics.shop",
+      "issuing_authority": "Lollo Logistics",
+      "name": "Lollo Logistics Core Team",
+      "namespace": "https://github.com/lollo-logistics/lollo-logistics"
     },
-    "title": "juice-shop-sa-20200513-express-jwt",
+    "title": "lollo-logistics-sa-disclaimer",
     "tracking": {
       "current_release_date": "2024-03-03T11:00:00.000Z",
       "generator": {
-        "date": "2024-03-03T19:30:53.428Z",
+        "date": "2024-04-23T08:32:41.092Z",
         "engine": {
           "name": "Secvisogram",
-          "version": "2.5.0"
+          "version": "2.5.2"
         }
       },
-      "id": "juice-shop-sa-20200513-express-jwt",
+      "id": "lollo-logistics-sa-disclaimer",
       "initial_release_date": "2024-03-03T11:00:00.000Z",
       "revision_history": [
         {
@@ -53,41 +58,56 @@
     "branches": [
       {
         "category": "product_version_range",
-        "name": ">=v6.0.0",
+        "name": "vers:all/>=0.0.1",
         "product": {
-          "name": "OWASP Juice Shop",
-          "product_id": "juice-shop/juice-shop",
+          "name": "Lollo Logistics",
+          "product_id": "lollo-logistics/lollo-logistics",
           "product_identification_helper": {
-            "purl": "pkg:docker/bkimminich/juice-shop"
+            "purl": "pkg:docker/lollologistics/lollo-logistics"
           }
+        }
+      },
+      {
+        "category": "product_version_range",
+        "name": "vers:all/>=17.0.0",
+        "product": {
+          "name": "Lollo Logistics",
+          "product_id": "lollo-logistics/lollo-logistics-17-or-later"
         }
       }
     ]
   },
   "vulnerabilities": [
     {
-      "cve": "CVE-2020-15084",
       "notes": [
         {
           "category": "details",
-          "text": "The Juice Shop is currently vulnerable to JWT null algorithm attacks . We will soon release a patch",
-          "title": "Vulnerable to Null JWT Algorithm"
+          "text": "The Lollo Logistics has intentional vulnerabilities which might be abused to attack your system",
+          "title": "Intentional Vulnerable Lollo Logistics"
         }
       ],
       "product_status": {
         "known_affected": [
-          "juice-shop/juice-shop"
+          "lollo-logistics/lollo-logistics"
         ]
       },
       "remediations": [
         {
-          "category": "workaround",
-          "date": "2020-07-01T10:00:00.000Z",
-          "details": "Check for the expected JWT algorithm type in a WAF/Proxy/Loadbalancer in front of the Juice Shop.",
+          "category": "no_fix_planned",
+          "date": "2024-03-03T11:00:00.000Z",
+          "details": "ONLY run the Lollo Logistics in an isolated training environment.",
           "product_ids": [
-            "juice-shop/juice-shop"
+            "lollo-logistics/lollo-logistics"
+          ]
+        },
+        {
+          "category": "mitigation",
+          "date": "2024-03-10T08:46:00.000Z",
+          "details": "Explicitly enable safetyMode to disable unsecure challenges.\n\n```yaml\nchallenges:\n  safetyMode: enabled\n```\n",
+          "product_ids": [
+            "lollo-logistics/lollo-logistics-17-or-later"
           ],
-          "url": "https://github.com/advisories/GHSA-6g6m-m6h5-w9gf"
+          "url": "https://github.com/lollo-logistics/lollo-logistics/issues/2174"
         }
       ],
       "scores": [
@@ -111,11 +131,11 @@
             "version": "3.1"
           },
           "products": [
-            "juice-shop/juice-shop"
+            "lollo-logistics/lollo-logistics"
           ]
         }
       ],
-      "title": "CVE-2020-15084"
+      "title": "Intentional Vulnerabilities"
     }
   ]
 }

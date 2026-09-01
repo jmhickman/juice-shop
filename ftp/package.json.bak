@@ -1,40 +1,23 @@
 {
-  "name": "juice-shop",
+  "name": "lollo-logistics",
   "version": "6.2.0-SNAPSHOT",
-  "description": "An intentionally insecure JavaScript Web Application",
-  "homepage": "http://owasp-juice.shop",
-  "author": "Björn Kimminich <bjoern.kimminich@owasp.org> (https://kimminich.de)",
+  "description": "Lollo Logistics web store frontend (legacy build)",
+  "homepage": "https://lollo-logistics.shop",
+  "author": "Helmut Lorenz <helmut@lollo-logistics.shop>",
   "contributors": [
-    "Björn Kimminich",
-    "Jannik Hollenbach",
-    "Aashish683",
-    "greenkeeper[bot]",
-    "MarcRler",
-    "agrawalarpit14",
-    "Scar26",
-    "CaptainFreak",
-    "Supratik Das",
-    "JuiceShopBot",
-    "the-pro",
-    "Ziyang Li",
-    "aaryan10",
-    "m4l1c3",
-    "Timo Pagel",
-    "..."
+    "Helmut Lorenz",
+    "Martin Weber",
+    "Leo Marsh",
+    "Vex Corrado",
+    "Timo Brandt"
   ],
   "private": true,
   "keywords": [
-    "web security",
-    "web application security",
-    "webappsec",
-    "owasp",
-    "pentest",
-    "pentesting",
-    "security",
-    "vulnerable",
-    "vulnerability",
-    "broken",
-    "bodgeit"
+    "logistics",
+    "shipping",
+    "freight",
+    "supply chain",
+    "wms"
   ],
   "dependencies": {
     "body-parser": "~1.18",
@@ -116,10 +99,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/juice-shop/juice-shop.git"
+    "url": "https://github.com/lollo-logistics/web-store.git"
   },
   "bugs": {
-    "url": "https://github.com/juice-shop/juice-shop/issues"
+    "url": "https://github.com/lollo-logistics/web-store/issues"
   },
   "license": "MIT",
   "scripts": {

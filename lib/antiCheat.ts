@@ -20,29 +20,25 @@ import { type ChallengeKey } from '@juice-shop/models/challenge'
 
 const tightlyCoupledChallenges = {
   loginAdminChallenge: ['weakPasswordChallenge'],
-  nullByteChallenge: ['easterEggLevelOneChallenge', 'forgottenDevBackupChallenge', 'forgottenBackupChallenge', 'misplacedSignatureFileChallenge'],
+  nullByteChallenge: ['forgottenDevBackupChallenge', 'forgottenBackupChallenge', 'misplacedSignatureFileChallenge'],
   deprecatedInterfaceChallenge: ['uploadTypeChallenge', 'xxeFileDisclosureChallenge', 'xxeDosChallenge', 'yamlBombChallenge'],
   uploadSizeChallenge: ['uploadTypeChallenge', 'xxeFileDisclosureChallenge', 'xxeDosChallenge', 'yamlBombChallenge'],
   uploadTypeChallenge: ['xxeFileDisclosureChallenge', 'xxeDosChallenge', 'yamlBombChallenge']
 }
 
 const looselyCoupledChallenges = [
-  ['easterEggLevelOneChallenge', 'forgottenDevBackupChallenge', 'forgottenBackupChallenge', 'misplacedSignatureFileChallenge'],
   ['uploadSizeChallenge', 'uploadTypeChallenge'],
   ['localXssChallenge', 'xssBonusChallenge'],
-  ['fileWriteChallenge', 'videoXssChallenge'],
+  ['fileWriteChallenge'],
   ['misplacedIacFiles', 'iacLeakedKeyChallenge', 'vulnerableDockerImageChallenge']
 ]
 
-const trivialChallenges = ['errorHandlingChallenge', 'privacyPolicyChallenge', 'closeNotificationsChallenge']
+const trivialChallenges = ['errorHandlingChallenge', 'privacyPolicyChallenge']
 
 const solves: Array<{ challenge: any, phase: string, timestamp: Date, cheatScore: number }> = [{ challenge: {}, phase: 'server start', timestamp: new Date(), cheatScore: 0 }] // seed with server start timestamp
 
 const preSolveInteractions: Array<{ challengeKey: ChallengeKey, urlFragments: string[], interactions: boolean[] }> = [
-  { challengeKey: 'missingEncodingChallenge', urlFragments: ['/assets/public/images/uploads/%F0%9F%98%BC-'], interactions: [false] },
   { challengeKey: 'directoryListingChallenge', urlFragments: ['/ftp'], interactions: [false] },
-  { challengeKey: 'easterEggLevelOneChallenge', urlFragments: ['/ftp', '/ftp/eastere.gg'], interactions: [false, false] },
-  { challengeKey: 'easterEggLevelTwoChallenge', urlFragments: ['/ftp', '/gur/qrif/ner/fb/shaal/gurl/uvq/na/rnfgre/rtt/jvguva/gur/rnfgre/rtt'], interactions: [false, false] },
   { challengeKey: 'forgottenDevBackupChallenge', urlFragments: ['/ftp', '/ftp/package.json.bak'], interactions: [false, false] },
   { challengeKey: 'forgottenBackupChallenge', urlFragments: ['/ftp', '/ftp/coupons_2013.md.bak'], interactions: [false, false] },
   { challengeKey: 'loginSupportChallenge', urlFragments: ['/ftp', '/ftp/incident-support.kdbx'], interactions: [false, false] },
@@ -56,7 +52,6 @@ const challengeSourceFiles: Record<string, string[]> = {
   knownVulnerableComponentChallenge: ['ftp/package.json.bak'],
   typosquattingNpmChallenge: ['ftp/package.json.bak'],
   supplyChainAttackChallenge: ['ftp/package.json.bak'],
-  weirdCryptoChallenge: ['ftp/package.json.bak'],
   vulnerableDockerImageChallenge: ['infrastructure/docker-compose.yml']
 }
 

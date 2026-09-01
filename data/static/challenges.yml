@@ -758,11 +758,11 @@
     - Contraption
     - Danger Zone
     - Code Analysis
-  description: 'Infect the server with juicy malware by abusing arbitrary command execution.'
+  description: 'Infect the server with lollo malware by abusing arbitrary command execution.'
   difficulty: 6
   hints:
     - '"SSTi" is a clear indicator that this has nothing to do with anything Angular. Also, make sure to use only our non-malicious malware.'
-    - 'You can find the juicy malware via a very obvious Google search or by stumbling into a very ill-placed quarantine folder with the necessary URLs in it.'
+    - 'You can find the lollo malware by stumbling into a very ill-placed quarantine folder with the necessary URLs in it.'
     - 'Making the server download and execute the malware is key to solving this challenge.'
     - 'For this challenge you do not have to reverse engineer the malware in any way. That will be required later to solve the "Request a hidden resource on server through server" challenge.'
   mitigationUrl: ~
@@ -1082,7 +1082,7 @@
     - 'Analyze and tamper with links in the application until you get to an unprotected directory listing.'
     - 'Some files in there are not directly accessible because a security mechanism prevents access.'
     - 'The Poison Null Byte can trick the security mechanism into thinking that the file you want has a valid file type.'
-    - 'Depending on the files you try to retrieve you will probably solve "Access a developer’s forgotten backup file", "Access a salesman’s forgotten backup file", "Access a misplaced SIEM signature file, or "Find the hidden easter egg" along the way.'
+    - 'Depending on the files you try to retrieve you will probably solve "Access a developer’s forgotten backup file", "Access a salesman’s forgotten backup file", or "Access a misplaced SIEM signature file" along the way.'
   mitigationUrl: ~
   key: nullByteChallenge
 -
