@@ -34,7 +34,7 @@ export function checkKeys () {
 export function nftUnlocked () {
   return (req: Request, res: Response) => {
     try {
-      res.status(200).json({ status: challenges.nftUnlockChallenge.solved })
+      res.status(200).json({ status: challenges.nftUnlockChallenge?.solved ?? false })
     } catch (error) {
       res.status(500).json(utils.getErrorMessage(error))
     }
