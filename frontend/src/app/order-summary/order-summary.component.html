@@ -50,19 +50,19 @@
           <table class="mat-table">
             <tr class="mat-row">
               <td class="mat-cell label">{{"ITEMS" | translate}}</td>
-              <td class="mat-cell price">{{ itemTotal?.toFixed(2) }}&curren;</td>
+              <td class="mat-cell price">{{ itemTotal?.toFixed(2) }}$</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-cell label">{{"DELIVERY" | translate}}</td>
-              <td class="mat-cell price">{{ deliveryPrice.toFixed(2) }}&curren;</td>
+              <td class="mat-cell price">{{ deliveryPrice.toFixed(2) }}$</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-cell label">{{"PROMOTION" | translate}}</td>
-              <td class="mat-cell price">{{ promotionalDiscount.toFixed(2) }}&curren;</td>
+              <td class="mat-cell price">{{ promotionalDiscount.toFixed(2) }}$</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-footer-cell label">{{"LABEL_TOTAL_PRICE" | translate}}</td>
-              <td class="mat-footer-cell price">{{ (itemTotal + deliveryPrice - promotionalDiscount)?.toFixed(2) }}&curren;</td>
+              <td class="mat-footer-cell price">{{ (itemTotal + deliveryPrice - promotionalDiscount)?.toFixed(2) }}$</td>
             </tr>
           </table>
           <!-- Checkout Button -->

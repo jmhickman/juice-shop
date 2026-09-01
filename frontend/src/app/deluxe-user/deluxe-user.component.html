@@ -23,7 +23,7 @@
     <span translate [translateParams]="{appname: applicationName}">DESCRIPTION_DELUXE_MEMBERSHIP</span>
     @if (!error) {
       <span>
-        {{ membershipCost }}&curren;
+        {{ membershipCost }}$
       </span>
       <button (click)="upgradeToDeluxe()" aria-label="Become deluxe member" color="primary"
         mat-button mat-raised-button>

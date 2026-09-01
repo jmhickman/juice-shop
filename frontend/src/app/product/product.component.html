@@ -49,11 +49,11 @@
     <footer class="footer">
        <div class="price">
           @if (!isDeluxe() || product.price === product.deluxePrice) {
-            {{ product.price }}&curren;
+            {{ product.price }}$
           }
           @if (isDeluxe() && product.price !== product.deluxePrice) {
             <s class="expired">{{ product.price }}</s>
-            {{ product.deluxePrice }}&curren;
+            {{ product.deluxePrice }}$
           }
         </div>
       <button

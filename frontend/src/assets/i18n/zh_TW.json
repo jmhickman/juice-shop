@@ -300,7 +300,7 @@
   "LABEL_WALLET_BALANCE": "錢包總額",
   "MANDATORY_AMOUNT": "請輸入金額",
   "LABEL_AMOUNT": "金額",
-  "AMOUNT_LIMIT": "你可以增加最少10¤至多到1000¤。",
+  "AMOUNT_LIMIT": "你可以增加最少10$至多到1000$。",
   "LABEL_CHOOSE_A_DELIVERY_SPEED": "選擇物流速度",
   "CARD_ENDING_IN": "卡號結尾為",
   "CARD_HOLDER": "持卡人",

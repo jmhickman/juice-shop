@@ -300,7 +300,7 @@
   "LABEL_WALLET_BALANCE": "Montante disponível na carteira",
   "MANDATORY_AMOUNT": "Insera um montante",
   "LABEL_AMOUNT": "montante",
-  "AMOUNT_LIMIT": "Deves adicionar no minimo 10¤ e valor máximo é 1000¤.",
+  "AMOUNT_LIMIT": "Deves adicionar no minimo 10$ e valor máximo é 1000$.",
   "LABEL_CHOOSE_A_DELIVERY_SPEED": "Escolhe a velocidade de entrega",
   "CARD_ENDING_IN": "Cartão acabado em",
   "CARD_HOLDER": "Dono do cartão",

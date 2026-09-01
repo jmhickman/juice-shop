@@ -16,7 +16,7 @@
         <div [innerHTML]="data.productData.description"></div>
         <br/>
         <div>
-          <p class="item-price">{{data.productData.price}}&curren;</p>
+          <p class="item-price">{{data.productData.price}}$</p>
           @if (data.productData.points > 0) {
             <div matTooltip="{{'LABEL_BONUS' | translate}}"
               aria-label="Bonus points when buying the product">

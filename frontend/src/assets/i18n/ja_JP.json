@@ -300,7 +300,7 @@
   "LABEL_WALLET_BALANCE": "ウォレット残高",
   "MANDATORY_AMOUNT": "金額を入力してください",
   "LABEL_AMOUNT": "金額",
-  "AMOUNT_LIMIT": "最低 10¤、最高 1000¤ を追加することができます。",
+  "AMOUNT_LIMIT": "最低 10$、最高 1000$ を追加することができます。",
   "LABEL_CHOOSE_A_DELIVERY_SPEED": "配送方法を選択",
   "CARD_ENDING_IN": "カードの下 4 桁",
   "CARD_HOLDER": "カード名義人",

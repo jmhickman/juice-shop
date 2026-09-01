@@ -35,7 +35,7 @@
         </ng-container>
         <ng-container matColumnDef="Price">
           <mat-header-cell *matHeaderCellDef translate="LABEL_PRICE" class="table-header-label"></mat-header-cell>
-          <mat-cell *matCellDef="let element">{{ element.price.toFixed(2) }}&curren;</mat-cell>
+          <mat-cell *matCellDef="let element">{{ element.price.toFixed(2) }}$</mat-cell>
         </ng-container>
         <ng-container matColumnDef="ETA">
           <mat-header-cell *matHeaderCellDef translate="LABEL_EXPECTED_DELIVERY" class="table-header-label"></mat-header-cell>
