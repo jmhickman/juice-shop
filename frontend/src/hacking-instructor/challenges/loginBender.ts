@@ -15,7 +15,7 @@ import {
 import { type ChallengeInstruction } from '../'
 
 export const LoginBenderInstruction: ChallengeInstruction = {
-  name: 'Login Bender',
+  name: 'Login Vex',
   hints: [
     {
       text:
@@ -33,7 +33,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
     },
     {
       text:
-        "Let's try if we find a way to log in with Bender's user account. To begin, go to the _Login_ page via the _Account_ menu.",
+        "Let's try if we find a way to log in with Vex's user account. To begin, go to the _Login_ page via the _Account_ menu.",
       fixture: 'app-navbar',
       fixtureAfter: true,
       unskippable: true,
@@ -41,7 +41,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
     },
     {
       text:
-        "As you would expect you need to supply Bender's email address and password to log in regularly. But you might have neither at the moment.",
+        "As you would expect you need to supply Vex's email address and password to log in regularly. But you might have neither at the moment.",
       fixture: 'app-navbar',
       resolved: waitInMs(15000)
     },
@@ -53,7 +53,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
     },
     {
       text:
-        "So, let's go find out Bender's email! Luckily the shop is very bad with privacy and leaks emails in different places, for instance in the user feedback.",
+        "So, let's go find out Vex's email! Luckily the shop is very bad with privacy and leaks emails in different places, for instance in the user feedback.",
       fixture: 'app-navbar',
       resolved: waitInMs(15000)
     },
@@ -66,16 +66,16 @@ export const LoginBenderInstruction: ChallengeInstruction = {
     },
     {
       text:
-        'Once you found an entry by Bender in the feedback carousel leaking enough of his email to deduce the rest, go to the _Login_ screen.',
+        'Once you found an entry by Vex in the feedback carousel leaking enough of his email to deduce the rest, go to the _Login_ screen.',
       fixture: 'app-about',
       unskippable: true,
       resolved: waitForAngularRouteToBeVisited('login')
     },
     {
-      text: "Supply Bender's email address in the **email field**.",
+      text: "Supply Vex's email address in the **email field**.",
       fixture: '#email',
       unskippable: true,
-      resolved: waitForInputToHaveValue('#email', 'bender@lollo-logistics.shop', { replacement: ['lollo-logistics.shop', 'application.domain'] })
+      resolved: waitForInputToHaveValue('#email', 'vex@lollo-logistics.shop', { replacement: ['lollo-logistics.shop', 'application.domain'] })
     },
     {
       text: "Now put anything in the **password field**. Let's assume we don't know it yet, even if you happen to already do.",
@@ -95,10 +95,10 @@ export const LoginBenderInstruction: ChallengeInstruction = {
       resolved: waitInMs(10000)
     },
     {
-      text: "You can comment out the entire password check clause of the DB query by adding `'--` to Bender's email address!",
+      text: "You can comment out the entire password check clause of the DB query by adding `'--` to Vex's email address!",
       fixture: '#email',
       unskippable: true,
-      resolved: waitForInputToHaveValue('#email', "bender@lollo-logistics.shop'--", { replacement: ['lollo-logistics.shop', 'application.domain'] })
+      resolved: waitForInputToHaveValue('#email', "vex@lollo-logistics.shop'--", { replacement: ['lollo-logistics.shop', 'application.domain'] })
     },
     {
       text: 'Now click the _Log in_ button again.',
@@ -108,7 +108,7 @@ export const LoginBenderInstruction: ChallengeInstruction = {
     },
     {
       text:
-        '🎉 Congratulations! You have been logged in as Bender!',
+        '🎉 Congratulations! You have been logged in as Vex!',
       fixture: 'app-navbar',
       resolved: waitInMs(5000)
     }

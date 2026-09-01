@@ -77,24 +77,24 @@
   hints:
     - 'Look out for a tweet praising new functionality of the web shop. Then find a third party vulnerability associated with it.'
     - 'Find all places in the application where file uploads are possible.'
-    - 'For at least one of these, the Juice Shop is depending on a library that suffers from an arbitrary file overwrite vulnerability.'
-    - 'You can find a hint toward the underlying vulnerability in the @owasp_juiceshop Twitter timeline.'
+    - 'For at least one of these, Lollo Logistics depends on a library that suffers from an arbitrary file overwrite vulnerability.'
+    - 'You can find a hint toward the underlying vulnerability in the official Lollo Logistics social media feed.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html'
   key: fileWriteChallenge
   disabledEnv:
     - Docker
     - Heroku
 -
-  name: 'Bjoern''s Favorite Pet'
+  name: 'Weber''s Favorite Pet'
   category: 'Broken Authentication'
   tags:
     - OSINT
-  description: 'Reset the password of Bjoern''s OWASP account via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
+  description: 'Reset the password of Weber''s personal account via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
   difficulty: 3
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Choosing_and_Using_Security_Questions_Cheat_Sheet.html'
   hints:
-    - 'Hints to the answer to Bjoern’s question can be found by looking him up on the Internet.'
-    - 'More precisely, Bjoern might have accidentally (?) doxxed himself by mentioning his security answer on at least one occasion where a camera was running.'
+    - 'Hints to the answer to Weber’s question can be found by looking him up on the Internet.'
+    - 'More precisely, Weber might have accidentally (?) doxxed himself by mentioning his security answer in one of his depot tour videos.'
     - 'Brute forcing the answer might be very well possible with a sufficiently extensive list of common pet names.'
   key: resetPasswordBjoernOwaspChallenge
 -
@@ -169,7 +169,7 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html'
   hints:
     - 'The feature you need to exploit for this challenge is not directly advertised anywhere.'
-    - 'As the Juice Shop is written in pure Javascript, there is one data format that is most probably used for serialization.'
+    - 'As Lollo Logistics is written in pure Javascript, there is one data format that is most probably used for serialization.'
     - 'You should try to make the server busy for all eternity.'
     - 'The challenge will be solved if you manage to trigger the protection of the application against a very specific DoS attack vector.'
     - 'Similar to the "Let the server sleep for some time" challenge (which accepted nothing but NoSQL Injection as a solution) this challenge will only accept proper RCE as a solution. It cannot be solved by simply hammering the server with requests. That would probably just kill your server instance.'
@@ -187,20 +187,20 @@
   hints:
     - 'After finding a CAPTCHA bypass, write a script that automates feedback submission. Or open many browser tabs and be really quick.'
     - 'You could prepare 10 browser tabs, solving every CAPTCHA and filling out the each feedback form. Then you’d need to very quickly switch through the tabs and submit the forms in under 20 seconds total.'
-    - 'Should the Juice Shop ever decide to change the challenge into "Submit 100 or more customer feedbacks within 60 seconds" or worse, you’d probably have a hard time keeping up with any tab-switching approach.'
+    - 'Should Lollo Logistics ever decide to change the challenge into "Submit 100 or more customer feedbacks within 60 seconds" or worse, you’d probably have a hard time keeping up with any tab-switching approach.'
     - 'Investigate closely how the CAPTCHA mechanism works and try to find either a bypass or some automated way of solving it dynamically.'
     - 'Wrap this into a script (in whatever programming language you prefer) that repeats this 10 times.'
   mitigationUrl: ~
   key: captchaBypassChallenge
 -
-  name: 'Change Bender''s Password'
+  name: 'Change Vex''s Password'
   category: 'Broken Authentication'
-  description: 'Change Bender''s password into <i>slurmCl4ssic</i> without using SQL Injection or Forgot Password.'
+  description: 'Change Vex''s password into <i>palletJack1f!</i> without using SQL Injection or Forgot Password.'
   difficulty: 5
   hints:
     - 'In previous releases this challenge was wrongly accused of being based on CSRF.'
     - 'It might also have been put into the Improper Input Validation category.'
-    - 'Bender’s current password is so strong that brute force, rainbow table or guessing attacks will probably not work.'
+    - 'Vex’s current password is so strong that brute force, rainbow table or guessing attacks will probably not work.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html'
   key: changePasswordBenderChallenge
 -
@@ -241,7 +241,7 @@
   description: 'Perform a <i>persisted</i> XSS attack with <code>&lt;iframe src="javascript:alert(`xss`)"&gt;</code> bypassing a <i>client-side</i> security mechanism.'
   difficulty: 3
   hints:
-    - 'There are only some input fields in the Juice Shop forms that validate their input.'
+    - 'There are only some input fields in the Lollo Logistics forms that validate their input.'
     - 'Even less of these fields are persisted in a way where their content is shown on another screen.'
     - 'Bypassing client-side security can typically be done by either disabling it on the client (i.e. in the browser by manipulating the DOM tree) or by ignoring it completely and interacting with the backend instead.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html'
@@ -344,13 +344,13 @@
 -
   name: 'Ephemeral Accountant'
   category: 'Injection'
-  description: 'Log in with the (non-existing) accountant <i>acc0unt4nt@juice-sh.op</i> without ever registering that user.'
+  description: 'Log in with the (non-existing) accountant <i>b00kkeeper@lollo-logistics.shop</i> without ever registering that user.'
   difficulty: 4
   hints:
     - 'Try to create the needed user "out of thin air".'
     - 'The user literally needs to be ephemeral as in "lasting for only a short time".'
-    - 'Registering normally with the user’s email address will then obviously not solve this challenge. The Juice Shop will not even let you register as acc0unt4nt@juice-sh.op, as this would make the challenge unsolvable for you.'
-    - 'Getting the user into the database some other way will also fail to solve this challenge. In case you somehow managed to do so, you need to restart the Juice Shop application in order to wipe the database and make the challenge solvable again.'
+    - 'Registering normally with the user’s email address will then obviously not solve this challenge. Lollo Logistics will not even let you register as b00kkeeper@lollo-logistics.shop, as this would make the challenge unsolvable for you.'
+    - 'Getting the user into the database some other way will also fail to solve this challenge. In case you somehow managed to do so, you need to restart the Lollo Logistics application in order to wipe the database and make the challenge solvable again.'
     - 'The fact that this challenge is in the Injection category should already give away the intended approach.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: ephemeralAccountantChallenge
@@ -428,7 +428,7 @@
   hints:
     - 'You can solve this by tampering with the user interface or by intercepting the communication with the RESTful backend.'
     - 'To find the client-side leverage point, closely analyze the HTML form used for feedback submission.'
-    - 'The backend-side leverage point is similar to some of the XSS challenges found in OWASP Juice Shop.'
+    - 'The backend-side leverage point is similar to some of the XSS challenges elsewhere in this store.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: forgedFeedbackChallenge
   tutorial:
@@ -448,12 +448,12 @@
 -
   name: 'Forged Signed JWT'
   category: 'Vulnerable Components'
-  description: 'Forge an almost properly RSA-signed JWT token that impersonates the (non-existing) user <i>rsa_lord@juice-sh.op</i>.'
+  description: 'Forge an almost properly RSA-signed JWT token that impersonates the (non-existing) user <i>rsa_lord@lollo-logistics.shop</i>.'
   difficulty: 6
   hints:
     - 'This challenge is explicitly not about acquiring the RSA private key used for JWT signing.'
     - 'The three generic hints from Forge an essentially unsigned JWT token also help with this challenge.'
-    - 'Instead of enforcing no encryption to be applied, try to apply a more sophisticated exploit against the JWT libraries used in the Juice Shop.'
+    - 'Instead of enforcing no encryption to be applied, try to apply a more sophisticated exploit against the JWT libraries used by Lollo Logistics.'
     - 'Getting your hands on the public RSA key the application employs for its JWTs is mandatory for this challenge.'
     - 'Finding the corresponding private key should actually be impossible, but that obviously doesn’t make this challenge unsolvable.'
     - 'Make sure your JWT is URL safe!'
@@ -511,8 +511,8 @@
   hints:
     - 'Turns out that something is technically and legally wrong with the implementation of the "right to be forgotten" for users.'
     - 'Trying out the Request Data Erasure functionality might be interesting, but cannot help you solve this challenge in real time.'
-    - 'If you have solved the challenge Retrieve a list of all user credentials via SQL Injection you might have already retrieved some information about how the Juice Shop "deletes" users upon their request.'
-    - 'What the Juice Shop does here is totally incompliant with GDPR. Luckily a 4% fine on a gross income of 0$ is still 0$.'
+    - 'If you have solved the challenge Retrieve a list of all user credentials via SQL Injection you might have already retrieved some information about how Lollo Logistics "deletes" users upon their request.'
+    - 'What Lollo Logistics does here is totally incompliant with GDPR. Luckily a 4% fine on a gross income of 0$ is still 0$.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/User_Privacy_Protection_Cheat_Sheet.html'
   key: ghostLoginChallenge
 -
@@ -619,76 +619,76 @@
   tutorial:
     order: 7
 -
-  name: 'Login Amy'
+  name: 'Login Mia'
   category: 'Sensitive Data Exposure'
   tags:
     - OSINT
-  description: 'Log in with Amy''s original user credentials. (This could take 93.83 billion trillion trillion centuries to brute force, but luckily she did not read the "One Important Final Note")'
+  description: 'Log in with Mia''s original user credentials. (This could take 93.83 billion trillion trillion centuries to brute force, but luckily she did not read the "One Important Final Note")'
   difficulty: 3
   hints:
     - 'This challenge will make you go after a needle in a haystack.'
-    - 'As with so many other characters from Futurama this challenge is of course about logging in as Amy from that show.'
-    - 'Did you know that Amy is married to an alien named Kif?'
-    - 'The challenge description contains a few sentences which give away some information how Amy decided to strengthen her password.'
-    - 'Obviously, Amy - being a little dimwitted - did not put nearly enough effort and creativity into the password selection process.'
+    - 'Mia works in the mailroom and considers herself the sharpest mind on the depot floor.'
+    - 'Did you know that Mia believes any password becomes stronger by simply making it longer?'
+    - 'The challenge description contains a few sentences which give away some information how Mia decided to strengthen her password.'
+    - 'Obviously, Mia - being a little dimwitted - did not put nearly enough effort and creativity into the password selection process.'
   mitigationUrl: ~
   key: loginAmyChallenge
 -
-  name: 'Login Bender'
+  name: 'Login Vex'
   category: 'Injection'
   tags:
     - Tutorial
-  description: 'Log in with Bender''s user account.'
+  description: 'Log in with Vex''s user account.'
   difficulty: 3
   hints:
     - 'The challenge description probably gave away what form you should attack.'
-    - 'You need to know (or smart-guess) Bender’s email address so you can launch a targeted attack.'
-    - 'Bender''s password hash might not help you very much.'
-    - 'In case you try some other approach than SQL Injection, you will notice that Bender’s password hash is not very useful.'
+    - 'You need to know (or smart-guess) Vex’s email address so you can launch a targeted attack.'
+    - 'Vex''s password hash might not help you very much.'
+    - 'In case you try some other approach than SQL Injection, you will notice that Vex’s password hash is not very useful.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: loginBenderChallenge
   tutorial:
     order: 13
 -
-  name: 'Login Bjoern'
+  name: 'Login Weber'
   category: 'Broken Authentication'
   tags:
     - Code Analysis
-  description: 'Log in with Bjoern''s Gmail account <i>without</i> previously changing his password, applying SQL Injection, or hacking his Google account.'
+  description: 'Log in with Weber''s Gmail account <i>without</i> previously changing his password, applying SQL Injection, or hacking his Google account.'
   difficulty: 4
   hints:
-    - 'The security flaw behind this challenge is 100% OWASP Juice Shop''s fault and 0% Google''s.'
-    - 'One way to light up this challenge in green on the score board, is to be Bjoern Kimminich. In that case, just log in with your Google account to automatically solve this challenge! Congratulations!'
-    - 'Most likely you are not Bjoern Kimminich, so instead you might want to take detailed look into how the OAuth login with Google is implemented.'
+    - 'The security flaw behind this challenge is 100% Lollo Logistics'' fault and 0% Google''s.'
+    - 'One way to light up this challenge in green on the score board, is to be Martin Weber. In that case, just log in with your Google account to automatically solve this challenge! Congratulations!'
+    - 'Most likely you are not Martin Weber, so instead you might want to take detailed look into how the OAuth login with Google is implemented.'
     - 'It could bring you some insight to register with your own Google account and analyze closely what happens behind the scenes.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html'
   key: oauthUserPasswordChallenge
 -
-  name: 'Login Jim'
+  name: 'Login Leo'
   category: 'Injection'
   tags:
     - Tutorial
-  description: 'Log in with Jim''s user account.'
+  description: 'Log in with Leo''s user account.'
   difficulty: 3
   hints:
     - 'The challenge description probably gave away what form you should attack.'
-    - 'You need to know (or smart-guess) Jim’s email address so you can launch a targeted attack.'
-    - 'If you harvested Jim’s password hash, you can try to attack that instead of using SQL Injection.'
+    - 'You need to know (or smart-guess) Leo’s email address so you can launch a targeted attack.'
+    - 'If you harvested Leo’s password hash, you can try to attack that instead of using SQL Injection.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: loginJimChallenge
   tutorial:
     order: 12
 -
-  name: 'Login MC SafeSearch'
+  name: 'Login DJ Bass'
   category: 'Sensitive Data Exposure'
   tags:
     - Shenanigans
     - OSINT
-  description: 'Log in with MC SafeSearch''s original user credentials without applying SQL Injection or any other bypass.'
+  description: 'Log in with DJ Bass''s original user credentials without applying SQL Injection or any other bypass.'
   difficulty: 2
   hints:
-    - 'MC SafeSearch is a rapper who produced the song "Protect Ya'' Passwordz" which explains password & sensitive data protection very nicely.'
-    - 'After watching the music video of this song, you should agree that even ⭐⭐ is a slightly exaggerated difficulty rating for this challenge.'
+    - 'DJ Bass released a promo track about password hygiene that went mildly viral in the logistics scene.'
+    - 'After watching the music video of that track, you should agree that even ⭐⭐ is a slightly exaggerated difficulty rating for this challenge.'
   mitigationUrl: ~
   key: loginRapperChallenge
 -
@@ -767,7 +767,7 @@
   difficulty: 4
   hints:
     - 'This challenge is essentially a stripped-down Denial of Service (DoS) attack.'
-    - 'As stated in the Architecture overview, OWASP Juice Shop uses a MongoDB derivate as its NoSQL database.'
+    - 'As stated in the Architecture overview, Lollo Logistics uses a MongoDB derivate as its NoSQL database.'
     - 'The categorization into the NoSQL Injection category totally gives away the expected attack vector for this challenge. Trying any others will not solve the challenge, even if they might yield the same result.'
     - 'In particular, flooding the application with requests will not solve this challenge. That would probably just kill your server instance.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html'
@@ -893,7 +893,7 @@
 -
   name: 'Product Tampering'
   category: 'Broken Access Control'
-  description: 'Change the <code>href</code> of the link within the <a href="/#/search?q=OWASP SSL Advanced Forensic Tool (O-Saft)">OWASP SSL Advanced Forensic Tool (O-Saft)</a> product description into <i>https://owasp.slack.com</i>.'
+  description: 'Change the <code>href</code> of the link within the <a href="/#/search?q=PortHound SSL Analyzer">PortHound SSL Analyzer</a> product description into <i>https://community.lollo-logistics.example.com</i>.'
   difficulty: 3
   hints:
     - 'Theoretically there are three possible ways to beat this challenge: a) broken admin functionality, b) holes in RESTful API or c) possibility for SQL Injection.'
@@ -932,61 +932,61 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html'
   key: passwordRepeatChallenge
 -
-  name: 'Reset Bender''s Password'
+  name: 'Reset Vex''s Password'
   category: 'Broken Authentication'
   tags:
     - OSINT
-  description: 'Reset Bender''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
+  description: 'Reset Vex''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
   difficulty: 4
   hints:
-    - 'If you have no idea who Bender is, please put down this book right now and watch the first episodes of Futurama before you come back.'
-    - 'Unexpectedly, Bender also chose to answer his chosen question truthfully.'
-    - 'Hints to the answer to Bender’s question can be found in publicly available information on the Internet.'
+    - 'Vex is not exactly shy about his work history on professional networking sites.'
+    - 'Unexpectedly, Vex also chose to answer his chosen question truthfully.'
+    - 'Hints to the answer to Vex’s question can be found in publicly available information on the Internet.'
     - 'If a seemingly correct answer is not accepted, you might just need to try some alternative spelling.'
     - 'Brute forcing the answer should be next to impossible.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Choosing_and_Using_Security_Questions_Cheat_Sheet.html'
   key: resetPasswordBenderChallenge
 -
-  name: 'Reset Bjoern''s Password'
+  name: 'Reset Helmut''s Password'
   category: 'Broken Authentication'
   tags:
     - OSINT
-  description: 'Reset the password of Bjoern''s internal account via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
+  description: 'Reset the password of Helmut''s internal account via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
   difficulty: 5
   hints:
     - 'Nothing a little bit of Facebook stalking couldn''t reveal. Might involve a historical twist.'
-    - 'Other than with his OWASP account, Bjoern was a bit less careless with his choice of security and answer to his internal account.'
-    - 'Bjoern chose to answer his chosen question truthfully but tried to make it harder for attackers by applying sort of a historical twist.'
-    - 'Again, hints to the answer to Bjoern’s question can be found by looking him up on the Internet.'
+    - 'Other than with his personal account, Helmut was a bit less careless with his choice of security and answer to his internal account.'
+    - 'Helmut chose to answer his chosen question truthfully but tried to make it harder for attackers by applying sort of a historical twist.'
+    - 'Again, hints to the answer to Helmut’s question can be found by looking him up on the Internet.'
     - 'Brute forcing the answer should be next to impossible.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Choosing_and_Using_Security_Questions_Cheat_Sheet.html'
   key: resetPasswordBjoernChallenge
 -
-  name: 'Reset Jim''s Password'
+  name: 'Reset Leo''s Password'
   category: 'Broken Authentication'
   tags:
     - OSINT
-  description: 'Reset Jim''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
+  description: 'Reset Leo''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
   difficulty: 3
   hints:
-    - 'The hardest part of this challenge is actually to find out who Jim actually is.'
-    - 'Jim picked one of the worst security questions and chose to answer it truthfully.'
-    - 'As Jim is a celebrity, the answer to his question is quite easy to find in publicly available information on the internet.'
+    - 'The hardest part of this challenge is actually to find out who Leo actually is.'
+    - 'Leo picked one of the worst security questions and chose to answer it truthfully.'
+    - 'As Leo is a well-known face in the industry, the answer to his question is quite easy to find in publicly available information on the internet.'
     - 'Even brute forcing the answer should be possible with the right kind of word list.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Choosing_and_Using_Security_Questions_Cheat_Sheet.html'
   key: resetPasswordJimChallenge
 -
-  name: 'Reset Morty''s Password'
+  name: 'Reset Oscar''s Password'
   category: 'Broken Anti Automation'
   tags:
     - OSINT
     - Brute Force
-  description: 'Reset Morty''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>his obfuscated answer</i> to his security question.'
+  description: 'Reset Oscar''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>his obfuscated answer</i> to his security question.'
   difficulty: 5
   hints:
-    - 'Finding out who Morty actually is, will help to reduce the solution space.'
-    - 'You can assume that Morty answered his security question truthfully but employed some obfuscation to make it more secure.'
-    - 'Morty’s answer is less than 10 characters long and does not include any special characters.'
+    - 'Finding out who Oscar actually is, will help to reduce the solution space.'
+    - 'You can assume that Oscar answered his security question truthfully but employed some obfuscation to make it more secure.'
+    - 'Oscar’s answer is less than 10 characters long and does not include any special characters.'
     - 'Unfortunately, Forgot your password? is protected by a rate limiting mechanism that prevents brute forcing. You need to beat this somehow.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html'
   key: resetPasswordMortyChallenge
@@ -1011,7 +1011,7 @@
   hints:
     - 'Reverse engineering something bad can make good things happen.'
     - 'Using whatever you find inside the malware directly will not do you any good.'
-    - 'For this to count as an SSRF attack you need to make the Juice Shop server attack itself.'
+    - 'For this to count as an SSRF attack you need to make the Lollo Logistics server attack itself.'
     - 'Do not try to find the source code for the malware on GitHub. Take it apart with classic reverse-engineering techniques instead.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html'
   key: ssrfChallenge
@@ -1123,7 +1123,7 @@
 -
   name: 'Two Factor Authentication'
   category: 'Broken Authentication'
-  description: 'Solve the 2FA challenge for user "wurstbrot". (Disabling, bypassing or overwriting his 2FA settings does not count as a solution)'
+  description: 'Solve the 2FA challenge for user "saltedpretzel". (Disabling, bypassing or overwriting his 2FA settings does not count as a solution)'
   difficulty: 5
   hints:
     - 'The 2FA implementation requires to store a secret for every user. You will need to find a way to access this secret in order to solve this challenge.'
@@ -1135,7 +1135,7 @@
 -
   name: 'Unsigned JWT'
   category: 'Vulnerable Components'
-  description: 'Forge an essentially unsigned JWT token that impersonates the (non-existing) user <i>jwtn3d@juice-sh.op</i>.'
+  description: 'Forge an essentially unsigned JWT token that impersonates the (non-existing) user <i>jwtn3d@lollo-logistics.shop</i>.'
   difficulty: 5
   hints:
     - 'This challenge exploits a weird option that is supported when signing tokens with JWT.'
@@ -1188,7 +1188,7 @@
   difficulty: 6
   hints:
     - 'Without utilizing the vulnerability behind another ⭐⭐⭐⭐⭐⭐ challenge it is not possible to plant the XSS payload for this challenge.'
-    - 'The mentioned "marketing collateral" might have been publicly advertised by the Juice Shop but is not necessarily part of its sitemap yet.'
+    - 'The mentioned "marketing collateral" might have been publicly advertised by Lollo Logistics but is not necessarily part of its sitemap yet.'
     - 'It might help to perform some online searches for structurally similar web projects once you get stuck.'
     - 'This challenge will always partially keep you blindfolded, no matter how hard you do research and analysis.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html'
@@ -1244,7 +1244,7 @@
   difficulty: 4
   hints:
      - 'You have to find a way to beat the allowlist of allowed redirect URLs.'
-     - 'You can find several places where redirects happen in the OWASP Juice Shop.'
+     - 'You can find several places where redirects happen in this store.'
      - 'The application will only allow you to redirect to allowlisted (previously referred to as whitelisted) URLs.'
      - 'Tampering with the redirect mechanism might give you some valuable information about how it works under to hood.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html'
@@ -1276,7 +1276,7 @@
     - 'It is not as easy as sending a large amount of data directly to the deprecated B2B interface.'
     - 'The leverage point for this is obviously the same as for the XXE Data Access challenge.'
     - 'You can only solve this challenge by keeping the server busy for >2sec with your attack.'
-    - 'The effectiveness of attack payloads for this challenge might depend on the operating system the Juice Shop is running on.'
+    - 'The effectiveness of attack payloads for this challenge might depend on the operating system the Lollo Logistics server is running on.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html'
   key: xxeDosChallenge
   disabledEnv:
@@ -1292,7 +1292,7 @@
   hints:
     - 'This one is actually similar to the XXE DoS challenge in every way except the data format being (ab)used.'
     - 'You can only solve this challenge by keeping the server busy for >2sec with your attack.'
-    - 'The effectiveness of attack payloads for this challenge might depend on the operating system the Juice Shop is running on.'
+    - 'The effectiveness of attack payloads for this challenge might depend on the operating system the Lollo Logistics server is running on.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html'
   key: yamlBombChallenge
   disabledEnv:
@@ -1312,7 +1312,7 @@
   category: 'Improper Input Validation'
   tags:
     - Shenanigans
-  description: 'Retrieve the photo of Bjoern''s cat in "melee combat-mode".'
+  description: 'Retrieve the photo of Weber''s cat in "melee combat-mode".'
   difficulty: 1
   hints:
     - 'Check the Photo Wall for an image that could not be loaded correctly.'
@@ -1344,7 +1344,7 @@
   difficulty: 1
   hints:
     - 'Try to guess what URL the endpoint might have.'
-    - 'The Juice Shop serves its metrics on the default path expected by Prometheus'
+    - 'Lollo Logistics serves its metrics on the default path expected by Prometheus'
     - 'Guessing the path is probably just as quick as taking the RTFM route via https://prometheus.io/docs/introduction/first_steps'
   mitigationUrl: ~
   key: exposedMetricsChallenge
@@ -1402,15 +1402,15 @@
   tutorial:
     order: 3
 -
-  name: 'Reset Uvogin''s Password'
+  name: 'Reset Vinnie''s Password'
   category: 'Sensitive Data Exposure'
   tags:
     - OSINT
-  description: 'Reset Uvogin''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
+  description: 'Reset Vinnie''s password via the <a href="/#/forgot-password">Forgot Password</a> mechanism with <i>the original answer</i> to his security question.'
   difficulty: 4
   hints:
     - 'You might have to do some OSINT on his social media personas to find out his honest answer to the security question.'
-    - 'People often reuse aliases online. You might be able to find something by looking online for Uvogin’s name or slight variations of it based on his unique writing habits.'
+    - 'People often reuse aliases online. You might be able to find something by looking online for Vinnie’s name or slight variations of it based on his unique writing habits.'
     - 'You might be able to find some existing OSINT tools to help you in this investigation.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Choosing_and_Using_Security_Questions_Cheat_Sheet.html'
   key: resetPasswordUvoginChallenge
@@ -1462,7 +1462,7 @@
   hints:
     - 'You should read up on vulnerabilities in popular NodeJs template engines.'
     - 'You should read up on Local File Read (LFR) vulnerabilities in popular NodeJS template engines.'
-    - 'Look for an easily forgettable endpoint in Juice Shop to test out the LFR attack.'
+    - 'Look for an easily forgettable endpoint in this store to test out the LFR attack.'
     - '500 Internal Server Error is always an interesting status code.'
     - 'Fuzzing can also help with this challenge.'
   description: 'Gain read access to an arbitrary local file on the web server.'
@@ -1484,7 +1484,7 @@
 -
   name: 'Security Advisory'
   category: 'Miscellaneous'
-  description: 'The Juice Shop is susceptible to a known vulnerability in a library, for which an advisory has already been issued, marking the Juice Shop as <i>known affected</i>. A fix is still pending. <a href="/#/contact">Inform the shop</a> about a suitable checksum as proof that you did your due diligence.'
+  description: 'Lollo Logistics is susceptible to a known vulnerability in a library, for which an advisory has already been issued, marking Lollo Logistics as <i>known affected</i>. A fix is still pending. <a href="/#/contact">Inform the shop</a> about a suitable checksum as proof that you did your due diligence.'
   difficulty: 3
   hints:
     - 'Security Advisories are often listed in the security.txt'
@@ -1508,7 +1508,7 @@
   difficulty: 5
   hints:
     - 'The API call is part of a scheduled process "behind the scenes", i.e. completely unrelated to the web application.'
-    - 'Check the Juice Shop’s social media channels for regularly scheduled content being posted, possibly even indicating that it was automatically created.'
+    - 'Check Lollo Logistics’ social media channels for regularly scheduled content being posted, possibly even indicating that it was automatically created.'
     - 'Find out which part of the content might come from the response of an API call.'
     - 'Find the place where the API call happens — as stated above, it is not in the web application — and then look for the API key itself.'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html'

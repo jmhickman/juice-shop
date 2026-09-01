@@ -126,7 +126,7 @@ const UserModelInit = (sequelize: Sequelize) => { // vuln-code-snippet start wea
     if (
       user.email &&
     user.email.toLowerCase() ===
-      `acc0unt4nt@${config.get<string>('application.domain')}`.toLowerCase()
+      `b00kkeeper@${config.get<string>('application.domain')}`.toLowerCase()
     ) {
       await Promise.reject(
         new Error(

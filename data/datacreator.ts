@@ -119,7 +119,7 @@ async function createChallenges () {
       name: challenge.name,
       category: challenge.category,
       tags: (tags != null) ? tags.join(',') : undefined,
-      // todo(@J12934) currently missing the 'not available' text. Needs changes to the model and utils functions
+      // todo currently missing the 'not available' text. Needs changes to the model and utils functions
       description: isChallengeEnabled ? description : (description + ' <em>(This challenge is <strong>potentially harmful</strong> on ' + disabledBecause + '!)</em>'),
       difficulty: challenge.difficulty,
       solved: false,

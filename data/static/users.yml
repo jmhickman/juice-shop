@@ -7,7 +7,7 @@
     id: 2
     answer: '@xI98PxDO+06!'
   feedback:
-    comment: 'I love this shop! Best products in town! Highly recommended!'
+    comment: 'I love this store! Best gear in the trade! Highly recommended!'
     rating: 5
   address:
     - fullName: 'Administrator'
@@ -27,25 +27,25 @@
       expMonth: 4
       expYear: 2086
 -
-  email: jim
-  password: 'ncc-1701'
+  email: leo
+  password: 'route66-delivery'
   key: jim
   role: 'customer'
   walletBalance: 100
   securityQuestion:
     id: 1
-    answer: 'Samuel' # https://en.wikipedia.org/wiki/James_T._Kirk
+    answer: 'Maximilian' # Leo's eldest brother
   feedback:
-    comment: 'Great shop! Awesome service!'
+    comment: 'Great store! Awesome service!'
     rating: 4
   address:
-    - fullName: 'Jim'
+    - fullName: 'Leo Marsh'
       mobileNum: 523423432
       zipCode: '1701'
       streetAddress: 'Room 3F 121'
-      city: 'Deck 5'
-      state: 'USS Enterprise'
-      country: 'Space'
+      city: 'Dockside Quarter'
+      state: 'Harbor District'
+      country: 'Republic'
     - fullName: 'Sam'
       mobileNum: 1000000783
       zipCode: 'GSK783'
@@ -54,43 +54,43 @@
       state: 'Beta Darius System'
       country: 'United Federation of Planets'
   card:
-    - fullName: 'Jim'
+    - fullName: 'Leo Marsh'
       cardNum: 5107891722278705
       expMonth: 11
       expYear: 2099
 -
-  email: bender
+  email: vex
   password: 'OhG0dPlease1nsertLiquor!'
   key: bender
   role: 'customer'
   securityQuestion:
     id: 10
-    answer: "Stop'n'Drop" # http://futurama.wikia.com/wiki/Suicide_booth
+    answer: "Gearworks Salvage & Haul" # Vex's first employer
   feedback:
     comment: 'Nothing useful available here!'
     rating: 1
   address:
-    - fullName: 'Bender'
+    - fullName: 'Vex'
       mobileNum: 797675345
       zipCode: '10001'
       streetAddress: 'Robot Arms Apts 42'
-      city: 'New New York'
-      state: 'New New York'
+      city: 'Ironhaven'
+      state: 'Ironhaven'
       country: 'Planet Earth'
   card:
-    - fullName: 'Bender'
+    - fullName: 'Vex'
       cardNum: 4716943969046208
       expMonth: 2
       expYear: 2081
 -
-  email: bjoern.kimminich@gmail.com
-  username: bkimminich
-  password: 'bW9jLmxpYW1nQGhjaW5pbW1pay5ucmVvamI='
+  email: martin.weber@gmail.com
+  username: mweber
+  password: 'bW9jLmxpYW1nQHJlYmV3Lm5pdHJhbQ==' # base64 of the reversed email — the OAuth puzzle
   customDomain: true
   key: bjoernGoogle
   role: 'admin'
   address:
-    - fullName: 'Bjoern Kimminich'
+    - fullName: 'Martin Weber'
       mobileNum: 4917000001
       zipCode: '25436'
       streetAddress: 'Am Lokalhorst 42'
@@ -98,7 +98,7 @@
       state: 'Schleswig-Holstein'
       country: 'Germany'
   card:
-    - fullName: 'Bjoern Kimminich'
+    - fullName: 'Martin Weber'
       cardNum: 4815205605542754
       expMonth: 12
       expYear: 2092
@@ -119,17 +119,17 @@
     id: 10
     answer: 'SC OLEA SRL' # http://www.olea.com.ro/
 -
-  email: morty
-  password: 'focusOnScienceMorty!focusOnScience'
+  email: oscar
+  password: 'focusOnResearchOscar!focusOnResearch'
   key: morty
   role: 'customer'
   walletBalance: 100
   securityQuestion:
     id: 7
-    answer: '5N0wb41L' # http://rickandmorty.wikia.com/wiki/Snuffles
+    answer: '5N0wb41L' # Oscar's beloved pet, often seen in his lab videos
 -
-  email: mc.safesearch
-  password: 'Mr. N00dles'
+  email: dj.bass
+  password: 'BassCannon88!'
   key: rapper
   role: 'customer'
   walletBalance: 13337
@@ -137,7 +137,7 @@
     id: 8
     answer: 'I even shared my pizza bagels with you!'
 -
-  email: J12934
+  email: R7291K
   password: '0Y8rMnww$*9VFYE§59-!Fg1L6t&6lB'
   key: jannik
   role: 'admin'
@@ -145,9 +145,9 @@
     id: 1
     answer: 'azjTLprq2im6p86RbFrA41L'
 -
-  email: wurstbrot
-  username: wurstbrot
-  password: 'EinBelegtesBrotMitSchinkenSCHINKEN!'
+  email: saltedpretzel
+  username: saltedpretzel
+  password: 'WarmButTerribleBAGUETTE!'
   totpSecret: IFTXE3SPOEYVURT2MRYGI52TKJ4HC3KH
   key: timo
   role: 'admin'
@@ -155,16 +155,16 @@
     id: 1
     answer: 'NZMJLjEinU7TFElDIYW8'
 -
-  email: amy
-  password: 'K1f.....................'
+  email: mia
+  password: 'M4i.....................' # she thought dots made it stronger...
   key: amy
   role: 'customer'
   walletBalance: 48
   securityQuestion:
     id: 8
-    answer: 'Dr. Dr. Dr. Dr. Zoidberg'
+    answer: 'Dr. Dr. Dr. Dr. Quill'
 -
-  email: bjoern
+  email: helmut
   password: 'monkey summer birthday are all bad passwords but work just fine in a long passphrase'
   key: bjoern
   profileImage: '12.png'
@@ -174,18 +174,17 @@
     id: 9
     answer: 'West-2082' # http://www.alte-postleitzahlen.de/uetersen
 -
-  email: bjoern@owasp.org
+  email: weber
   password: 'kitten lesser pooch karate buffoon indoors'
-  customDomain: true
   key: bjoernOwasp
   role: 'deluxe'
   profileImage: '13.jpg'
   securityQuestion:
     id: 7
-    answer: 'Zaya' # https://www.youtube.com/watch?v=Lu0-kDdtVf4
+    answer: 'Zaya' # the name of Weber's beloved dog, mentioned in his depot tour videos
 -
   email: chris.pike
-  password: 'uss enterprise'
+  password: 'harbor pilot'
   key: chris
   role: 'customer'
   deletedFlag: true
@@ -202,8 +201,8 @@
     id: 7
     answer: 'sdAffsdfrefrbgreq3423'
 -
-  email: uvogin
-  password: 'muda-muda > ora-ora' # https://www.youtube.com/watch?v=vnJv8IoLMwc
+  email: vinnie
+  password: 'vroom-vroom > turbo-boost'
   key: uvogin
   role: 'customer'
   walletBalance: 100
@@ -246,15 +245,15 @@
   key: emma
   role: 'customer'
 -
-  email: stan
-  username: SmilinStan
+  email: sam
+  username: SmilingSam
   password: 'ship coffin krypt cross estate supply insurance asbestos souvenir'
   key: stan
   profileImage: '20.jpg'
   role: 'deluxe'
   securityQuestion:
     id: 10
-    answer: "Used Ship Emporium" # https://monkeyisland.fandom.com/wiki/Stan_S._Stanman
+    answer: "Used Ship Emporium" # Sam's famous used-goods emporium
 -
   email: ethereum
   username: evmrox
@@ -262,7 +261,7 @@
   key: evm
   role: 'deluxe'
   feedback:
-    comment: 'Please send me the juicy chatbot NFT in my wallet at /juicy-nft : "purpose betray marriage blame crunch monitor spin slide donate sport lift clutch"'
+    comment: 'Please send me the Lollo Dispatch NFT in my wallet at /lollo-nft : "purpose betray marriage blame crunch monitor spin slide donate sport lift clutch"'
     rating: 1
   securityQuestion:
     id: 10

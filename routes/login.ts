@@ -58,10 +58,10 @@ export function login () {
   function verifyPreLoginChallenges (req: Request) {
     challengeUtils.solveIf(challenges.weakPasswordChallenge, () => { return req.body.email === 'admin@' + config.get<string>('application.domain') && req.body.password === 'admin123' })
     challengeUtils.solveIf(challenges.loginSupportChallenge, () => { return req.body.email === 'support@' + config.get<string>('application.domain') && req.body.password === 'J6aVjTgOpRs@?5l!Zkq2AYnCE@RF$P' })
-    challengeUtils.solveIf(challenges.loginRapperChallenge, () => { return req.body.email === 'mc.safesearch@' + config.get<string>('application.domain') && req.body.password === 'Mr. N00dles' })
-    challengeUtils.solveIf(challenges.loginAmyChallenge, () => { return req.body.email === 'amy@' + config.get<string>('application.domain') && req.body.password === 'K1f.....................' })
-    challengeUtils.solveIf(challenges.dlpPasswordSprayingChallenge, () => { return req.body.email === 'J12934@' + config.get<string>('application.domain') && req.body.password === '0Y8rMnww$*9VFYE§59-!Fg1L6t&6lB' })
-    challengeUtils.solveIf(challenges.oauthUserPasswordChallenge, () => { return req.body.email === 'bjoern.kimminich@gmail.com' && req.body.password === 'bW9jLmxpYW1nQGhjaW5pbW1pay5ucmVvamI=' })
+    challengeUtils.solveIf(challenges.loginRapperChallenge, () => { return req.body.email === 'dj.bass@' + config.get<string>('application.domain') && req.body.password === 'BassCannon88!' })
+    challengeUtils.solveIf(challenges.loginAmyChallenge, () => { return req.body.email === 'mia@' + config.get<string>('application.domain') && req.body.password === 'M4i.....................' })
+    challengeUtils.solveIf(challenges.dlpPasswordSprayingChallenge, () => { return req.body.email === 'R7291K@' + config.get<string>('application.domain') && req.body.password === '0Y8rMnww$*9VFYE§59-!Fg1L6t&6lB' })
+    challengeUtils.solveIf(challenges.oauthUserPasswordChallenge, () => { return req.body.email === 'martin.weber@gmail.com' && req.body.password === 'bW9jLmxpYW1nQHJlYmV3Lm5pdHJhbQ==' })
     challengeUtils.solveIf(challenges.exposedCredentialsChallenge, () => { return req.body.email === 'testing@' + config.get<string>('application.domain') && req.body.password === 'IamUsedForTesting' })
   }
 
@@ -70,8 +70,8 @@ export function login () {
     challengeUtils.solveIf(challenges.loginJimChallenge, () => { return user.id === users.jim.id })
     challengeUtils.solveIf(challenges.loginBenderChallenge, () => { return user.id === users.bender.id })
     challengeUtils.solveIf(challenges.ghostLoginChallenge, () => { return user.id === users.chris.id })
-    if (challengeUtils.notSolved(challenges.ephemeralAccountantChallenge) && user.email === 'acc0unt4nt@' + config.get<string>('application.domain') && user.role === 'accounting') {
-      UserModel.count({ where: { email: 'acc0unt4nt@' + config.get<string>('application.domain') } }).then((count: number) => {
+    if (challengeUtils.notSolved(challenges.ephemeralAccountantChallenge) && user.email === 'b00kkeeper@' + config.get<string>('application.domain') && user.role === 'accounting') {
+      UserModel.count({ where: { email: 'b00kkeeper@' + config.get<string>('application.domain') } }).then((count: number) => {
         if (count === 0) {
           challengeUtils.solve(challenges.ephemeralAccountantChallenge)
         }
