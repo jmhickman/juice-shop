@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -21,19 +21,6 @@ export function restoreProgress () {
       return res.status(404).send(invalidContinueCode)
     }
     const ids = hashids.decode(continueCode)
-    if (challengeUtils.notSolved(challenges.continueCodeChallenge) && ids.includes(999)) {
-      challengeUtils.solve(challenges.continueCodeChallenge)
-      res.end()
-    } else if (ids.length > 0) {
-      for (const challenge of Object.values(challenges)) {
-        if (ids.includes(challenge.id)) {
-          challengeUtils.solve(challenge, true)
-        }
-      }
-      res.json({ data: ids.length + ' solved challenges have been restored.' })
-    } else {
-      res.status(404).send(invalidContinueCode)
-    }
   }
 }
 

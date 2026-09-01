@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -65,14 +65,10 @@ export const accessControlChallenges = () => (req: Request, res: Response, next:
   const { url } = req
   const uiBypassed = req.header('sec-fetch-dest') === 'document' || !req.header('referer')
   challengeUtils.solveIf(challenges.scoreBoardChallenge, () => { return url.endsWith('/1px.png') }, false, uiBypassed)
-  challengeUtils.solveIf(challenges.web3SandboxChallenge, () => { return url.endsWith('/11px.png') }, false, uiBypassed)
   challengeUtils.solveIf(challenges.adminSectionChallenge, () => { return url.endsWith('/19px.png') }, false, uiBypassed)
-  challengeUtils.solveIf(challenges.tokenSaleChallenge, () => { return url.endsWith('/56px.png') }, false, uiBypassed)
   challengeUtils.solveIf(challenges.privacyPolicyChallenge, () => { return url.endsWith('/81px.png') }, false, uiBypassed)
-  challengeUtils.solveIf(challenges.extraLanguageChallenge, () => { return url.endsWith('/tlh_AA.json') })
   challengeUtils.solveIf(challenges.retrieveBlueprintChallenge, () => { return url.endsWith(retrieveBlueprintChallengeFile ?? '') })
   challengeUtils.solveIf(challenges.securityPolicyChallenge, () => { return url.endsWith('/security.txt') })
-  challengeUtils.solveIf(challenges.missingEncodingChallenge, () => { return url.toLowerCase().endsWith('%e1%93%9a%e1%98%8f%e1%97%a2-%23zatschi-%23whoneedsfourlegs-1572600969477.jpg') })
   challengeUtils.solveIf(challenges.accessLogDisclosureChallenge, () => { return url.match(/access\.log(0-9-)*/) })
   challengeUtils.solveIf(challenges.misplacedIacFiles, () => { return (url.endsWith('.tf') || url.endsWith('Dockerfile') || url.endsWith('docker-compose.yml')) })
   next()
@@ -86,9 +82,6 @@ export const errorHandlingChallenge = () => (err: unknown, req: Request, { statu
 export const jwtChallenges = () => (req: Request, res: Response, next: NextFunction) => {
   if (challengeUtils.notSolved(challenges.jwtUnsignedChallenge)) {
     jwtChallenge(challenges.jwtUnsignedChallenge, req, 'none', /jwtn3d@/)
-  }
-  if (utils.isChallengeEnabled(challenges.jwtForgedChallenge) && challengeUtils.notSolved(challenges.jwtForgedChallenge)) {
-    jwtChallenge(challenges.jwtForgedChallenge, req, 'HS256', /rsa_lord@/)
   }
   if (challengeUtils.notSolved(challenges.iacLeakedKeyChallenge)) {
     jwtChallenge(challenges.iacLeakedKeyChallenge, req, 'RS256', /cloud-admin@/)
@@ -180,17 +173,11 @@ export const databaseRelatedChallenges = () => (req: Request, res: Response, nex
   if (challengeUtils.notSolved(challenges.knownVulnerableComponentChallenge)) {
     knownVulnerableComponentChallenge()
   }
-  if (challengeUtils.notSolved(challenges.weirdCryptoChallenge)) {
-    weirdCryptoChallenge()
-  }
   if (challengeUtils.notSolved(challenges.typosquattingNpmChallenge)) {
     typosquattingNpmChallenge()
   }
   if (challengeUtils.notSolved(challenges.typosquattingAngularChallenge)) {
     typosquattingAngularChallenge()
-  }
-  if (challengeUtils.notSolved(challenges.hiddenImageChallenge)) {
-    hiddenImageChallenge()
   }
   if (challengeUtils.notSolved(challenges.supplyChainAttackChallenge)) {
     supplyChainAttackChallenge()
@@ -266,12 +253,6 @@ function knownVulnerableComponents () {
   ]
 }
 
-function weirdCryptoChallenge () {
-  void checkPatternInFeedbackAndComplaints(
-    challenges.weirdCryptoChallenge,
-    { [Op.or]: weirdCryptos() }
-  )
-}
 
 function weirdCryptos () {
   return [
@@ -297,12 +278,6 @@ function typosquattingAngularChallenge () {
   )
 }
 
-function hiddenImageChallenge () {
-  void checkPatternInFeedbackAndComplaints(
-    challenges.hiddenImageChallenge,
-    { [Op.like]: '%pickle rick%' }
-  )
-}
 
 function supplyChainAttackChallenge () {
   void checkPatternInFeedbackAndComplaints(

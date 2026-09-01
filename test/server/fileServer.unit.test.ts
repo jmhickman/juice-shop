@@ -7,7 +7,7 @@ import { describe, it, beforeEach, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { challenges } from '../../data/datacache'
 import { servePublicFiles } from '../../routes/fileServer'
-import { type Challenge } from '@juice-shop/data/types'
+import { type Challenge } from '@lollo-logistics/data/types'
 
 void describe('fileServer', () => {
   let req: any
@@ -80,17 +80,6 @@ void describe('fileServer', () => {
     assert.equal(res.sendFile.mock.calls.length, 1)
     assert.match(res.sendFile.mock.calls[0].arguments[0], /ftp[/\\]acquisitions\.md/)
     assert.equal(challenges.directoryListingChallenge.solved, true)
-  })
-
-  void it('should solve "easterEggLevelOneChallenge" when requesting eastere.gg with Poison Null Byte attack', () => {
-    challenges.easterEggLevelOneChallenge = { solved: false, save } as unknown as Challenge
-    req.params.file = 'eastere.gg%00.md'
-
-    servePublicFiles()(req, res, next)
-
-    assert.equal(res.sendFile.mock.calls.length, 1)
-    assert.match(res.sendFile.mock.calls[0].arguments[0], /ftp[/\\]eastere\.gg/)
-    assert.equal(challenges.easterEggLevelOneChallenge.solved, true)
   })
 
   void it('should solve "forgottenDevBackupChallenge" when requesting package.json.bak with Poison Null Byte attack', () => {

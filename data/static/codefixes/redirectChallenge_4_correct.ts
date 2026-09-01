@@ -1,5 +1,5 @@
 export const redirectAllowlist = new Set([
-  'https://github.com/juice-shop/juice-shop',
+  'https://github.com/lollo-logistics/web-store',
   'https://blockchain.info/address/1AbKfgvw9psQ41NbLi8kufDQTezwG8DRZm',
   'https://explorer.dash.org/address/Xr556RzuwX6hg5EGpkybbv5RanJoZN17kW',
   'https://etherscan.io/address/0x0f933ab9fcaaa782d0279c300d73750e1311eae6',

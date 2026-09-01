@@ -12,18 +12,15 @@ export function checkKeys () {
       const privateKey = mnemonicWallet.privateKey
       const publicKey = mnemonicWallet.publicKey
       const address = mnemonicWallet.address
-      challengeUtils.solveIf(challenges.nftUnlockChallenge, () => {
-        return req.body.privateKey === privateKey
-      })
       if (req.body.privateKey === privateKey) {
-        res.status(200).json({ success: true, message: 'Challenge successfully solved', status: challenges.nftUnlockChallenge })
+        res.status(200).json({ success: true, message: 'Key accepted' })
       } else {
         if (req.body.privateKey === address) {
-          res.status(401).json({ success: false, message: 'Looks like you entered the public address of my ethereum wallet!', status: challenges.nftUnlockChallenge })
+          res.status(401).json({ success: false, message: 'Looks like you entered the public address of my ethereum wallet!' })
         } else if (req.body.privateKey === publicKey) {
-          res.status(401).json({ success: false, message: 'Looks like you entered the public key of my ethereum wallet!', status: challenges.nftUnlockChallenge })
+          res.status(401).json({ success: false, message: 'Looks like you entered the public key of my ethereum wallet!' })
         } else {
-          res.status(401).json({ success: false, message: 'Looks like you entered a non-Ethereum private key to access me.', status: challenges.nftUnlockChallenge })
+          res.status(401).json({ success: false, message: 'Looks like you entered a non-Ethereum private key to access me.' })
         }
       }
     } catch (error) {
@@ -34,7 +31,7 @@ export function checkKeys () {
 export function nftUnlocked () {
   return (req: Request, res: Response) => {
     try {
-      res.status(200).json({ status: challenges.nftUnlockChallenge?.solved ?? false })
+      res.status(200).json({ status: false })
     } catch (error) {
       res.status(500).json(utils.getErrorMessage(error))
     }

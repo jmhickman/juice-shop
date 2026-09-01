@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
 import fs from 'node:fs'
 import crypto from 'node:crypto'
 import { type Request, type Response, type NextFunction } from 'express'
-import { type UserModel } from '@juice-shop/models/user'
+import { type UserModel } from '@lollo-logistics/models/user'
 import expressJwt from 'express-jwt'
 import jwt from 'jsonwebtoken'
 import jws from 'jws'

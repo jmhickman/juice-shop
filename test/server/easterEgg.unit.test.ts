@@ -6,7 +6,7 @@
 import { describe, it, beforeEach, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { challenges } from '../../data/datacache'
-import { type Challenge } from '@juice-shop/data/types'
+import { type Challenge } from '@lollo-logistics/data/types'
 import { serveEasterEgg } from '../../routes/easterEgg'
 
 void describe('easterEgg', () => {
@@ -27,13 +27,5 @@ void describe('easterEgg', () => {
 
     assert.equal(res.sendFile.mock.calls.length, 1)
     assert.match(res.sendFile.mock.calls[0].arguments[0], /frontend[/\\]dist[/\\]frontend[/\\]assets[/\\]private[/\\]threejs-demo\.html/)
-  })
-
-  void it('should solve "easterEggLevelTwoChallenge"', () => {
-    challenges.easterEggLevelTwoChallenge = { solved: false, save } as unknown as Challenge
-
-    serveEasterEgg()(req, res)
-
-    assert.equal(challenges.easterEggLevelTwoChallenge.solved, true)
   })
 })

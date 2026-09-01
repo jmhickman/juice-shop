@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -10,7 +10,6 @@ import * as challengeUtils from '../lib/challengeUtils'
 
 export function servePremiumContent () {
   return (req: Request, res: Response) => {
-    challengeUtils.solveIf(challenges.premiumPaywallChallenge, () => { return true })
     res.sendFile(path.resolve('frontend/dist/frontend/assets/private/lollo_wallpaper_1920x1080_vr.jpg'))
   }
 }

@@ -1,51 +1,34 @@
 {
-  "name": "juice-shop",
+  "name": "lollo-logistics",
   "version": "20.2.0",
   "private": true,
-  "description": "Probably the most modern and sophisticated insecure web application",
+  "description": "Lollo Logistics web store — shipping supplies & delivery services",
   "keywords": [
-    "web security",
-    "web application security",
     "webappsec",
-    "owasp",
-    "pentest",
-    "pentesting",
-    "security",
-    "vulnerable",
-    "vulnerability",
     "broken",
-    "bodgeit",
     "ctf",
     "capture the flag",
-    "awareness"
+    "awareness",
+    "logistics",
+    "shipping",
+    "e-commerce"
   ],
-  "homepage": "https://owasp-juice.shop",
+  "homepage": "https://lollo-logistics.shop",
   "bugs": {
-    "url": "https://github.com/juice-shop/juice-shop/issues"
+    "url": "https://github.com/lollo-logistics/web-store/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/juice-shop/juice-shop.git"
+    "url": "https://github.com/lollo-logistics/web-store.git"
   },
   "license": "MIT",
-  "author": "Björn Kimminich <bjoern.kimminich@owasp.org> (https://kimminich.de)",
+  "author": "Helmut Lorenz <helmut@lollo-logistics.shop>",
   "contributors": [
-    "Björn Kimminich",
-    "Jannik Hollenbach",
-    "Aashish683",
-    "greenkeeper[bot]",
-    "MarcRler",
-    "agrawalarpit14",
-    "Scar26",
-    "JuiceShopBot",
-    "ShubhamPalriwala",
-    "CaptainFreak",
-    "Supratik Das",
-    "the-pro",
-    "Harsh Kumar",
-    "rishabhkeshan",
-    "Ziyang Li",
-    "..."
+    "Helmut Lorenz",
+    "Martin Weber",
+    "Leo Marsh",
+    "Vex Corrado",
+    "Timo Brandt"
   ],
   "scripts": {
     "build": "npm run build:frontend && npm run build:server",

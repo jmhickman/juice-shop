@@ -29,7 +29,7 @@
 -
   email: leo
   password: 'route66-delivery'
-  key: jim
+  key: leo
   role: 'customer'
   walletBalance: 100
   securityQuestion:
@@ -46,13 +46,13 @@
       city: 'Dockside Quarter'
       state: 'Harbor District'
       country: 'Republic'
-    - fullName: 'Sam'
+    - fullName: 'Sam Marsh'
       mobileNum: 1000000783
       zipCode: 'GSK783'
-      streetAddress: 'Deneva Colony'
-      city: 'Deneva'
-      state: 'Beta Darius System'
-      country: 'United Federation of Planets'
+      streetAddress: 'Unit 12, Transit Depot'
+      city: 'Northgate'
+      state: 'Free Territory'
+      country: 'Republic'
   card:
     - fullName: 'Leo Marsh'
       cardNum: 5107891722278705
@@ -61,7 +61,7 @@
 -
   email: vex
   password: 'OhG0dPlease1nsertLiquor!'
-  key: bender
+  key: vex
   role: 'customer'
   securityQuestion:
     id: 10
@@ -73,7 +73,7 @@
     - fullName: 'Vex'
       mobileNum: 797675345
       zipCode: '10001'
-      streetAddress: 'Robot Arms Apts 42'
+      streetAddress: 'Berth 9, Dockside Row'
       city: 'Ironhaven'
       state: 'Ironhaven'
       country: 'Planet Earth'
@@ -87,7 +87,7 @@
   username: mweber
   password: 'bW9jLmxpYW1nQHJlYmV3Lm5pdHJhbQ==' # base64 of the reversed email — the OAuth puzzle
   customDomain: true
-  key: bjoernGoogle
+  key: mweber
   role: 'admin'
   address:
     - fullName: 'Martin Weber'
@@ -121,7 +121,7 @@
 -
   email: oscar
   password: 'focusOnResearchOscar!focusOnResearch'
-  key: morty
+  key: oscar
   role: 'customer'
   walletBalance: 100
   securityQuestion:
@@ -130,7 +130,7 @@
 -
   email: dj.bass
   password: 'BassCannon88!'
-  key: rapper
+  key: dj
   role: 'customer'
   walletBalance: 13337
   securityQuestion:
@@ -139,7 +139,7 @@
 -
   email: R7291K
   password: '0Y8rMnww$*9VFYE§59-!Fg1L6t&6lB'
-  key: jannik
+  key: r7291k
   role: 'admin'
   securityQuestion:
     id: 1
@@ -149,7 +149,7 @@
   username: saltedpretzel
   password: 'WarmButTerribleBAGUETTE!'
   totpSecret: IFTXE3SPOEYVURT2MRYGI52TKJ4HC3KH
-  key: timo
+  key: pretzel
   role: 'admin'
   securityQuestion:
     id: 1
@@ -157,7 +157,7 @@
 -
   email: mia
   password: 'M4i.....................' # she thought dots made it stronger...
-  key: amy
+  key: mia
   role: 'customer'
   walletBalance: 48
   securityQuestion:
@@ -166,7 +166,7 @@
 -
   email: helmut
   password: 'monkey summer birthday are all bad passwords but work just fine in a long passphrase'
-  key: bjoern
+  key: helmut
   profileImage: '12.png'
   role: 'admin'
   isAdmin: true
@@ -176,7 +176,7 @@
 -
   email: weber
   password: 'kitten lesser pooch karate buffoon indoors'
-  key: bjoernOwasp
+  key: weber
   role: 'deluxe'
   profileImage: '13.jpg'
   securityQuestion:
@@ -203,7 +203,7 @@
 -
   email: vinnie
   password: 'vroom-vroom > turbo-boost'
-  key: uvogin
+  key: vinnie
   role: 'customer'
   walletBalance: 100
   securityQuestion:

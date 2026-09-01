@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "juice_shop" {
       mountPoints = [
         {
           sourceVolume  = "sqlite-data"
-          containerPath = "/juice-shop/data/sqlite"
+          containerPath = "/lollo-logistics/data/sqlite"
           readOnly      = false
         }
       ]

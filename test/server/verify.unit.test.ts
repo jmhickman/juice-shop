@@ -7,12 +7,11 @@ import { describe, it, beforeEach, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import config from 'config'
 import { challenges, products, setRetrieveBlueprintChallengeFile } from '../../data/datacache'
-import type { Product, Challenge } from '@juice-shop/data/types'
+import type { Product, Challenge } from '@lollo-logistics/data/types'
 import type { Product as ProductConfig } from '../../lib/config.schema'
 import * as security from '../../lib/insecurity'
-import { type UserModel } from '@juice-shop/models/user'
+import { type UserModel } from '@lollo-logistics/models/user'
 import * as verify from '../../routes/verify'
-import { isWindows } from '../../lib/utils'
 
 void describe('verify', () => {
   let req: any
@@ -97,24 +96,6 @@ void describe('verify', () => {
       assert.equal(challenges.adminSectionChallenge.solved, true)
     })
 
-    void it('"tokenSaleChallenge" is solved when the 56px.png transpixel is requested', () => {
-      challenges.tokenSaleChallenge = { solved: false, save } as unknown as Challenge
-      req.url = 'http://juice-sh.op/public/images/padding/56px.png'
-
-      verify.accessControlChallenges()(req, res, next)
-
-      assert.equal(challenges.tokenSaleChallenge.solved, true)
-    })
-
-    void it('"extraLanguageChallenge" is solved when the Klingon translation file is requested', () => {
-      challenges.extraLanguageChallenge = { solved: false, save } as unknown as Challenge
-      req.url = 'http://juice-sh.op/public/i18n/tlh_AA.json'
-
-      verify.accessControlChallenges()(req, res, next)
-
-      assert.equal(challenges.extraLanguageChallenge.solved, true)
-    })
-
     void it('"retrieveBlueprintChallenge" is solved when the blueprint file is requested', () => {
       challenges.retrieveBlueprintChallenge = { solved: false, save } as unknown as Challenge
       setRetrieveBlueprintChallengeFile('test.dxf')
@@ -123,15 +104,6 @@ void describe('verify', () => {
       verify.accessControlChallenges()(req, res, next)
 
       assert.equal(challenges.retrieveBlueprintChallenge.solved, true)
-    })
-
-    void it('"missingEncodingChallenge" is solved when the crazy cat photo is requested', () => {
-      challenges.missingEncodingChallenge = { solved: false, save } as unknown as Challenge
-      req.url = 'http://juice-sh.op/public/images/uploads/%E1%93%9A%E1%98%8F%E1%97%A2-%23zatschi-%23whoneedsfourlegs-1572600969477.jpg'
-
-      verify.accessControlChallenges()(req, res, next)
-
-      assert.equal(challenges.missingEncodingChallenge.solved, true)
     })
 
     void it('"accessLogDisclosureChallenge" is solved when any server access log file is requested', () => {
@@ -276,7 +248,6 @@ void describe('verify', () => {
   void describe('jwtChallenges', () => {
     beforeEach(() => {
       challenges.jwtUnsignedChallenge = { solved: false, save } as unknown as Challenge
-      challenges.jwtForgedChallenge = { solved: false, save, disabledEnv: 'Windows' } as unknown as Challenge
     })
 
     void it('"jwtUnsignedChallenge" is solved when forged unsigned token has email jwtn3d@juice-sh.op in the payload', () => {
@@ -304,30 +275,8 @@ void describe('verify', () => {
       assert.equal(challenges.jwtUnsignedChallenge.solved, false)
     })
 
-    void it('"jwtForgedChallenge" is solved when forged token HMAC-signed with public RSA-key has email rsa_lord@juice-sh.op in the payload', { skip: isWindows() ? 'not supported on Windows' : false }, () => {
-      req.headers = { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImVtYWlsIjoicnNhX2xvcmRAanVpY2Utc2gub3AifSwiaWF0IjoxNTgyMjIxNTc1fQ.ycFwtqh4ht4Pq9K5rhiPPY256F9YCTIecd4FHFuSEAg' }
 
-      verify.jwtChallenges()(req, res, next)
 
-      assert.equal(challenges.jwtForgedChallenge.solved, true)
-    })
-
-    void it('"jwtForgedChallenge" is solved when forged token HMAC-signed with public RSA-key has string "rsa_lord@" in the payload', { skip: isWindows() ? 'not supported on Windows' : false }, () => {
-      req.headers = { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImVtYWlsIjoicnNhX2xvcmRAIn0sImlhdCI6MTU4MjIyMTY3NX0.50f6VAIQk2Uzpf3sgH-1JVrrTuwudonm2DKn2ec7Tg8' }
-
-      verify.jwtChallenges()(req, res, next)
-
-      assert.equal(challenges.jwtForgedChallenge.solved, true)
-    })
-
-    void it('"jwtForgedChallenge" is not solved when token regularly signed with private RSA-key has email rsa_lord@juice-sh.op in the payload', { skip: isWindows() ? 'not supported on Windows' : false }, () => {
-      const token = security.authorize({ data: { email: 'rsa_lord@juice-sh.op' } })
-      req.headers = { authorization: `Bearer ${token}` }
-
-      verify.jwtChallenges()(req, res, next)
-
-      assert.equal(challenges.jwtForgedChallenge.solved, false)
-    })
 
     void it('"iacLeakedKeyChallenge" is solved when RS256-signed token has email cloud-admin@juice-sh.op in the payload', () => {
       challenges.iacLeakedKeyChallenge = { solved: false, save } as unknown as Challenge

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 import { type Request, type Response, type NextFunction } from 'express'
@@ -67,8 +67,8 @@ export function login () {
 
   function verifyPostLoginChallenges (user: User) {
     challengeUtils.solveIf(challenges.loginAdminChallenge, () => { return user.id === users.admin.id })
-    challengeUtils.solveIf(challenges.loginJimChallenge, () => { return user.id === users.jim.id })
-    challengeUtils.solveIf(challenges.loginBenderChallenge, () => { return user.id === users.bender.id })
+    challengeUtils.solveIf(challenges.loginJimChallenge, () => { return user.id === users.leo.id })
+    challengeUtils.solveIf(challenges.loginBenderChallenge, () => { return user.id === users.vex.id })
     challengeUtils.solveIf(challenges.ghostLoginChallenge, () => { return user.id === users.chris.id })
     if (challengeUtils.notSolved(challenges.ephemeralAccountantChallenge) && user.email === 'b00kkeeper@' + config.get<string>('application.domain') && user.role === 'accounting') {
       UserModel.count({ where: { email: 'b00kkeeper@' + config.get<string>('application.domain') } }).then((count: number) => {

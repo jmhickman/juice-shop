@@ -6,7 +6,7 @@
 import { describe, it, beforeEach, mock } from 'node:test'
 import assert from 'node:assert/strict'
 import { challenges } from '../../data/datacache'
-import { type Challenge } from '@juice-shop/data/types'
+import { type Challenge } from '@lollo-logistics/data/types'
 import { continueCode } from '../../routes/continueCode'
 
 void describe('continueCode', () => {
@@ -30,7 +30,6 @@ void describe('continueCode', () => {
   void it('should be hashid value of IDs of solved challenges', () => {
     challenges.scoreBoardChallenge = { id: 1, solved: true } as unknown as Challenge
     challenges.adminSectionChallenge = { id: 2, solved: true } as unknown as Challenge
-    challenges.continueCodeChallenge = { id: 3, solved: false } as unknown as Challenge
 
     continueCode()(req, res)
     assert.equal(res.json.mock.calls.length, 1)

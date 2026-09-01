@@ -115,7 +115,7 @@ products:
     deluxePrice: 2.49
     image: cooler_box.jpg
     reviews:
-      - { text: 'y0ur f1r3wall needs m0r3 musc13', author: uvogin }
+      - { text: 'y0ur f1r3wall needs m0r3 musc13', author: vinnie }
   -
     name: 'Egg-Crate Pallet Insert (500 units)'
     description: 'Now with even more exotic cushioning geometry.'
@@ -141,7 +141,7 @@ products:
     price: 1.99
     image: banana_wrap.jpg
     reviews:
-      - { text: 'Fry liked it too.', author: bender }
+      - { text: 'The night crew swears by it.', author: vex }
   -
     name: 'Lollo Logistics Crew Tee'
     description: 'Real couriers wear it 24/7!'
@@ -205,7 +205,7 @@ products:
     price: 14.99
     image: tattoo.jpg
     reviews:
-      - { text: 'I straight-up gots nuff props fo''these tattoos!', author: rapper }
+      - { text: 'I straight-up gots nuff props fo''these tattoos!', author: dj }
   -
     name: 'Dispatch Desk Mug'
     description: 'Black mug with regular logo on one side and heritage crest on the other! Your colleagues will envy you!'
@@ -224,8 +224,8 @@ products:
     limitPerUser: 5
     image: velcro-patch.jpg
     reviews:
-      - { text: 'This thang would look phat on Bobby''s jacked fur coat!', author: rapper }
-      - { text: 'Looks so much better on my uniform than the boring Starfleet symbol.', author: jim }
+      - { text: 'This thang would look phat on the forklift!', author: dj }
+      - { text: 'Looks so much better on my uniform than the old company logo.', author: leo }
   -
     name: 'Woodruff Tonic "Forest Master X-Treme"'
     description: 'Harvested and manufactured in the Black Forest, Germany. Can cause hyperactive behavior in children. Can cause permanent green tongue when consumed undiluted.'
@@ -237,7 +237,7 @@ products:
     price: 1.99
     image: green_smoothie.jpg
     reviews:
-      - { text: 'Fresh out of a replicator.', author: jim }
+      - { text: 'Straight off the packing line.', author: leo }
   -
     name: 'Quince Cordial (1000ml)'
     description: 'Cordial of the <em>Cydonia oblonga</em> fruit. Not exactly sweet but rich in Vitamin C.'
@@ -286,7 +286,7 @@ products:
     price: 2.99
     image: carrot_drink.jpeg
     reviews:
-      - { text: '0 st4rs f0r 7h3 h0rr1bl3 s3cur17y', author: uvogin }
+      - { text: '0 st4rs f0r 7h3 h0rr1bl3 s3cur17y', author: vinnie }
   -
     name: 'Nordic Convoy Tour 2017 Sticker Sheet (Special Edition)'
     description: '10 sheets of Nordic-themed stickers with 15 stickers on each.'
@@ -299,7 +299,7 @@ products:
     price: 5.99
     image: cover_small.jpg
     reviews:
-      - { text: 'Even more interesting than watching Interdimensional Cable!', author: morty }
+      - { text: 'Better than the in-terminal Wi-Fi waiting lounge!', author: oscar }
   -
     name: 'Produce Cart (Comeback-Product 2018 Edition)'
     description: 'The wheels of this cart are made from real water melons. You might not want to roll it up/down the curb too hard.'
@@ -320,7 +320,7 @@ products:
     quantity: 8
     image: snakes_ladders.jpg
     reviews:
-      - { text: 'Wait for a 10$ sale on game night supplies!', author: bjoernOwasp }
+      - { text: 'Wait for a 10$ sale, then stock up!', author: weber }
   -
     name: 'Risk & Recovery Board Game - Field Ops'
     description: 'This amazing field-ops security awareness board game is the perfect break-room companion!'
@@ -328,7 +328,7 @@ products:
     quantity: 0
     image: snakes_ladders_m.jpg
     reviews:
-      - { text: "Here yo' learn how tha fuck ta not show yo' goddamn phone on camera!", author: rapper }
+      - { text: "Here yo' learn how tha fuck ta not show yo' goddamn phone on camera!", author: dj }
   -
     name: 'Lollo Logistics Holographic Decal'
     description: "Die-cut holographic decal. Stand out from those 08/15-decal-covered laptops with this shiny beacon of 80's coolness!"
@@ -336,9 +336,9 @@ products:
     quantity: 0
     image: holo_sticker.png
     reviews:
-      - { text: "Rad, dude!", author: rapper }
-      - { text: "Looks spacy on Bones' new tricorder!", author: jim }
-      - { text: "Will put one on the Planet Express ship's bumper!", author: bender }
+      - { text: "Rad, dude!", author: dj }
+      - { text: "Looks spacy on Bones' new tricorder!", author: leo }
+      - { text: "Will put one on the delivery van's bumper!", author: vex }
   -
     name: 'Dust Mask "King of the Dock"'
     description: "Dust mask with compartment for filter from 50% cotton and 50% polyester."
@@ -347,8 +347,8 @@ products:
     limitPerUser: 1
     image: dust_mask.jpg
     reviews:
-      - { text: "K33p5 y0ur 5plu773r 70 y0ur53lf!", author: uvogin }
-      - { text: "Puny mask for puny human weaklings!", author: bender }
+      - { text: "K33p5 y0ur 5plu773r 70 y0ur53lf!", author: vinnie }
+      - { text: "Puny mask for puny human weaklings!", author: vex }
   -
     name: 'Forklift Operator Trading Card (Common)'
     description: 'Common rarity "Forklift Operator" card for the depot trading card club.'
@@ -358,7 +358,7 @@ products:
     limitPerUser: 5
     image: ccg_common.png
     reviews:
-      - { text: "Ooooh, puny human playing Mau Mau, now?", author: bender }
+      - { text: "Ooooh, puny human playing Mau Mau, now?", author: vex }
   -
     name: 'Forklift Operator Trading Card (Super Rare)'
     description: 'Super rare "Forklift Operator" card with holographic foil-coating for the depot trading card club.'
@@ -369,7 +369,7 @@ products:
     limitPerUser: 1
     image: ccg_foil.png
     reviews:
-      - { text: "Mau Mau with bling-bling? Humans are so pathetic!", author: bender }
+      - { text: "Mau Mau with bling-bling? Humans are so pathetic!", author: vex }
   -
     name: 'Lollo Logistics "Deep Freeze" 2020 Edition'
     description: 'Exact version of <a href="https://example.com/releases/tag/v9.3.1-PERMAFROST">our warehouse management system that was archived on 02/02/2020</a> by the Global Data Archive Program and ultimately went into the <a href="https://example.com/arctic-vault">Arctic Code Vault</a> on July 8. 2020 where it will be safely stored for at least 1000 years.'
@@ -378,7 +378,7 @@ products:
     limitPerUser: 1
     image: permafrost.jpg
     reviews:
-      - { text: "🧊 Let it go, let it go 🎶 Can't hold it back anymore 🎶 Let it go, let it go 🎶 Turn away and slam the door ❄️", author: rapper }
+      - { text: "🧊 Let it go, let it go 🎶 Can't hold it back anymore 🎶 Let it go, let it go 🎶 Turn away and slam the door ❄️", author: dj }
   -
     name: 'Chief Salesman Portrait'
     description: 'Unique digital painting depicting Stan, our most qualified and almost profitable salesman. He made a succesful carreer in selling used ships, coffins, krypts, crosses, real estate, life insurance, restaurant supplies, voodoo enhanced asbestos and courtroom souvenirs before <em>finally</em> adding his expertise to the Lollo Logistics marketing team.'
@@ -387,7 +387,7 @@ products:
     image: artwork2.jpg
     reviews:
       - { text: "I'd stand on my head to make you a deal for this piece of art.", author: stan }
-      - { text: "Just when my opinion of humans couldn't get any lower, along comes Stan...", author: bender }
+      - { text: "Just when my opinion of humans couldn't get any lower, along comes Stan...", author: vex }
   -
     name: 'Lollo Logistics Promo Card (Non-Foil)'
     description: 'Mythic rare <small><em>(obviously...)</em></small> card "Lollo Logistics" with three distinctly useful abilities. Alpha printing, mint condition. A true collectors piece to own!'
@@ -405,7 +405,7 @@ products:
     limitPerUser: 1
     image: anniversary.jpeg
     reviews:
-      - { text: "I'll be there! Will you, too?", author: bjoernOwasp }
+      - { text: "I'll be there! Will you, too?", author: weber }
   -
     name: 'Raspberry Pi Server Rack Kit'
     description: 'Want to run a depot CTF in style? Build <a href="https://example.com/lego/server-rack.pdf" target="_blank">your own server rack tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules running a Kubernetes cluster! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
@@ -414,7 +414,7 @@ products:
     limitPerUser: 1
     image: lego_case.jpg
     reviews:
-      - { text: 'Check out the /#/photo-wall for some impressions of the assembly process!', author: bjoernOwasp }
+      - { text: 'Check out the /#/photo-wall for some impressions of the assembly process!', author: weber }
   -
     name: 'Ops Security User Day Ticket 2024'
     description: 'You are going to the Global AppSec Conference 2024? <a href="https://example.com/tickets" target="_blank">Get a ticket<sup>*</sup></a> for this amazing side event as well! Check the cargo-packed agenda <a href="https://example.com/userday" target="_blank">here</a> for all the details!<br><br><small><small><sup>*</sup>=scroll down to <strong>Elevate: Ops Security User Day (Sept. 25)</strong> after clicking <em>Get Tickets</em>. Ticket price set to only cover fees for room, AV, and catering throughout the day.</small></small>'
@@ -423,8 +423,8 @@ products:
     limitPerUser: 1
     image: user_day_ticket.png
     reviews:
-      - { text: 'The Live Assessment session will even use our warehouse system as its "real-world" example!', author: timo }
-      - { text: 'We will showcase the amazing Raspberry Pi Server Rack at this event!', author: jannik }
+      - { text: 'The Live Assessment session will even use our warehouse system as its "real-world" example!', author: pretzel }
+      - { text: 'We will showcase the amazing Raspberry Pi Server Rack at this event!', author: r7291k }
   -
     name: 'Pineapple Cooler (1000ml)'
     description: 'Tropical refreshment from the finest sun-ripened pineapples.'
@@ -481,11 +481,11 @@ memories:
   -
     image: 'team-offsite-day-1571814229653.jpg'
     caption: 'Team offsite day! 🚚'
-    user: bjoernGoogle
+    user: mweber
   -
     image: 'my-rare-collectors-item!-[̲̅$̲̅(̲̅-͡°-͜ʖ-͡°̲̅)̲̅$̲̅]-1572603645543.jpg'
     caption: 'My rare collectors item! [̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]'
-    user: bjoernGoogle
+    user: mweber
   -
     image: 'favorite-hiking-place.png'
     caption: 'I love going hiking here...'
@@ -503,19 +503,19 @@ memories:
   -
     image: 'sorted-the-pieces,-starting-assembly-process-1721152307290.jpg'
     caption: 'Sorted the pieces, starting assembly process...'
-    user: bjoernOwasp
+    user: weber
   -
     image: 'building-something-literally-bottom-up-1721152342603.jpg'
     caption: 'Building something literally bottom up...'
-    user: bjoernOwasp
+    user: weber
   -
     image: 'putting-in-the-hardware-1721152366854.jpg'
     caption: 'Putting in the hardware...'
-    user: bjoernOwasp
+    user: weber
   -
     image: 'everything-up-and-running!-1721152385146.jpg'
     caption: 'Everything up and running!'
-    user: bjoernOwasp
+    user: weber
 ctf:
   showFlagsInNotifications: false
   showCountryDetailsInNotifications: none # Options: none  name  flag  both

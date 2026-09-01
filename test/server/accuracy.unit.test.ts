@@ -6,7 +6,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 import * as accuracy from '../../lib/accuracy'
-import { type ChallengeKey } from '@juice-shop/models/challenge'
+import { type ChallengeKey } from '@lollo-logistics/models/challenge'
 
 void describe('accuracy', () => {
   void it('should calculate accuracy as 1.0 when solved on first attempt', () => {

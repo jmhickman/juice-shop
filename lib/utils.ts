@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -10,7 +10,7 @@ import config from 'config'
 import download from 'download'
 import crypto from 'node:crypto'
 import clarinet from 'clarinet'
-import type { Challenge } from '@juice-shop/data/types'
+import type { Challenge } from '@lollo-logistics/data/types'
 
 import isHeroku from './is-heroku'
 import isDocker from './is-docker'

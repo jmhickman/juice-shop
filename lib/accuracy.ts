@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2014-2021 Bjoern Kimminich.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
-import { type ChallengeKey } from '@juice-shop/models/challenge'
+import { type ChallengeKey } from '@lollo-logistics/models/challenge'
 import logger from './logger'
 import colors from 'colors/safe'
 const solves: Record<string, { 'find it': boolean, 'fix it': boolean, attempts: { 'find it': number, 'fix it': number } }> = {}

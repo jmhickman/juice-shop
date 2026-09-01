@@ -1,15 +1,11 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
-import config from 'config'
 import { type Request, type Response, type NextFunction } from 'express'
 
-import type { Memory as MemoryConfig } from '../lib/config.schema'
 import { SecurityAnswerModel } from '../models/securityAnswer'
-import * as challengeUtils from '../lib/challengeUtils'
-import { challenges, users } from '../data/datacache'
 import * as security from '../lib/insecurity'
 import { UserModel } from '../models/user'
 
@@ -42,7 +38,6 @@ export function resetPassword () {
         const user = await UserModel.findByPk(data.UserId)
         if (user) {
           const updatedUser = await user.update({ password: newPassword })
-          verifySecurityAnswerChallenges(updatedUser, answer)
           res.json({ user: updatedUser })
         }
       } else {
@@ -52,35 +47,4 @@ export function resetPassword () {
       next(error)
     }
   }
-}
-
-function verifySecurityAnswerChallenges (user: UserModel, answer: string) {
-  challengeUtils.solveIf(challenges.resetPasswordJimChallenge, () => { return user.id === users.jim.id && answer === 'Maximilian' })
-  challengeUtils.solveIf(challenges.resetPasswordBenderChallenge, () => { return user.id === users.bender.id && answer === 'Gearworks Salvage & Haul' })
-  challengeUtils.solveIf(challenges.resetPasswordBjoernChallenge, () => { return user.id === users.bjoern.id && answer === 'West-2082' })
-  challengeUtils.solveIf(challenges.resetPasswordMortyChallenge, () => { return user.id === users.morty.id && answer === '5N0wb41L' })
-  challengeUtils.solveIf(challenges.resetPasswordBjoernOwaspChallenge, () => { return user.id === users.bjoernOwasp.id && answer === 'Zaya' })
-  challengeUtils.solveIf(challenges.resetPasswordUvoginChallenge, () => { return user.id === users.uvogin.id && answer === 'Silence of the Lambs' })
-  challengeUtils.solveIf(challenges.geoStalkingMetaChallenge, () => {
-    const securityAnswer = ((() => {
-      const memories = config.get<MemoryConfig[]>('memories')
-      for (let i = 0; i < memories.length; i++) {
-        if (memories[i].geoStalkingMetaSecurityAnswer) {
-          return memories[i].geoStalkingMetaSecurityAnswer
-        }
-      }
-    })())
-    return user.id === users.john.id && answer === securityAnswer
-  })
-  challengeUtils.solveIf(challenges.geoStalkingVisualChallenge, () => {
-    const securityAnswer = ((() => {
-      const memories = config.get<MemoryConfig[]>('memories')
-      for (let i = 0; i < memories.length; i++) {
-        if (memories[i].geoStalkingVisualSecurityAnswer) {
-          return memories[i].geoStalkingVisualSecurityAnswer
-        }
-      }
-    })())
-    return user.id === users.emma.id && answer === securityAnswer
-  })
 }

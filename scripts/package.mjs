@@ -60,29 +60,26 @@ const archiveName = `${pkg.name}-${pkg.version}` +
   (cpuArch ? `_${cpuArch}` : '') +
   ext
 const archivePath = path.join('dist', archiveName)
-const prefix = `juice-shop_${pkg.version}`
+const prefix = `lollo-logistics_${pkg.version}`
 
 await fs.mkdir('dist', { recursive: true })
 
 const files = await glob([
   '.well-known/**',
   'LICENSE',
-  '*.md',
   'package.json',
   'ctf.key',
   'swagger.yml',
   'server.ts',
   'build/**',
-  'bom.json',
-  'bom.xml',
   'config/*.yml',
   'data/*.ts',
   'data/static/**',
   'encryptionkeys/**',
   'frontend/dist/frontend/**',
-  'frontend/dist/bom/**',
   'frontend/src/**/*.ts',
   'ftp/**',
+  'infrastructure/**',
   'i18n/.gitkeep',
   'lib/**',
   'models/*.ts',
@@ -90,7 +87,7 @@ const files = await glob([
   'routes/*.ts',
   'uploads/complaints/.gitkeep',
   'views/**'
-], { dot: true, ignore: ['build/reports/**'], nodir: true })
+], { dot: true, ignore: ['build/reports/**', 'build/test/**', '**/*.spec.ts', '**/stats.json'], nodir: true })
 
 // Stream all matched files into the archive under the prefix directory
 await new Promise((resolve, reject) => {

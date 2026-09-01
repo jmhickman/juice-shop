@@ -17,7 +17,7 @@ import validateConfig, {
   checkNecessaryExtraKeysOnSpecialProducts,
   checkForIllogicalCombos
 } from '../../lib/startup/validateConfig'
-import type { Memory, Product } from '@juice-shop/lib/config.schema'
+import type { Memory, Product } from '@lollo-logistics/lib/config.schema'
 
 void describe('configValidation', () => {
   const COMMON_PRODUCT = { price: 1, description: 'foo', image: 'bar.jpg' }

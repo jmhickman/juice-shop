@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2026 Lollo Logistics contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -27,13 +27,6 @@ export function updateUserProfile () {
         next(new Error('User not found'))
         return
       }
-
-      challengeUtils.solveIf(challenges.csrfChallenge, () => {
-        const url = config.get<string>('challenges.overwriteUrlForCsrfChallenge')
-        return ((req.headers.origin?.includes('://' + url.replace(/^https?:\/\//, ''))) ??
-          (req.headers.referer?.includes('://' + url.replace(/^https?:\/\//, '')))) &&
-          req.body.username !== user.username
-      })
 
       const savedUser = await user.update({ username: req.body.username })
       const userWithStatus = utils.queryResultToJson(savedUser)

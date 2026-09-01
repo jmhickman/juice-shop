@@ -2,7 +2,7 @@
 services:
   nginx:
     image: nginx:1.28.0-alpine
-    container_name: juice-shop-proxy
+    container_name: lollo-logistics-proxy
     restart: unless-stopped
     ports:
       - "80:80"
@@ -10,16 +10,16 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - juice-shop
+      - lollo-logistics
     networks:
-      - juice-shop-net
+      - lollo-logistics-net
 
-  juice-shop:
+  lollo-logistics:
     build:
       context: ../
       dockerfile: infrastructure/Dockerfile
-    image: juice-shop:latest
-    container_name: juice-shop-app
+    image: lollo-logistics:latest
+    container_name: lollo-logistics-app
     restart: unless-stopped
     expose:
       - "3000"
@@ -32,9 +32,9 @@ services:
       mongo:
         condition: service_healthy
     volumes:
-      - juice-shop-data:/juice-shop/data/sqlite
+      - lollo-logistics-data:/lollo-logistics/data/sqlite
     networks:
-      - juice-shop-net
+      - lollo-logistics-net
     deploy:
       resources:
         limits:
@@ -42,7 +42,7 @@ services:
 
   redis:
     image: redis:7.4.4-alpine
-    container_name: juice-shop-redis
+    container_name: lollo-logistics-redis
     restart: unless-stopped
     command: ["redis-server", "--maxmemory", "128mb", "--maxmemory-policy", "allkeys-lru"]
     healthcheck:
@@ -53,11 +53,11 @@ services:
     expose:
       - "6379"
     networks:
-      - juice-shop-net
+      - lollo-logistics-net
 
   mongo:
     image: mongo:4.4.29 # vuln-code-snippet vuln-line vulnerableDockerImageChallenge
-    container_name: juice-shop-mongo
+    container_name: lollo-logistics-mongo
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
@@ -71,15 +71,15 @@ services:
     volumes:
       - mongo-data:/data/db
     networks:
-      - juice-shop-net
+      - lollo-logistics-net
 
 volumes:
-  juice-shop-data:
+  lollo-logistics-data:
     driver: local
   mongo-data:
     driver: local
 
 networks:
-  juice-shop-net:
+  lollo-logistics-net:
     driver: bridge
 # vuln-code-snippet end vulnerableDockerImageChallenge

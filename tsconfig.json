@@ -13,7 +13,7 @@
     "target": "es2020",
     "moduleResolution": "bundler",
     "paths": {
-      "@juice-shop/*": ["./*"]
+      "@lollo-logistics/*": ["./*"]
     },
     "sourceMap": true,
     "strict": true,
