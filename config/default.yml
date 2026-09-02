@@ -78,7 +78,7 @@ application:
       - { uri: 'http://penguin.termina.linux.test:3000', proxy: 'https://localchromeos.lollo-logistics.shop' }
       - { uri: 'http://penguin.termina.linux.test:4200', proxy: 'https://localchromeos.lollo-logistics.shop' }
 challenges:
-  showSolvedNotifications: true
+  showSolvedNotifications: false
   showHints: true
   showMitigations: true
   codingChallengesEnabled: solved # Options: never  solved  always

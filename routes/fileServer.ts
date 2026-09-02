@@ -23,10 +23,10 @@ export function servePublicFiles () {
   }
 
   function verify (file: string, res: Response, next: NextFunction) {
-    if (file && (endsWithAllowlistedFileType(file) || (file === 'incident-support.kdbx'))) {
+    if (file && (endsWithAllowlistedFileType(file) || (file === 'support-vault.kdbx'))) {
       file = security.cutOffPoisonNullByte(file)
 
-      challengeUtils.solveIf(challenges.directoryListingChallenge, () => { return file.toLowerCase() === 'acquisitions.md' })
+      challengeUtils.solveIf(challenges.directoryListingChallenge, () => { return file.toLowerCase() === 'market-acquisitions.md' })
       verifySuccessfulPoisonNullByteExploit(file)
 
       res.sendFile(path.resolve('ftp/', file))
@@ -37,9 +37,9 @@ export function servePublicFiles () {
   }
 
   function verifySuccessfulPoisonNullByteExploit (file: string) {
-    challengeUtils.solveIf(challenges.forgottenDevBackupChallenge, () => { return file.toLowerCase() === 'package.json.bak' })
-    challengeUtils.solveIf(challenges.forgottenBackupChallenge, () => { return file.toLowerCase() === 'coupons_2013.md.bak' })
-    challengeUtils.solveIf(challenges.misplacedSignatureFileChallenge, () => { return file.toLowerCase() === 'suspicious_errors.yml' })
+    challengeUtils.solveIf(challenges.forgottenDevBackupChallenge, () => { return file.toLowerCase() === 'store-backend.json.bak' })
+    challengeUtils.solveIf(challenges.forgottenBackupChallenge, () => { return file.toLowerCase() === 'promo-codes-2019.md.bak' })
+    challengeUtils.solveIf(challenges.misplacedSignatureFileChallenge, () => { return file.toLowerCase() === 'error-signatures.yml' })
 
     challengeUtils.solveIf(challenges.nullByteChallenge, () => {
       return challenges.forgottenDevBackupChallenge.solved || challenges.forgottenBackupChallenge.solved ||

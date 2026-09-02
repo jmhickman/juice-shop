@@ -698,6 +698,10 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
 
   /* Error Handling */
   app.use(verify.errorHandlingChallenge())
+  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    if (err instanceof Error) err.stack = err.message // never leak stack traces (paths, deps, layout) to clients
+    next(err)
+  })
   app.use(errorhandler())
 }
 
@@ -748,7 +752,7 @@ logger.info(`Entity models ${colors.bold(Object.keys(sequelize.models).length.to
 let metricsUpdateLoop: any
 const Metrics = metrics.observeMetrics() // vuln-code-snippet neutral-line exposedMetricsChallenge
 app.get('/metrics', utils.asyncHandler(metrics.serveMetrics())) // vuln-code-snippet vuln-line exposedMetricsChallenge
-errorhandler.title = `${config.get<string>('application.name')} (Express ${utils.version('express')})`
+errorhandler.title = config.get<string>('application.name')
 
 export async function start (readyCallback?: () => void) {
   const datacreatorEnd = startupGauge.startTimer({ task: 'datacreator' })

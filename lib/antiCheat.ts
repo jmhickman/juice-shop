@@ -39,19 +39,19 @@ const solves: Array<{ challenge: any, phase: string, timestamp: Date, cheatScore
 
 const preSolveInteractions: Array<{ challengeKey: ChallengeKey, urlFragments: string[], interactions: boolean[] }> = [
   { challengeKey: 'directoryListingChallenge', urlFragments: ['/ftp'], interactions: [false] },
-  { challengeKey: 'forgottenDevBackupChallenge', urlFragments: ['/ftp', '/ftp/package.json.bak'], interactions: [false, false] },
-  { challengeKey: 'forgottenBackupChallenge', urlFragments: ['/ftp', '/ftp/coupons_2013.md.bak'], interactions: [false, false] },
-  { challengeKey: 'loginSupportChallenge', urlFragments: ['/ftp', '/ftp/incident-support.kdbx'], interactions: [false, false] },
-  { challengeKey: 'misplacedSignatureFileChallenge', urlFragments: ['/ftp', '/ftp/suspicious_errors.yml'], interactions: [false, false] },
+  { challengeKey: 'forgottenDevBackupChallenge', urlFragments: ['/ftp', '/ftp/store-backend.json.bak'], interactions: [false, false] },
+  { challengeKey: 'forgottenBackupChallenge', urlFragments: ['/ftp', '/ftp/promo-codes-2019.md.bak'], interactions: [false, false] },
+  { challengeKey: 'loginSupportChallenge', urlFragments: ['/ftp', '/ftp/support-vault.kdbx'], interactions: [false, false] },
+  { challengeKey: 'misplacedSignatureFileChallenge', urlFragments: ['/ftp', '/ftp/error-signatures.yml'], interactions: [false, false] },
   { challengeKey: 'misplacedIacFiles', urlFragments: ['/infrastructure'], interactions: [false] },
   { challengeKey: 'rceChallenge', urlFragments: ['/api-docs', '/b2b/v2/orders'], interactions: [false, false] },
   { challengeKey: 'rceOccupyChallenge', urlFragments: ['/api-docs', '/b2b/v2/orders'], interactions: [false, false] }
 ]
 
 const challengeSourceFiles: Record<string, string[]> = {
-  knownVulnerableComponentChallenge: ['ftp/package.json.bak'],
-  typosquattingNpmChallenge: ['ftp/package.json.bak'],
-  supplyChainAttackChallenge: ['ftp/package.json.bak'],
+  knownVulnerableComponentChallenge: ['ftp/store-backend.json.bak'],
+  typosquattingNpmChallenge: ['ftp/store-backend.json.bak'],
+  supplyChainAttackChallenge: ['ftp/store-backend.json.bak'],
   vulnerableDockerImageChallenge: ['infrastructure/docker-compose.yml']
 }
 

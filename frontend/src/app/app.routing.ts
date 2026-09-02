@@ -38,7 +38,6 @@ import { PhotoWallComponent } from './photo-wall/photo-wall.component'
 import { DeluxeUserComponent } from './deluxe-user/deluxe-user.component'
 import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
 import { NFTUnlockComponent } from './nft-unlock/nft-unlock.component'
-import { ScoreBoardComponent } from './score-board/score-board.component'
 import { ChatbotComponent } from './chatbot/chatbot.component'
 import { ChatWelcomePageComponent } from './chatbot/chat-welcome-page/chat-welcome-page.component'
 import { ChatConversationComponent } from './chatbot/chat-conversation/chat-conversation.component'
@@ -183,7 +182,7 @@ const routes: Routes = [
   },
   { // vuln-code-snippet neutral-line scoreBoardChallenge
     path: 'score-board', // vuln-code-snippet vuln-line scoreBoardChallenge
-    component: ScoreBoardComponent // vuln-code-snippet neutral-line scoreBoardChallenge
+    component: SearchResultComponent // vuln-code-snippet neutral-line scoreBoardChallenge
   }, // vuln-code-snippet neutral-line scoreBoardChallenge
   {
     path: 'track-result',

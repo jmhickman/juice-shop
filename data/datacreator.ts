@@ -331,8 +331,8 @@ async function createQuantity () {
 async function createMemories () {
   const memories = [
     MemoryModel.create({
-      imagePath: 'assets/public/images/uploads/ᓚᘏᗢ-#zatschi-#whoneedsfourlegs-1572600969477.jpg',
-      caption: '😼 #zatschi #whoneedsfourlegs',
+      imagePath: 'assets/public/images/uploads/warehouse-cat-on-shift-1572600969477.jpg',
+      caption: '😼 The warehouse mascot keeps the packing station warm',
       UserId: datacache.users.weber.id
     }).catch((err: unknown) => {
       logger.error(`Could not create memory: ${utils.getErrorMessage(err)}`)

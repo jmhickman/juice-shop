@@ -14,6 +14,7 @@ import { challenges } from '../data/datacache'
 import * as security from '../lib/insecurity'
 import { UserModel } from '../models/user'
 import * as utils from '../lib/utils'
+import logger from '../lib/logger'
 
 const entities = new Entities()
 
@@ -100,6 +101,7 @@ export function getUserProfile () {
 
       res.send(fn(user))
     } catch (err) {
+      logger.error(`Profile render failed for user ${loggedInUser.data?.id}: ${utils.getErrorMessage(err)}`)
       next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
     }
   }

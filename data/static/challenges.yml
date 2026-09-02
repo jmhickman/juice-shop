@@ -340,7 +340,7 @@
   hints:
     - 'This challenge has nothing to do with mistyping web domains. There is no conveniently misplaced file helping you with this one either. Or is there?'
     - 'This challenge has nothing to do with URLs or domains.'
-    - 'Other than for its legacy companion, combing through the package.json.bak does not help for this challenge.'
+    - 'Other than for its legacy companion, combing through the store-backend.json.bak does not help for this challenge.'
   key: typosquattingAngularChallenge
 -
   name: 'GDPR Data Erasure'
@@ -750,7 +750,7 @@
     - 'The "Comment" field in the "Customer Feedback" screen is where you want to put your focus on.'
     - 'The Comment field in the Contact Us screen is where you want to put your focus on.'
     - 'The attack payload <iframe src="javascript:alert(`xss)">` will not be rejected by any validator but stripped from the comment before persisting it.'
-    - 'Look for possible dependencies related to input processing in the package.json.bak you harvested earlier.'
+    - 'Look for possible dependencies related to input processing in the store-backend.json.bak you harvested earlier.'
     - 'If an XSS alert shows up but the challenge does not appear as solved on the Score Board, you might not have managed to put the exact attack string <iframe src="javascript:alert(`xss)">` into the database?'
   key: persistedXssFeedbackChallenge
   disabledEnv:
@@ -860,7 +860,7 @@
   difficulty: 4
   hints:
     - 'Report one of two possible answers via the "Customer Feedback" form. Do not forget to submit the library''s version as well.'
-    - 'Look for possible dependencies related to security in the package.json.bak you probably harvested earlier during the Access a developer’s forgotten backup file challenge.'
+    - 'Look for possible dependencies related to security in the store-backend.json.bak you probably harvested earlier during the Access a developer’s forgotten backup file challenge.'
     - 'Do some research on the internet for known security issues in the most suspicious application dependencies.'
   key: knownVulnerableComponentChallenge
 -
