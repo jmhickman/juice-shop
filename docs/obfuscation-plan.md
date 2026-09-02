@@ -208,7 +208,7 @@ Bulk mechanical changes across many files. Lower risk but high volume.
 ### 6A: Copyright headers (434 TS files)
 
 - [ ] **6.1** Write a script (or use `sed`/`find`) to replace the header block in all `.ts`, `.js`, `.html`, `.scss` files:
-  - FROM: `Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.`
+  - FROM: `For copyright information, please see the COPYRIGHT file.`
   - TO: `Copyright (c) <year> <new project name>. All rights reserved.` (or MIT-style attribution to the new project)
 - [ ] **6.2** Verify: `grep -rl "OWASP Juice Shop contributors" --include="*.ts" . | grep -v node_modules` → zero hits
 

@@ -6,7 +6,7 @@ Frontend tests run on **Vitest** through the Angular builder (`@angular/build:un
 
 ```typescript
 /*
- * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * For copyright information, please see the COPYRIGHT file.
  * SPDX-License-Identifier: MIT
  */
 
