@@ -24,9 +24,9 @@ const customizeEasterEgg = async () => {
 }
 
 const replaceImagePath = (overlay: string) => {
-  const textureDeclaration = 'orangeTexture = THREE.ImageUtils.loadTexture("/assets/private/' + overlay + '");'
+  const textureDeclaration = 'planetTexture = THREE.ImageUtils.loadTexture("/assets/private/' + overlay + '");'
   replace({
-    regex: /orangeTexture = .*;/,
+    regex: /planetTexture = .*;/,
     replacement: textureDeclaration,
     paths: ['frontend/dist/frontend/assets/private/threejs-demo.html'],
     recursive: false,

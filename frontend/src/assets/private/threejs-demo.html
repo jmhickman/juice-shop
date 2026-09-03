@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Planet Orangeuze</title>
+    <title>Welcome to Planet Resonara</title>
     <script src="/assets/private/three.js"></script>
     <script src="/assets/private/OrbitControls.js"></script>
     <script src="/assets/private/dat.gui.min.js"></script>
@@ -46,7 +46,7 @@ function init() {
     renderer.shadowMapEnabled = true;
 
     var sphereGeometry = new THREE.SphereGeometry(15, 60, 60);
-    var sphereMaterial = createOrangeMaterial();
+    var sphereMaterial = createPlanetMaterial();
     var earthMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
     earthMesh.name = 'earth';
     scene.add(earthMesh);
@@ -109,21 +109,21 @@ function init() {
 }
 
 
-function createOrangeMaterial() {
-    var orangeTexture = THREE.ImageUtils.loadTexture("/assets/private/orangemap2k.avif");
+function createPlanetMaterial() {
+    var planetTexture = THREE.ImageUtils.loadTexture("/assets/private/resonara_surface.avif");
     var specularMap = THREE.ImageUtils.loadTexture("/assets/private/earthspec4k.avif");
     var normalMap = THREE.ImageUtils.loadTexture("/assets/private/earth_normalmap_flat4k.avif");
 
-    var orangeMaterial = new THREE.MeshPhongMaterial();
-    orangeMaterial.map = orangeTexture;
+    var planetMaterial = new THREE.MeshPhongMaterial();
+    planetMaterial.map = planetTexture;
 
-    orangeMaterial.specularMap = specularMap;
-    orangeMaterial.specular = new THREE.Color(0x262626);
+    planetMaterial.specularMap = specularMap;
+    planetMaterial.specular = new THREE.Color(0x262626);
 
-    orangeMaterial.normalMap = normalMap;
-    orangeMaterial.normalScale = new THREE.Vector2(0.5, 0.7);
+    planetMaterial.normalMap = normalMap;
+    planetMaterial.normalScale = new THREE.Vector2(0.5, 0.7);
 
-    return orangeMaterial;
+    return planetMaterial;
 }
 
 function createCloudMaterial() {

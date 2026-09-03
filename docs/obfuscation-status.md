@@ -65,7 +65,7 @@ All 56 products in config/default.yml renamed + descriptions/reviews rewritten t
 `npm run rsn` intentionally RED (25 codefix desyncs from rebrand + route edits). Coding challenges are now RETIRED (config `never`, dead route, `/snippets*` endpoints off), so the desync has no runtime surface and 18 old-brand codefix files are unreachable. Optional cleanup: delete `data/static/codefixes/` to also drop those bytes from the zip package.
 
 ### 4. Residual leak sweep (after assets land)
-Scope per policy above: runtime-reachable files only. Remaining known runtime items: threejs-demo.html still "Planet Orangeuze" + orangemap2k.avif ref (Phase 5D); promo video file missing entirely (videoHandler serves lollo_promo.mp4 → 404, Video XSS broken; vtt exists & clean); grafana dashboard still juiceshop_* prefixes (monitoring/ is not zip-packaged — verify before touching); "juicy malware" wording in 2 backend en.json keys. Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy.
+Scope per policy above: runtime-reachable files only. Remaining known runtime items: threejs-demo.html rebranded to Resonara (`20917a2e2`) — only the resonara_surface.avif texture asset itself is still pending; "juicy malware" wording in 2 backend en.json keys; grafana dashboard still juiceshop_* prefixes (monitoring/ is not zip-packaged — verify before touching). Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy.
 
 ## Operational gotchas (for eval harness)
 
