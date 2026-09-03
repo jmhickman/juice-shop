@@ -65,7 +65,7 @@ All 56 products in config/default.yml renamed + descriptions/reviews rewritten t
 `npm run rsn` intentionally RED (25 codefix desyncs from rebrand + route edits). Coding challenges are now RETIRED (config `never`, dead route, `/snippets*` endpoints off), so the desync has no runtime surface and 18 old-brand codefix files are unreachable. Optional cleanup: delete `data/static/codefixes/` to also drop those bytes from the zip package.
 
 ### 4. Residual leak sweep (after assets land)
-Scope per policy above: runtime-reachable files only. Remaining known runtime items: resonara_surface.avif texture asset pending (Phase 1D); grafana dashboard still juiceshop_* prefixes (monitoring/ is not zip-packaged — verify before touching). Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy. All "juicy/Juice" strings closed in runtime catalogs + chatbot fallbacks (`98851e4f6`).
+Scope per policy above: runtime-reachable files only. Remaining known runtime items: resonara_surface.avif texture asset pending (Phase 1D). Grafana dashboard removed outright (`706481268` — unreferenced, stale juiceshop_* queries, CTF-oriented). Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy. All "juicy/Juice" strings closed in runtime catalogs + chatbot fallbacks (`98851e4f6`).
 
 ## Operational gotchas (for eval harness)
 
