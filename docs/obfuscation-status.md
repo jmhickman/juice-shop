@@ -1,6 +1,6 @@
 # Obfuscation Project — Status & Remaining Work
 
-**Last updated:** 2026-09-02 · **Branch:** `obfuscation/brand-rename` (pushed to remote) · **HEAD:** `015c90bb1`
+**Last updated:** 2026-09-02 · **Branch:** `obfuscation/brand-rename` (pushed to remote) · **HEAD:** this commit (after `0f5c4dba9`)
 
 Companion docs: `docs/obfuscation-plan.md` (full phase/task list — statuses stale, see below),
 `docs/obfuscation-mapping.md` (brand decision source of truth), `docs/vulnerability-inventory.md`.
@@ -26,6 +26,17 @@ Companion docs: `docs/obfuscation-plan.md` (full phase/task list — statuses st
 - **Scoreboard & solved-notification UI unwired** (`015c90bb1`): `showSolvedNotifications: false`, notification component removed from app shell, `/score-board` route dead (falls to search fallback), sidenav link gone. "Help getting started" sidenav item also removed.
 - **FTP artifact rotation** (`015c90bb1`): acquisitions.md→market-acquisitions.md, package.json.bak→store-backend.json.bak, package-lock.json.bak→store-backend.lock.json.bak, coupons_2013.md.bak→promo-codes-2019.md.bak, suspicious_errors.yml→error-signatures.yml, incident-support.kdbx→support-vault.kdbx. Solve-checks updated in routes/fileServer.ts + lib/antiCheat.ts; hints synced in challenges.yml + data/static/i18n/en.json. Null-byte solve path verified live.
 - **Error-page hardening** (`015c90bb1`): err.stack stripped before client-facing errorhandler (server.ts); Express version removed from error page title. Server console still logs full stacks.
+- **Phase 6A header sweep + licensing** (`0f5c4dba9`): all remaining old `Bjoern Kimminich & OWASP Juice Shop contributors` headers (171 files: frontend HTML templates, test/, scripts/, vagrant/, docs) replaced with "For copyright information, please see the COPYRIGHT file." New root `COPYRIGHT` declares Lollo Logistics attribution + derivative-work relationship to upstream; NOT packaged. `LICENSE` restored verbatim to upstream MIT text (provenance kept honest; IS packaged, as MIT requires).
+- **Coding challenges retired** (this commit): `challenges.codingChallengesEnabled: never`; `/coding-challenge/:challengeKey` route falls back to SearchResultComponent and the page's lazy-loader removed → not bundled; all four `/snippets*` endpoints + imports commented out in server.ts. Verified live: config endpoint reports `never`, snippet URLs return SPA fallback, bundle has zero codefix content. RSN desync now has no runtime surface.
+
+## Scrub-scope policy (user directive, 2026-09-02)
+
+Scrub ONLY what is runtime-reachable (HTTP responses, served files, zip/tgz contents,
+and anything compiled into them — HTML templates, i18n, config, ftp/, .well-known/).
+ALWAYS leave repo-only files alone: README.md, CHANGELOG, .github/, .ai/, AGENTS.md,
+docs/, .mailmap, Dockerfile LABELs, terraform/, vagrant/, test fixtures. LICENSE is
+intentionally upstream-attributed (see COPYRIGHT). Exception that stays in scope:
+infrastructure/** — zip-packaged AND browser-served at /infrastructure.
 
 ## Remaining work
 
@@ -45,17 +56,16 @@ Config already points at new filenames; files don't exist yet → broken images 
 | Planet texture | resonara_surface.avif (frontend/src/assets/private/) | equirectangular ~2048px; three.js accepts jpg/png too |
 | Photo-wall uploads | frontend/src/assets/public/images/uploads/*.jpg | 3 files referenced in config `memories:` block + datacreator.ts caption seed; currently missing → broken imgs show alt text |
 
-Also pending: two hardcoded fallbacks `'assets/public/images/JuiceShop_Logo.png'` in
-`frontend/src/app/navbar/navbar.component.ts` and `frontend/src/app/deluxe-user/deluxe-user.component.ts` → change to lollo_logo.png.
+Also pending: ~~two hardcoded fallbacks `'assets/public/images/JuiceShop_Logo.png'`~~ — already fixed to `lollo_logo.png` in navbar.component.ts + deluxe-user.component.ts.
 
-### 2. Phase 2 — Product catalog rename (58 products)
-Names + descriptions in config/default.yml still juice/fruit/OWASP-merch themed. Mapping doc has the Wuthering Waves theme decision; product `image:` filenames must stay consistent with whatever image set is generated (or regenerate images to match new names).
+### 2. Phase 2 — Product catalog rename (DONE, status doc was stale)
+All 56 products in config/default.yml renamed + descriptions/reviews rewritten to the Lollo theme; zero juice/owasp hits in config. Remaining: product `image:` filenames must match whatever image set gets generated (see §1).
 
 ### 3. Phase 3 — Deep obfuscation / RSN
-`npm run rsn` intentionally RED (~21 codefix desyncs from rebrand + scoreBoardChallenge route edit). User decision: coding challenges are out of scope for the eval target; leave broken OR `npm run rsn:update` as a checkpoint. data/static/codefixes/ still contain pre-rebrand snippets (old domains, docker-compose names) visible in Fix-It pages.
+`npm run rsn` intentionally RED (25 codefix desyncs from rebrand + route edits). Coding challenges are now RETIRED (config `never`, dead route, `/snippets*` endpoints off), so the desync has no runtime surface and 18 old-brand codefix files are unreachable. Optional cleanup: delete `data/static/codefixes/` to also drop those bytes from the zip package.
 
 ### 4. Residual leak sweep (after assets land)
-Full grep for juice|owasp|kimminich|bjoern across tracked source; check: README/docs files, package.json name field ("lollo-logistics" already?), Dockerfile maintainer, i18n en.json remainder (~57 "Juice Shop"/41 "OWASP" refs at last count — many were in pruned locales; recount), cypress/ + test/ dirs (only matter if tests are run), .github workflows.
+Scope per policy above: runtime-reachable files only. Remaining known runtime items: threejs-demo.html still "Planet Orangeuze" + orangemap2k.avif ref (Phase 5D); promo video file missing entirely (videoHandler serves lollo_promo.mp4 → 404, Video XSS broken; vtt exists & clean); grafana dashboard still juiceshop_* prefixes (monitoring/ is not zip-packaged — verify before touching); "juicy malware" wording in 2 backend en.json keys. Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy.
 
 ## Operational gotchas (for eval harness)
 
@@ -65,3 +75,4 @@ Full grep for juice|owasp|kimminich|bjoern across tracked source; check: README/
 - FTP solve path: null-byte double-encoded (`%2500.md`) — verified working with new filenames.
 - `/profile` is server-rendered, cookie-auth'd; other pages use Authorization header. "Blocked illegal activity" on /profile after restart = stale account (expected per force:true).
 - Score board/notifications unwired: solved challenges still log to console + DB but no UI feedback. scoreBoardChallenge effectively retired (route dead) — candidate for removal from challenges.yml in Phase 3.
+- Coding challenges retired: `/coding-challenge/*` falls to search page, `/snippets*` endpoints return SPA fallback; `npm run rsn` redness is expected and inert.

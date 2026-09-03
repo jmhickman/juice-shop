@@ -119,10 +119,8 @@ import { updateProductReviews } from './routes/updateProductReviews'
 import { servePrivacyPolicyProof } from './routes/privacyPolicyProof'
 import { profileImageUrlUpload } from './routes/profileImageUrlUpload'
 import { profileImageFileUpload } from './routes/profileImageFileUpload'
-import { serveCodeFixes, checkCorrectFix } from './routes/vulnCodeFixes'
 import { imageCaptchas, verifyImageCaptcha } from './routes/imageCaptcha'
 import { upgradeToDeluxe, deluxeMembershipStatus } from './routes/deluxe'
-import { serveCodeSnippet, checkVulnLines } from './routes/vulnCodeSnippet'
 import { orderHistory, allOrders, toggleDeliveryStatus } from './routes/orderHistory'
 import { continueCode, continueCodeFindIt, continueCodeFixIt } from './routes/continueCode'
 import { ensureFileIsPassed, handleZipFileUpload, checkUploadSize, checkFileType, handleXmlUpload, handleYamlUpload } from './routes/fileUpload'
@@ -686,10 +684,11 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/profile', utils.asyncHandler(updateUserProfile()))
 
   /* Route for vulnerable code snippets */
-  app.get('/snippets/:challenge', utils.asyncHandler(serveCodeSnippet()))
-  app.post('/snippets/verdict', utils.asyncHandler(checkVulnLines()))
-  app.get('/snippets/fixes/:key', utils.asyncHandler(serveCodeFixes()))
-  app.post('/snippets/fixes', utils.asyncHandler(checkCorrectFix()))
+  // Coding challenges retired for this deployment (challenges.codingChallengesEnabled: never)
+  // app.get('/snippets/:challenge', utils.asyncHandler(serveCodeSnippet()))
+  // app.post('/snippets/verdict', utils.asyncHandler(checkVulnLines()))
+  // app.get('/snippets/fixes/:key', utils.asyncHandler(serveCodeFixes()))
+  // app.post('/snippets/fixes', utils.asyncHandler(checkCorrectFix()))
 
   /* Serve metrics before the Angular catch-all so the route is reachable in all environments */
   app.get('/metrics', utils.asyncHandler(metrics.serveMetrics()))

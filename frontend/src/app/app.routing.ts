@@ -56,11 +56,6 @@ const loadWeb3SandboxModule = async () => {
   return module.Web3SandboxModule
 }
 
-const loadCodingChallenge = async () => {
-  const module = await import('./coding-challenge-page/coding-challenge-page.component')
-  return module.CodingChallengePageComponent
-}
-
 const loadRecycleComponent = async () => {
   const module = await import('./recycle/recycle.component')
   return module.RecycleComponent
@@ -256,7 +251,7 @@ const routes: Routes = [
   },
   {
     path: 'coding-challenge/:challengeKey',
-    loadComponent: async () => await loadCodingChallenge()
+    component: SearchResultComponent
   },
   {
     path: '403',

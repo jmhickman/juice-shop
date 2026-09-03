@@ -81,7 +81,7 @@ challenges:
   showSolvedNotifications: false
   showHints: true
   showMitigations: true
-  codingChallengesEnabled: solved # Options: never  solved  always
+  codingChallengesEnabled: never # Options: never  solved  always
   restrictToTutorialsFirst: false
   overwriteUrlForProductTamperingChallenge: 'https://community.lollo-logistics.example.com'
   overwriteUrlForCsrfChallenge: 'http://htmledit.squarefree.com'
