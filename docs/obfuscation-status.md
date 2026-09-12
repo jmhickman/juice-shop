@@ -40,32 +40,17 @@ infrastructure/** — zip-packaged AND browser-served at /infrastructure.
 
 ## Remaining work
 
-### 1. Phase 1D — Brand image assets (BLOCKED on image generation)
-Config already points at new filenames; files don't exist yet → broken images in UI + startup warnings. Requirements:
+### 1. Phase 1D — Brand image assets (DROPPED by decision, 2026-09-03)
+Image regeneration is out of scope: broken/missing images carry no Juice Shop fingerprint, and eval models are unlikely to care. Verified no challenge solvability depends on a missing raster (blueprint .stl files exist; deluxe/photo-wall solves don't require seeded images). Consequences accepted: broken img placeholders in UI, black-sphere easter egg planet, startup avatar warnings. Dead requirements confirmed during analysis and NOT needed even if revisited: welcome banner (component is text-only), logo size variants, hidden_agent.png/stego (hiddenImageChallenge pruned).
 
-| Asset | Target path (frontend/src/assets/public/images/ unless noted) | Size / format |
-|---|---|---|
-| Main logo | lollo_logo.png | 2268×2535 PNG (displayed max-height 60px); variants _400px/_100px/_50px at 400/100/50 wide, ratio ≈0.9:1; also lollo_logo.svg viewBox 0 0 1134 1268 |
-| CTF logo | lollo_ctf_logo.png (+_400px) | same ratios as main |
-| Favicon | frontend/src/assets/public/lollo_favicon.ico | ICO multi-size 48/32/16 |
-| Welcome banner | welcome_banner.svg (or png) | 5658×1529 (~3.7:1) |
-| Chatbot avatar | lolly_avatar.png | 190×328 PNG; copied to dist as fixed name ChatbotAvatar.png by customizeApplication.ts |
-| Hacking instructor | lolly_instructor.png (+lolly_masked.png) | 105×105 PNG; copied to dist as hackingInstructor.png |
-| Easter egg character | hidden_agent.png | 1591×1601 PNG — **must embed LSB stego text** or hiddenImageChallenge is unsolvable |
-| Premium wallpaper | lollo_wallpaper_1920x1080_vr.jpg | exactly 1920×1080 JPEG (served by premiumReward.ts) |
-| Planet texture | resonara_surface.avif (frontend/src/assets/private/) | equirectangular ~2048px; three.js accepts jpg/png too |
-| Photo-wall uploads | frontend/src/assets/public/images/uploads/*.jpg | 3 files referenced in config `memories:` block + datacreator.ts caption seed; currently missing → broken imgs show alt text |
-
-Also pending: ~~two hardcoded fallbacks `'assets/public/images/JuiceShop_Logo.png'`~~ — already fixed to `lollo_logo.png` in navbar.component.ts + deluxe-user.component.ts.
-
-### 2. Phase 2 — Product catalog rename (DONE, status doc was stale)
-All 56 products in config/default.yml renamed + descriptions/reviews rewritten to the Lollo theme; zero juice/owasp hits in config. Remaining: product `image:` filenames must match whatever image set gets generated (see §1).
+### 2. Phase 2 — Product catalog rename (DONE)
+All 56 products in config/default.yml renamed + descriptions/reviews rewritten to the Lollo theme; zero juice/owasp hits in config. Product `image:` files intentionally absent (see §1, dropped).
 
 ### 3. Phase 3 — Deep obfuscation / RSN
 `npm run rsn` intentionally RED (25 codefix desyncs from rebrand + route edits). Coding challenges are now RETIRED (config `never`, dead route, `/snippets*` endpoints off), so the desync has no runtime surface and 18 old-brand codefix files are unreachable. Optional cleanup: delete `data/static/codefixes/` to also drop those bytes from the zip package.
 
 ### 4. Residual leak sweep (after assets land)
-Scope per policy above: runtime-reachable files only. Remaining known runtime items: resonara_surface.avif texture asset pending (Phase 1D). Grafana dashboard removed outright (`706481268` — unreferenced, stale juiceshop_* queries, CTF-oriented). Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy. All "juicy/Juice" strings closed in runtime catalogs + chatbot fallbacks (`98851e4f6`).
+Scope per policy above: runtime-reachable files only. With images dropped (§1), no known runtime leaks remain open. Grafana dashboard removed outright (`706481268` — unreferenced, stale juiceshop_* queries, CTF-oriented). Repo-only hits (README, .github, Dockerfile LABELs, terraform/vagrant, CHANGELOG) are OUT OF SCOPE by policy. All "juicy/Juice" strings closed in runtime catalogs + chatbot fallbacks (`98851e4f6`).
 
 ## Operational gotchas (for eval harness)
 
