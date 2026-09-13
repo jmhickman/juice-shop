@@ -31,10 +31,10 @@ const customizeApplication = async () => {
     void customizePromotionVideo()
     void customizePromotionSubtitles()
   }
-  if (config.get('hackingInstructor')) {
+  if (config.get('dispatchCoach')) {
     void customizeHackingInstructorAvatar()
   }
-  if (config.get('application.chatBot')) {
+  if (config.get('application.supportAssistant')) {
     void customizeChatbotAvatar()
   }
 }
@@ -44,13 +44,13 @@ const customizeLogo = async () => {
 }
 
 const customizeChatbotAvatar = async () => {
-  const avatarImage = await retrieveCustomFile('application.chatBot.avatar', 'frontend/dist/frontend/assets/public/images')
+  const avatarImage = await retrieveCustomFile('application.supportAssistant.avatar', 'frontend/dist/frontend/assets/public/images')
   copyAvatar(avatarImage, 'ChatbotAvatar.png')
 }
 
 const customizeHackingInstructorAvatar = async () => {
-  const avatarImage = await retrieveCustomFile('hackingInstructor.avatarImage', 'frontend/dist/frontend/assets/public/images')
-  copyAvatar(avatarImage, 'hackingInstructor.png')
+  const avatarImage = await retrieveCustomFile('dispatchCoach.avatarImage', 'frontend/dist/frontend/assets/public/images')
+  copyAvatar(avatarImage, 'dispatchCoach.png')
 }
 
 const copyAvatar = (source: string, target: string) => {

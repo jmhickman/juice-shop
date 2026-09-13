@@ -12,8 +12,8 @@ const ChatBotSchema = z.object({
   name: z.string(),
   avatar: z.string(),
   model: z.string(),
-  llmApiUrl: z.string(),
-  llmMaxRetries: z.number().optional(),
+  apiBaseUrl: z.string(),
+  maxRetries: z.number().optional(),
   sampleQuestions: z.array(z.string()).optional()
 })
 
@@ -84,42 +84,42 @@ export const ApplicationSchema = z.object({
   logo: z.string(),
   favicon: z.string(),
   theme: z.enum(['midnight-plum', 'dusk-rose', 'coral-slate', 'orchid-fern', 'sky-harbor', 'lollo-light-green', 'ember-navy', 'moss-field', 'solar-flare']),
-  showVersionNumber: z.boolean(),
-  showGitHubLinks: z.boolean(),
-  localBackupEnabled: z.boolean(),
-  numberOfRandomFakeUsers: z.number(),
-  altcoinName: z.string(),
+  showAppVersion: z.boolean(),
+  showPressLinks: z.boolean(),
+  dataExportEnabled: z.boolean(),
+  fakeCustomerCount: z.number(),
+  rewardTokenName: z.string(),
   privacyContactEmail: z.string(),
-  customMetricsPrefix: z.string(),
-  chatBot: ChatBotSchema,
+  metricsNamespace: z.string(),
+  supportAssistant: ChatBotSchema,
   social: SocialSchema,
   recyclePage: RecyclePageSchema,
   welcomeBanner: WelcomeBannerSchema,
   cookieConsent: CookieConsentSchema,
   securityTxt: SecurityTxtSchema,
   promotion: PromotionSchema,
-  easterEggPlanet: EasterEggPlanetSchema,
+  holoDisplay: EasterEggPlanetSchema,
   googleOauth: GoogleOauthSchema
 })
 
 export const ChallengesSchema = z.object({
-  showSolvedNotifications: z.boolean(),
-  showHints: z.boolean(),
-  showMitigations: z.boolean(),
-  codingChallengesEnabled: z.enum(['never', 'solved', 'always']),
-  restrictToTutorialsFirst: z.boolean(),
-  overwriteUrlForProductTamperingChallenge: z.string(),
-  overwriteUrlForCsrfChallenge: z.string(),
-  xssBonusPayload: z.string(),
+  showCompletionAlerts: z.boolean(),
+  showTips: z.boolean(),
+  showFixNotes: z.boolean(),
+  codeReviewsEnabled: z.enum(['never', 'solved', 'always']),
+  tutorialsFirst: z.boolean(),
+  tamperingTargetUrl: z.string(),
+  csrfTargetUrl: z.string(),
+  bonusPayload: z.string(),
   safetyMode: z.enum(['enabled', 'disabled', 'auto']).optional(),
   csafHashValue: z.string(),
   metricsIgnoredUserAgents: z.array(z.string()).optional()
 })
 
 export const HackingInstructorSchema = z.object({
-  isEnabled: z.boolean(),
+  enabled: z.boolean(),
   avatarImage: z.string(),
-  hintPlaybackSpeed: z.enum(['faster', 'fast', 'normal', 'slow', 'slower'])
+  playbackRate: z.enum(['faster', 'fast', 'normal', 'slow', 'slower'])
 })
 
 export const ProductSchema = z.object({
@@ -155,9 +155,9 @@ const CountryEntrySchema = z.object({ name: z.string(), code: z.string() })
 export const CountryMappingSchema = z.record(ChallengeKeySchema, CountryEntrySchema)
 
 export const CtfSchema = z.object({
-  showFlagsInNotifications: z.boolean(),
-  showCountryDetailsInNotifications: z.enum(['none', 'name', 'flag', 'both']),
-  countryMapping: CountryMappingSchema.nullable().optional(),
+  showRewardCodes: z.boolean(),
+  regionDisplayMode: z.enum(['none', 'name', 'flag', 'both']),
+  regionNames: CountryMappingSchema.nullable().optional(),
   systemWideNotifications: z.object({
     url: z.string().nullable().optional(),
     pollFrequencySeconds: z.number().nullable().optional()
@@ -167,11 +167,11 @@ export const CtfSchema = z.object({
 export const AppConfigSchema = z.object({
   server: ServerSchema,
   application: ApplicationSchema,
-  challenges: ChallengesSchema,
-  hackingInstructor: HackingInstructorSchema,
+  scoring: ChallengesSchema,
+  dispatchCoach: HackingInstructorSchema,
   products: z.array(ProductSchema),
   memories: z.array(MemorySchema),
-  ctf: CtfSchema
+  awards: CtfSchema
 })
 
 // Recursively drops null-valued object keys and null array elements.
@@ -194,21 +194,21 @@ const dropNulls = (value: unknown): unknown => {
 export const ValidationSchema = z.preprocess(dropNulls, z.object({
   server: ServerSchema.partial().optional(),
   application: ApplicationSchema.partial().extend({
-    chatBot: ChatBotSchema.partial().optional(),
+    supportAssistant: ChatBotSchema.partial().optional(),
     social: SocialSchema.partial().optional(),
     recyclePage: RecyclePageSchema.partial().optional(),
     welcomeBanner: WelcomeBannerSchema.partial().optional(),
     cookieConsent: CookieConsentSchema.partial().optional(),
     securityTxt: SecurityTxtSchema.partial().optional(),
     promotion: PromotionSchema.partial().optional(),
-    easterEggPlanet: EasterEggPlanetSchema.partial().optional(),
+    holoDisplay: EasterEggPlanetSchema.partial().optional(),
     googleOauth: GoogleOauthSchema.partial().optional()
   }).optional(),
-  challenges: ChallengesSchema.partial().optional(),
-  hackingInstructor: HackingInstructorSchema.partial().optional(),
+  scoring: ChallengesSchema.partial().optional(),
+  dispatchCoach: HackingInstructorSchema.partial().optional(),
   products: z.array(ProductSchema.partial()).optional(),
   memories: z.array(MemorySchema.partial()).optional(),
-  ctf: CtfSchema.partial().optional()
+  awards: CtfSchema.partial().optional()
 }))
 
 export type ServerConfig = z.infer<typeof ServerSchema>

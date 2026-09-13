@@ -47,7 +47,7 @@ export default defineConfig({
           return config.get(variable)
         },
         GetOverwriteUrl () {
-          return config.get('challenges.overwriteUrlForProductTamperingChallenge')
+          return config.get('scoring.tamperingTargetUrl')
         },
         GetPastebinLeakProduct () {
           return config.get<ProductConfig[]>('products').filter(

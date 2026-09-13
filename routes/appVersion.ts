@@ -11,7 +11,7 @@ import * as utils from '../lib/utils'
 export function retrieveAppVersion () {
   return (_req: Request, res: Response) => {
     res.json({
-      version: config.get('application.showVersionNumber') ? utils.version() : ''
+      version: config.get('application.showAppVersion') ? utils.version() : ''
     })
   }
 }

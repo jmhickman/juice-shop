@@ -96,7 +96,7 @@ import { serveLogFiles } from './routes/logfileServer'
 import { servePublicFiles } from './routes/fileServer'
 import { addMemory, getMemories } from './routes/memory'
 import { changePassword } from './routes/changePassword'
-import { countryMapping } from './routes/countryMapping'
+import { regionNames } from './routes/regionNames'
 import { retrieveAppVersion } from './routes/appVersion'
 import { captchas, verifyCaptcha } from './routes/captcha'
 import * as restoreProgress from './routes/restoreProgress'
@@ -133,7 +133,7 @@ const startTime = Date.now()
 
 const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yml', 'utf8'))
 
-const appName = config.get<string>('application.customMetricsPrefix')
+const appName = config.get<string>('application.metricsNamespace')
 const startupGauge = new Prometheus.Gauge({
   name: `${appName}_startup_duration_seconds`,
   help: `Duration ${appName} required to perform a certain task during startup`,
@@ -629,7 +629,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.get('/shop/check-code', utils.asyncHandler(captchas()))
   app.get('/shop/check-image', utils.asyncHandler(imageCaptchas()))
   app.get('/shop/tracking/:id', trackOrder())
-  app.get('/shop/country-catalog', utils.asyncHandler(countryMapping()))
+  app.get('/shop/country-catalog', utils.asyncHandler(regionNames()))
   app.get('/shop/auth/client-ip', utils.asyncHandler(saveLoginIp()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(verifyImageCaptcha()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
@@ -681,7 +681,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/profile', utils.asyncHandler(updateUserProfile()))
 
   /* Route for vulnerable code snippets */
-  // Coding challenges retired for this deployment (challenges.codingChallengesEnabled: never)
+  // Coding challenges retired for this deployment (challenges.codeReviewsEnabled: never)
   // app.get('/snippets/:challenge', utils.asyncHandler(serveCodeSnippet()))
   // app.post('/snippets/verdict', utils.asyncHandler(checkVulnLines()))
   // app.get('/snippets/fixes/:key', utils.asyncHandler(serveCodeFixes()))

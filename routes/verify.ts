@@ -303,7 +303,7 @@ function dlpPastebinDataLeakChallenge () {
 function csafChallenge () {
   void checkPatternInFeedbackAndComplaints(
     challenges.csafChallenge,
-    { [Op.like]: '%' + config.get<string>('challenges.csafHashValue') + '%' }
+    { [Op.like]: '%' + config.get<string>('challenges.bonusPayload') + '%' }
   )
 }
 

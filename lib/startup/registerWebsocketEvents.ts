@@ -38,7 +38,7 @@ const registerWebsocketEvents = (server: any) => {
 
     socket.on('verifyLocalXssChallenge', (data: any) => {
       challengeUtils.solveIf(challenges.localXssChallenge, () => { return data?.includes('<iframe src="javascript:alert(`xss`)">') ?? false })
-      challengeUtils.solveIf(challenges.xssBonusChallenge, () => { return data?.includes(config.get('challenges.xssBonusPayload')) ?? false })
+      challengeUtils.solveIf(challenges.xssBonusChallenge, () => { return data?.includes(config.get('scoring.bonusPayload')) ?? false })
     })
 
     socket.on('verifySvgInjectionChallenge', (data: any) => {

@@ -8,19 +8,19 @@ application:
   logo: lollo_logo.png
   favicon: lollo_favicon.ico
   theme: lollo-light-green # Options: lollo-light-green sky-harbor midnight-plum dusk-rose coral-slate orchid-fern ember-navy moss-field solar-flare
-  showVersionNumber: true
-  showGitHubLinks: false
-  localBackupEnabled: true
-  numberOfRandomFakeUsers: 0
-  altcoinName: Lollocoin
+  showAppVersion: true
+  showPressLinks: false
+  dataExportEnabled: true
+  fakeCustomerCount: 0
+  rewardTokenName: Lollocoin
   privacyContactEmail: donotreply@lollo-logistics.shop
-  customMetricsPrefix: lollo
-  chatBot:
+  metricsNamespace: lollo
+  supportAssistant:
     name: 'Lolly the Dispatch Assistant'
     avatar: 'lolly_avatar.png'
     model: 'gemma4:e4b'
-    llmApiUrl: 'http://localhost:11434/v1'
-    llmMaxRetries: 2
+    apiBaseUrl: 'http://localhost:11434/v1'
+    maxRetries: 2
     sampleQuestions:
       - 'CHATBOT_PROMPT_RECOMMENDATION_SUMMER_PARTY'
       - 'CHATBOT_PROMPT_RECOMMENDATION_POPULAR'
@@ -58,7 +58,7 @@ application:
   promotion:
     video: lollo_promo.mp4
     subtitles: lollo_promo.vtt
-  easterEggPlanet:
+  holoDisplay:
     name: Resonara
     overlayMap: resonara_surface.avif
   googleOauth:
@@ -77,15 +77,15 @@ application:
       - { uri: 'http://192.168.99.100:4200', proxy: 'https://localmac.lollo-logistics.shop' }
       - { uri: 'http://penguin.termina.linux.test:3000', proxy: 'https://localchromeos.lollo-logistics.shop' }
       - { uri: 'http://penguin.termina.linux.test:4200', proxy: 'https://localchromeos.lollo-logistics.shop' }
-challenges:
-  showSolvedNotifications: false
-  showHints: true
-  showMitigations: true
-  codingChallengesEnabled: never # Options: never  solved  always
-  restrictToTutorialsFirst: false
-  overwriteUrlForProductTamperingChallenge: 'https://community.lollo-logistics.example.com'
-  overwriteUrlForCsrfChallenge: 'http://htmledit.squarefree.com'
-  xssBonusPayload: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
+scoring:
+  showCompletionAlerts: false
+  showTips: true
+  showFixNotes: true
+  codeReviewsEnabled: never # Options: never  solved  always
+  tutorialsFirst: false
+  tamperingTargetUrl: 'https://community.lollo-logistics.example.com'
+  csrfTargetUrl: 'http://htmledit.squarefree.com'
+  bonusPayload: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
   safetyMode: auto # Options: enabled disabled auto
   csafHashValue: f9250b891f8945929f42db68c082ad1815cf10df34a8abb7672a71339649b5bc4c4c22d0b14b56299cb2fa35a53c627218eb2efdf4b6fa50b4107c4c481e7b64
   metricsIgnoredUserAgents:
@@ -93,10 +93,10 @@ challenges:
     - 'Alloy'
     - 'promscrape'
     - 'otelcol'
-hackingInstructor:
-  isEnabled: true
+dispatchCoach:
+  enabled: true
   avatarImage: lolly_instructor.png
-  hintPlaybackSpeed: normal # Options: faster fast normal slow slower
+  playbackRate: normal # Options: faster fast normal slow slower
 products:
   -
     name: 'Resonance-Damped Shipping Crate (Small)'
@@ -516,10 +516,10 @@ memories:
     image: 'everything-up-and-running!-1721152385146.jpg'
     caption: 'Everything up and running!'
     user: weber
-ctf:
-  showFlagsInNotifications: false
-  showCountryDetailsInNotifications: none # Options: none  name  flag  both
-  countryMapping: ~
+awards:
+  showRewardCodes: false
+  regionDisplayMode: none # Options: none  name  flag  both
+  regionNames: ~
   systemWideNotifications:
     url: ~ # URL of an external endpoint returning { message, enabled, updatedAt }
     pollFrequencySeconds: ~ # Required when url is set

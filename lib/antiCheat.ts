@@ -75,8 +75,8 @@ export const calculateCheatScore = (challenge: Challenge, isCheating = false) =>
     const timestamp = new Date()
     let cheatScore = 0
     let timeFactor = 2
-    timeFactor *= (config.get('challenges.showHints') ? 1 : 1.5)
-    timeFactor *= (challenge.tutorialOrder && config.get('hackingInstructor.isEnabled') ? 0.5 : 1)
+    timeFactor *= (config.get('scoring.showTips') ? 1 : 1.5)
+    timeFactor *= (challenge.tutorialOrder && config.get('dispatchCoach.enabled') ? 0.5 : 1)
     if (areTightlyCoupled(challenge, previous().challenge) || isLooselyCoupledToPreviouslySolved(challenge) || isTrivial(challenge)) {
       timeFactor = 0
     }
@@ -97,7 +97,7 @@ export const calculateCheatScore = (challenge: Challenge, isCheating = false) =>
 
     cheatScore = Math.min(1, cheatScore)
 
-    logger.info(`Cheat score for ${areTightlyCoupled(challenge, previous().challenge) ? 'tightly coupled ' : (isLooselyCoupledToPreviouslySolved(challenge) ? 'loosely coupled ' : (isTrivial(challenge) ? 'trivial ' : ''))}${challenge.tutorialOrder ? 'tutorial ' : ''}${colors.cyan(challenge.key)} solved in ${Math.round(minutesSincePreviousSolve)}min (expected ~${minutesExpectedToSolve}min) with${config.get('challenges.showHints') ? '' : 'out'} hints allowed${percentPrecedingInteraction > -1 ? (' and ' + percentPrecedingInteraction * 100 + '% expected preceding URL interaction') : ''}: ${cheatScore < 0.33 ? colors.green(cheatScore.toString()) : (cheatScore < 0.66 ? colors.yellow(cheatScore.toString()) : colors.red(cheatScore.toString()))}`)
+    logger.info(`Cheat score for ${areTightlyCoupled(challenge, previous().challenge) ? 'tightly coupled ' : (isLooselyCoupledToPreviouslySolved(challenge) ? 'loosely coupled ' : (isTrivial(challenge) ? 'trivial ' : ''))}${challenge.tutorialOrder ? 'tutorial ' : ''}${colors.cyan(challenge.key)} solved in ${Math.round(minutesSincePreviousSolve)}min (expected ~${minutesExpectedToSolve}min) with${config.get('scoring.showTips') ? '' : 'out'} hints allowed${percentPrecedingInteraction > -1 ? (' and ' + percentPrecedingInteraction * 100 + '% expected preceding URL interaction') : ''}: ${cheatScore < 0.33 ? colors.green(cheatScore.toString()) : (cheatScore < 0.66 ? colors.yellow(cheatScore.toString()) : colors.red(cheatScore.toString()))}`)
     solves.push({ challenge, phase: 'hack it', timestamp, cheatScore })
     return cheatScore
   }
@@ -106,7 +106,7 @@ export const calculateCheatScore = (challenge: Challenge, isCheating = false) =>
 export const calculateFindItCheatScore = async (challenge: Challenge) => {
   const timestamp = new Date()
   let timeFactor = 0.001
-  timeFactor *= (challenge.key === 'scoreBoardChallenge' && config.get('hackingInstructor.isEnabled') ? 0.5 : 1)
+  timeFactor *= (challenge.key === 'scoreBoardChallenge' && config.get('dispatchCoach.enabled') ? 0.5 : 1)
   let cheatScore = 0
 
   const codeSnippet = await retrieveCodeSnippet(challenge.key)
@@ -123,7 +123,7 @@ export const calculateFindItCheatScore = async (challenge: Challenge) => {
   const minutesSincePreviousSolve = (timestamp.getTime() - previous().timestamp.getTime()) / 60000
   cheatScore += Math.max(0, 1 - (minutesSincePreviousSolve / minutesExpectedToSolve))
 
-  logger.info(`Cheat score for "Find it" phase of ${challenge.key === 'scoreBoardChallenge' && config.get('hackingInstructor.isEnabled') ? 'tutorial ' : ''}${colors.cyan(challenge.key)} solved in ${Math.round(minutesSincePreviousSolve)}min (expected ~${minutesExpectedToSolve}min): ${cheatScore < 0.33 ? colors.green(cheatScore.toString()) : (cheatScore < 0.66 ? colors.yellow(cheatScore.toString()) : colors.red(cheatScore.toString()))}`)
+  logger.info(`Cheat score for "Find it" phase of ${challenge.key === 'scoreBoardChallenge' && config.get('dispatchCoach.enabled') ? 'tutorial ' : ''}${colors.cyan(challenge.key)} solved in ${Math.round(minutesSincePreviousSolve)}min (expected ~${minutesExpectedToSolve}min): ${cheatScore < 0.33 ? colors.green(cheatScore.toString()) : (cheatScore < 0.66 ? colors.yellow(cheatScore.toString()) : colors.red(cheatScore.toString()))}`)
   solves.push({ challenge, phase: 'find it', timestamp, cheatScore })
 
   return cheatScore

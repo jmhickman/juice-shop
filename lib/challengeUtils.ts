@@ -64,9 +64,9 @@ export const sendNotification = function (challenge: ChallengeModel, isRestore: 
     name: challenge.name,
     challenge: challenge.name + ' (' + entities.decode(sanitizeHtml(challenge.description, { allowedTags: [], allowedAttributes: {} })) + ')',
     flag,
-    hidden: !config.get('challenges.showSolvedNotifications'),
+    hidden: !config.get('scoring.showCompletionAlerts'),
     isRestore,
-    codingChallenge: config.get('challenges.codingChallengesEnabled') !== 'never' && hasCodingChallenge
+    codingChallenge: config.get('scoring.codeReviewsEnabled') !== 'never' && hasCodingChallenge
   }
   const wasPreviouslyShown = notifications.some(({ key }) => key === challenge.key)
   notifications.push(notification)

@@ -9,8 +9,8 @@ import * as utils from '../utils'
 import replace from 'replace'
 
 const customizeEasterEgg = async () => {
-  if (config.has('application.easterEggPlanet.overlayMap')) {
-    let overlay: string = config.get('application.easterEggPlanet.overlayMap')
+  if (config.has('application.holoDisplay.overlayMap')) {
+    let overlay: string = config.get('application.holoDisplay.overlayMap')
     if (utils.isUrl(overlay)) {
       const overlayPath = overlay
       overlay = utils.extractFilename(overlay)
@@ -18,7 +18,7 @@ const customizeEasterEgg = async () => {
     }
     replaceImagePath(overlay)
   }
-  if (config.has('application.easterEggPlanet.name')) {
+  if (config.has('application.holoDisplay.name')) {
     replaceThreeJsTitleTag()
   }
 }
@@ -35,7 +35,7 @@ const replaceImagePath = (overlay: string) => {
 }
 
 const replaceThreeJsTitleTag = () => {
-  const threeJsTitleTag = '<title>Welcome to Planet ' + config.get<string>('application.easterEggPlanet.name') + '</title>'
+  const threeJsTitleTag = '<title>Welcome to Planet ' + config.get<string>('application.holoDisplay.name') + '</title>'
   replace({
     regex: /<title>.*<\/title>/,
     replacement: threeJsTitleTag,

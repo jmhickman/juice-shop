@@ -66,8 +66,8 @@ export default async () => {
 }
 
 async function createChallenges () {
-  const showHints = config.get<boolean>('challenges.showHints')
-  const showMitigations = config.get<boolean>('challenges.showMitigations')
+  const showTips = config.get<boolean>('scoring.showTips')
+  const showFixNotes = config.get<boolean>('scoring.showFixNotes')
 
   const challenges = await loadStaticChallengeData()
   const codeChallenges = await getCodeChallenges()
@@ -82,8 +82,8 @@ async function createChallenges () {
     let tags = challenge.tags
 
     const { enabled: isChallengeEnabled, disabledBecause } = utils.getChallengeEnablementStatus({ disabledEnv: challenge.disabledEnv?.join(';') ?? '' } as ChallengeModel)
-    description = description.replace('http://htmledit.squarefree.com', config.get<string>('challenges.overwriteUrlForCsrfChallenge'))
-    description = description.replace('&lt;iframe width=&quot;100%&quot; height=&quot;166&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allow=&quot;autoplay&quot; src=&quot;https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&amp;color=%23ff5500&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&quot;&gt;&lt;/iframe&gt;', entities.encode(config.get('challenges.xssBonusPayload')))
+    description = description.replace('http://htmledit.squarefree.com', config.get<string>('scoring.csrfTargetUrl'))
+    description = description.replace('&lt;iframe width=&quot;100%&quot; height=&quot;166&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allow=&quot;autoplay&quot; src=&quot;https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&amp;color=%23ff5500&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&quot;&gt;&lt;/iframe&gt;', entities.encode(config.get('scoring.bonusPayload')))
     const hasCodingChallenge = challengeKeysWithCodeChallenges.includes(challenge.key)
 
     if (hasCodingChallenge) {
@@ -122,7 +122,7 @@ async function createChallenges () {
       description: isChallengeEnabled ? description : (description + ' <em>(This challenge is <strong>potentially harmful</strong> on ' + disabledBecause + '!)</em>'),
       difficulty: challenge.difficulty,
       solved: false,
-      mitigationUrl: showMitigations ? challenge.mitigationUrl : null,
+      mitigationUrl: showFixNotes ? challenge.mitigationUrl : null,
       disabledEnv: disabledBecause,
       tutorialOrder: (challenge.tutorial != null) ? challenge.tutorial.order : null,
       codingChallengeStatus: 0,
@@ -132,7 +132,7 @@ async function createChallenges () {
     if (challengeDependencies.length > 0) {
       pendingDependencies.push({ challengeKey: challenge.key, deps: challengeDependencies })
     }
-    if (showHints && challenge.hints?.length > 0) {
+    if (showTips && challenge.hints?.length > 0) {
       pendingHints.push({ challengeKey: challenge.key, hints: challenge.hints })
     }
   }
@@ -169,7 +169,7 @@ async function createChallenges () {
       hints.map((hint, index) => ({
         ChallengeId: datacache.challenges[challengeKey].id,
         text: hint
-          .replace('http://htmledit.squarefree.com', config.get<string>('challenges.overwriteUrlForCsrfChallenge')),
+          .replace('http://htmledit.squarefree.com', config.get<string>('scoring.csrfTargetUrl')),
         order: index + 1,
         unlocked: false
       }))
@@ -306,7 +306,7 @@ async function createRandomFakeUsers () {
     return text
   }
 
-  return await Promise.all(new Array(config.get('application.numberOfRandomFakeUsers')).fill(0).map(
+  return await Promise.all(new Array(config.get('application.fakeCustomerCount')).fill(0).map(
     async () => await UserModel.create({
       email: getGeneratedRandomFakeUserEmail(),
       password: makeRandomString(5)
@@ -440,7 +440,7 @@ async function createProducts () {
               await datacache.challenges.changeProductChallenge.update({
                 description: customizeChangeProductChallenge(
                   datacache.challenges.changeProductChallenge.description,
-                  config.get('challenges.overwriteUrlForProductTamperingChallenge'),
+                  config.get('scoring.tamperingTargetUrl'),
                   persistedProduct)
               })
             }

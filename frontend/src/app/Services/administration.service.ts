@@ -18,7 +18,7 @@ export class AdministrationService {
   private readonly host = this.hostServer + '/shop/system'
 
   getApplicationVersion () {
-    return this.http.get(this.host + '/application-version').pipe(
+    return this.http.get(this.host + '/version').pipe(
       map((response: any) => response.version),
       catchError((error: Error) => { throw error })
     )
