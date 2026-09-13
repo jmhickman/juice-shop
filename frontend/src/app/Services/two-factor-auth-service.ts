@@ -16,7 +16,7 @@ interface TwoFactorVerifyResponse {
 interface AuthenticationPayload {
   token: string
   bid: number
-  umail: string
+  email: string
 }
 
 export interface TwoFactorAuthStatusPayload {
@@ -34,19 +34,19 @@ export class TwoFactorAuthService {
 
 
   verify (totpToken: string): Observable<AuthenticationPayload> {
-    return this.http.post<TwoFactorVerifyResponse>(`${environment.hostServer}/rest/2fa/verify`, {
+    return this.http.post<TwoFactorVerifyResponse>(`${environment.hostServer}/shop/mfa/verify`, {
       tmpToken: localStorage.getItem('totp_tmp_token'),
       totpToken
     }).pipe(map((response: TwoFactorVerifyResponse) => response.authentication), catchError((error) => { throw error }))
   }
 
   status (): Observable<TwoFactorAuthStatusPayload> {
-    return this.http.get<TwoFactorAuthStatusPayload>(`${environment.hostServer}/rest/2fa/status`)
+    return this.http.get<TwoFactorAuthStatusPayload>(`${environment.hostServer}/shop/mfa/status`)
       .pipe(map((response: TwoFactorAuthStatusPayload) => response), catchError((error) => { throw error }))
   }
 
   setup (password: string, initialToken: string, setupToken?: string): Observable<void> {
-    return this.http.post(`${environment.hostServer}/rest/2fa/setup`, {
+    return this.http.post(`${environment.hostServer}/shop/mfa/setup`, {
       password,
       setupToken,
       initialToken
@@ -54,7 +54,7 @@ export class TwoFactorAuthService {
   }
 
   disable (password: string): Observable<void> {
-    return this.http.post(`${environment.hostServer}/rest/2fa/disable`, { password })
+    return this.http.post(`${environment.hostServer}/shop/mfa/disable`, { password })
       .pipe(map(() => undefined), catchError((error) => { throw error }))
   }
 }

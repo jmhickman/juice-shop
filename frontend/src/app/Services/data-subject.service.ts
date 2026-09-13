@@ -16,7 +16,7 @@ export class DataSubjectService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/user'
+  private readonly host = this.hostServer + '/shop/auth'
 
   erase (params: any) {
     return this.http.post(this.host + '/erasure-request', params).pipe(catchError((error: Error) => { throw error })

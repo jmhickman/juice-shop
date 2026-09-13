@@ -357,7 +357,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   // vuln-code-snippet start resetPasswordMortyChallenge
   /* Rate limiting */
   app.enable('trust proxy')
-  app.use('/rest/user/reset-password', rateLimit({
+  app.use('/shop/auth/reset-password', rateLimit({
     windowMs: 5 * 60 * 1000,
     max: 100,
     keyGenerator ({ headers, ip }: { headers: any, ip: any }) { return headers['X-Forwarded-For'] ?? ip } // vuln-code-snippet vuln-line resetPasswordMortyChallenge
@@ -412,7 +412,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.get('/api/SecurityAnswers', security.denyAll())
   app.use('/api/SecurityAnswers/:id', security.denyAll())
   /* REST API */
-  app.use('/rest/user/authentication-details', security.isAuthorized())
+  app.use('/shop/auth/details', security.isAuthorized())
   app.use('/rest/basket/:id', security.isAuthorized())
   app.use('/rest/basket/:id/order', security.isAuthorized())
   /* Challenge evaluation before finale takes over */ // vuln-code-snippet hide-start
@@ -472,20 +472,20 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   // vuln-code-snippet end changeProductChallenge
 
   /* Verify the 2FA Token */
-  app.post('/rest/2fa/verify',
+  app.post('/shop/mfa/verify',
     rateLimit({ windowMs: 5 * 60 * 1000, max: 100, validate: false }),
     utils.asyncHandler(twoFactorAuth.verify)
   )
   /* Check 2FA Status for the current User */
-  app.get('/rest/2fa/status', security.isAuthorized(), utils.asyncHandler(twoFactorAuth.status))
+  app.get('/shop/mfa/status', security.isAuthorized(), utils.asyncHandler(twoFactorAuth.status))
   /* Enable 2FA for the current User */
-  app.post('/rest/2fa/setup',
+  app.post('/shop/mfa/setup',
     rateLimit({ windowMs: 5 * 60 * 1000, max: 100, validate: false }),
     security.isAuthorized(),
     utils.asyncHandler(twoFactorAuth.setup)
   )
   /* Disable 2FA Status for the current User */
-  app.post('/rest/2fa/disable',
+  app.post('/shop/mfa/disable',
     rateLimit({ windowMs: 5 * 60 * 1000, max: 100, validate: false }),
     security.isAuthorized(),
     utils.asyncHandler(twoFactorAuth.disable)
@@ -610,12 +610,12 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   }
 
   /* Custom Restful API */
-  app.post('/rest/user/login', login())
-  app.get('/rest/user/change-password', utils.asyncHandler(changePassword()))
-  app.post('/rest/user/reset-password', utils.asyncHandler(resetPassword()))
-  app.get('/rest/user/security-question', utils.asyncHandler(securityQuestion()))
-  app.get('/rest/user/whoami', utils.asyncHandler(retrieveLoggedInUser()))
-  app.get('/rest/user/authentication-details', utils.asyncHandler(authenticatedUsers()))
+  app.post('/shop/auth/login', login())
+  app.get('/shop/auth/change-password', utils.asyncHandler(changePassword()))
+  app.post('/shop/auth/reset-password', utils.asyncHandler(resetPassword()))
+  app.get('/shop/auth/recovery-question', utils.asyncHandler(securityQuestion()))
+  app.get('/shop/auth/session', utils.asyncHandler(retrieveLoggedInUser()))
+  app.get('/shop/auth/details', utils.asyncHandler(authenticatedUsers()))
   app.get('/rest/products/search', utils.asyncHandler(searchProducts()))
   app.get('/rest/basket/:id', utils.asyncHandler(retrieveBasket()))
   app.post('/rest/basket/:id/checkout', placeOrder())
@@ -633,9 +633,9 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.get('/rest/image-captcha', utils.asyncHandler(imageCaptchas()))
   app.get('/rest/track-order/:id', trackOrder())
   app.get('/rest/country-mapping', utils.asyncHandler(countryMapping()))
-  app.get('/rest/saveLoginIp', utils.asyncHandler(saveLoginIp()))
-  app.post('/rest/user/data-export', security.appendUserId(), utils.asyncHandler(verifyImageCaptcha()))
-  app.post('/rest/user/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
+  app.get('/shop/auth/client-ip', utils.asyncHandler(saveLoginIp()))
+  app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(verifyImageCaptcha()))
+  app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
   app.get('/rest/languages', utils.asyncHandler(getLanguageList()))
   app.get('/rest/order-history', utils.asyncHandler(orderHistory()))
   app.get('/rest/order-history/orders', security.isAccounting(), utils.asyncHandler(allOrders()))

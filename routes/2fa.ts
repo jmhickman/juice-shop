@@ -44,7 +44,7 @@ export async function verify (req: Request, res: Response) {
     plainUser.bid = basket.id // keep track of original basket for challenge solution check
     security.authenticatedUsers.put(token, plainUser)
 
-    res.json({ authentication: { token, bid: basket.id, umail: user.email } })
+    res.json({ authentication: { token, bid: basket.id, email: user.email } })
   } catch (error) {
     res.status(401).send()
   }

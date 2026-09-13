@@ -26,7 +26,7 @@ export class UserService {
   private readonly host = this.hostServer + '/api/Users'
 
   find (params?: any) {
-    return this.http.get(this.hostServer + '/rest/user/authentication-details/', { params }).pipe(map((response: any) =>
+    return this.http.get(this.hostServer + '/shop/auth/details/', { params }).pipe(map((response: any) =>
       response.data), catchError((err) => { throw err }))
   }
 
@@ -43,7 +43,7 @@ export class UserService {
 
   login (params: any) {
     this.isLoggedIn.next(true)
-    return this.http.post(this.hostServer + '/rest/user/login', params).pipe(map((response: any) => response.authentication), catchError((err) => { throw err }))
+    return this.http.post(this.hostServer + '/shop/auth/login', params).pipe(map((response: any) => response.authentication), catchError((err) => { throw err }))
   }
 
   getLoggedInState () {
@@ -51,17 +51,17 @@ export class UserService {
   }
 
   changePassword (passwords: Passwords) {
-    return this.http.get(this.hostServer + '/rest/user/change-password?current=' + passwords.current + '&new=' +
+    return this.http.get(this.hostServer + '/shop/auth/change-password?current=' + passwords.current + '&new=' +
     passwords.new + '&repeat=' + passwords.repeat).pipe(map((response: any) => response.user), catchError((err) => { throw err.error }))
   }
 
   resetPassword (params: any) {
-    return this.http.post(this.hostServer + '/rest/user/reset-password', params).pipe(map((response: any) => response.user), catchError((err) => { throw err }))
+    return this.http.post(this.hostServer + '/shop/auth/reset-password', params).pipe(map((response: any) => response.user), catchError((err) => { throw err }))
   }
 
   whoAmI (fields?: string[]) {
     const queryParam = fields && fields.length > 0 ? `?fields=${fields.join(',')}` : ''
-    return this.http.get(this.hostServer + '/rest/user/whoami' + queryParam).pipe(map((response: any) => response.user), catchError((err) => { throw err }))
+    return this.http.get(this.hostServer + '/shop/auth/session' + queryParam).pipe(map((response: any) => response.user), catchError((err) => { throw err }))
   }
 
   oauthLogin (accessToken: string) {
@@ -69,7 +69,7 @@ export class UserService {
   }
 
   saveLastLoginIp () {
-    return this.http.get(this.hostServer + '/rest/saveLoginIp').pipe(map((response: any) => response), catchError((err) => { throw err }))
+    return this.http.get(this.hostServer + '/shop/auth/client-ip').pipe(map((response: any) => response), catchError((err) => { throw err }))
   }
 
   deluxeStatus () {
