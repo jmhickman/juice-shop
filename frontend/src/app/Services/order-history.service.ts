@@ -15,7 +15,7 @@ export class OrderHistoryService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/order-history'
+  private readonly host = this.hostServer + '/shop/orders'
 
   get () {
     return this.http.get(this.host).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

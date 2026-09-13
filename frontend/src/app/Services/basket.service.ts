@@ -33,7 +33,7 @@ export class BasketService {
   private readonly guestBasketKey = 'guestBasket'
 
   find (id?: number) {
-    return this.http.get(`${this.hostServer}/rest/basket/${id}`).pipe(map((response: any) => response.data), catchError((error) => { throw error }))
+    return this.http.get(`${this.hostServer}/shop/cart/${id}`).pipe(map((response: any) => response.data), catchError((error) => { throw error }))
   }
 
   get (id: number) {
@@ -53,11 +53,11 @@ export class BasketService {
   }
 
   checkout (id?: number, couponData?: string, orderDetails?: OrderDetail) {
-    return this.http.post(`${this.hostServer}/rest/basket/${id}/checkout`, { couponData, orderDetails }).pipe(map((response: any) => response.orderConfirmation), catchError((error) => { throw error }))
+    return this.http.post(`${this.hostServer}/shop/cart/${id}/checkout`, { couponData, orderDetails }).pipe(map((response: any) => response.orderConfirmation), catchError((error) => { throw error }))
   }
 
   applyCoupon (id?: number, coupon?: string) {
-    return this.http.put(`${this.hostServer}/rest/basket/${id}/coupon/${coupon}`, {}).pipe(map((response: any) => response.discount), catchError((error) => { throw error }))
+    return this.http.put(`${this.hostServer}/shop/cart/${id}/promo/${coupon}`, {}).pipe(map((response: any) => response.discount), catchError((error) => { throw error }))
   }
 
   updateNumberOfCartItems () {

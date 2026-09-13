@@ -370,7 +370,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.use(verify.jwtChallenges()) // vuln-code-snippet hide-line
   app.use(security.updateAuthenticatedUsers()) // vuln-code-snippet hide-line
   /* Baskets: Unauthorized users are not allowed to access baskets */
-  app.use('/rest/basket', security.isAuthorized(), security.appendUserId())
+  app.use('/shop/cart', security.isAuthorized(), security.appendUserId())
   /* BasketItems: API only accessible for authenticated users */
   app.use('/api/BasketItems', security.isAuthorized())
   app.use('/api/BasketItems/:id', security.isAuthorized())
@@ -413,8 +413,8 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.use('/api/SecurityAnswers/:id', security.denyAll())
   /* REST API */
   app.use('/shop/auth/details', security.isAuthorized())
-  app.use('/rest/basket/:id', security.isAuthorized())
-  app.use('/rest/basket/:id/order', security.isAuthorized())
+  app.use('/shop/cart/:id', security.isAuthorized())
+  app.use('/shop/cart/:id/confirmation', security.isAuthorized())
   /* Challenge evaluation before finale takes over */ // vuln-code-snippet hide-start
   app.post('/api/Feedbacks', verify.forgedFeedbackChallenge())
   /* Captcha verification before finale takes over */
@@ -617,9 +617,9 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.get('/shop/auth/session', utils.asyncHandler(retrieveLoggedInUser()))
   app.get('/shop/auth/details', utils.asyncHandler(authenticatedUsers()))
   app.get('/rest/products/search', utils.asyncHandler(searchProducts()))
-  app.get('/rest/basket/:id', utils.asyncHandler(retrieveBasket()))
-  app.post('/rest/basket/:id/checkout', placeOrder())
-  app.put('/rest/basket/:id/coupon/:coupon', utils.asyncHandler(applyCoupon()))
+  app.get('/shop/cart/:id', utils.asyncHandler(retrieveBasket()))
+  app.post('/shop/cart/:id/checkout', placeOrder())
+  app.put('/shop/cart/:id/promo/:promo', utils.asyncHandler(applyCoupon()))
   app.get('/rest/admin/application-version', utils.asyncHandler(retrieveAppVersion()))
   app.get('/rest/admin/application-configuration', utils.asyncHandler(retrieveAppConfiguration()))
   app.get('/rest/repeat-notification', utils.asyncHandler(repeatNotification()))
@@ -631,19 +631,19 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.put('/rest/continue-code/apply/:continueCode', utils.asyncHandler(restoreProgress.restoreProgress()))
   app.get('/rest/captcha', utils.asyncHandler(captchas()))
   app.get('/rest/image-captcha', utils.asyncHandler(imageCaptchas()))
-  app.get('/rest/track-order/:id', trackOrder())
+  app.get('/shop/tracking/:id', trackOrder())
   app.get('/rest/country-mapping', utils.asyncHandler(countryMapping()))
   app.get('/shop/auth/client-ip', utils.asyncHandler(saveLoginIp()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(verifyImageCaptcha()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
   app.get('/rest/languages', utils.asyncHandler(getLanguageList()))
-  app.get('/rest/order-history', utils.asyncHandler(orderHistory()))
-  app.get('/rest/order-history/orders', security.isAccounting(), utils.asyncHandler(allOrders()))
-  app.put('/rest/order-history/:id/delivery-status', security.isAccounting(), utils.asyncHandler(toggleDeliveryStatus()))
-  app.get('/rest/wallet/balance', security.appendUserId(), utils.asyncHandler(getWalletBalance()))
-  app.put('/rest/wallet/balance', security.appendUserId(), utils.asyncHandler(addWalletBalance()))
-  app.get('/rest/deluxe-membership', deluxeMembershipStatus())
-  app.post('/rest/deluxe-membership', security.appendUserId(), utils.asyncHandler(upgradeToDeluxe()))
+  app.get('/shop/orders', utils.asyncHandler(orderHistory()))
+  app.get('/shop/orders/all', security.isAccounting(), utils.asyncHandler(allOrders()))
+  app.put('/shop/orders/:id/delivery-status', security.isAccounting(), utils.asyncHandler(toggleDeliveryStatus()))
+  app.get('/shop/credit-balance', security.appendUserId(), utils.asyncHandler(getWalletBalance()))
+  app.put('/shop/credit-balance', security.appendUserId(), utils.asyncHandler(addWalletBalance()))
+  app.get('/shop/premium-plan', deluxeMembershipStatus())
+  app.post('/shop/premium-plan', security.appendUserId(), utils.asyncHandler(upgradeToDeluxe()))
   app.get('/rest/memories', utils.asyncHandler(getMemories()))
   /* NoSQL API endpoints */
   app.get('/rest/products/:id/reviews', showProductReviews())

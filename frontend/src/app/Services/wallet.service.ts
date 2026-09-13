@@ -15,7 +15,7 @@ export class WalletService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/wallet/balance'
+  private readonly host = this.hostServer + '/shop/credit-balance'
 
   get () {
     return this.http.get(this.host).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

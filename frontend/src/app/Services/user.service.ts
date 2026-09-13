@@ -73,10 +73,10 @@ export class UserService {
   }
 
   deluxeStatus () {
-    return this.http.get(this.hostServer + '/rest/deluxe-membership').pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+    return this.http.get(this.hostServer + '/shop/premium-plan').pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
 
   upgradeToDeluxe (paymentMode: string, paymentId: any) {
-    return this.http.post(this.hostServer + '/rest/deluxe-membership', { paymentMode, paymentId }).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+    return this.http.post(this.hostServer + '/shop/premium-plan', { paymentMode, paymentId }).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
 }

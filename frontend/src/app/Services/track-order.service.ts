@@ -15,7 +15,7 @@ export class TrackOrderService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/track-order'
+  private readonly host = this.hostServer + '/shop/tracking'
 
   find (params: string) {
     params = encodeURIComponent(params)
