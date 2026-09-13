@@ -51,6 +51,7 @@ import { PrivacyRequestModel } from './models/privacyRequests'
 import { SecurityQuestionModel } from './models/securityQuestion'
 
 import logger from './lib/logger'
+import { errorPage } from './lib/errorPage'
 import * as utils from './lib/utils'
 import * as antiCheat from './lib/antiCheat'
 import * as security from './lib/insecurity'
@@ -127,10 +128,6 @@ import { ensureFileIsPassed, handleZipFileUpload, checkUploadSize, checkFileType
 
 const app = express()
 const server = new http.Server(app)
-
-// errorhandler requires us from overwriting a string property on it's module which is a big no-no with esmodules :/
-
-const errorhandler = require('errorhandler')
 
 const startTime = Date.now()
 
@@ -701,7 +698,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     if (err instanceof Error) err.stack = err.message // never leak stack traces (paths, deps, layout) to clients
     next(err)
   })
-  app.use(errorhandler())
+  app.use(errorPage(config.get<string>('application.name')))
 }
 
 // Function called first to ensure that all the i18n files are reloaded successfully before other linked operations.
@@ -751,7 +748,6 @@ logger.info(`Entity models ${colors.bold(Object.keys(sequelize.models).length.to
 let metricsUpdateLoop: any
 const Metrics = metrics.observeMetrics() // vuln-code-snippet neutral-line exposedMetricsChallenge
 app.get('/metrics', utils.asyncHandler(metrics.serveMetrics())) // vuln-code-snippet vuln-line exposedMetricsChallenge
-errorhandler.title = config.get<string>('application.name')
 
 export async function start (readyCallback?: () => void) {
   const datacreatorEnd = startupGauge.startTimer({ task: 'datacreator' })

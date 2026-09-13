@@ -52,8 +52,8 @@ application:
   securityTxt:
     contact: 'mailto:donotreply@lollo-logistics.shop'
     encryption: 'https://keybase.io/lollo_logistics/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda'
-    acknowledgements: '/#/score-board'
-    hiring: '/#/jobs'
+    acknowledgements: 'https://lollo-logistics.shop/hall-of-fame'
+    hiring: 'https://lollo-logistics.shop/careers'
     csaf: '/.well-known/csaf/provider-metadata.json' # scheme,host,port taken from baseUrl
   promotion:
     video: lollo_promo.mp4
