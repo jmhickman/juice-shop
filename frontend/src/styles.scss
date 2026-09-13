@@ -308,33 +308,33 @@
 
 $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
 
-.deeppurple-amber-theme {
-  @include custom-components-theme($deeppurple-amber-theme);
-  @include css-vars($deeppurple-amber-theme);
+.midnight-plum-theme {
+  @include custom-components-theme($midnight-plum-theme);
+  @include css-vars($midnight-plum-theme);
   @include theme-overrides(#673ab7, #fafafa, #9575cd, #000);
 }
 
-.indigo-pink-theme {
-  @include custom-components-theme($indigo-pink-theme);
-  @include css-vars($indigo-pink-theme);
+.dusk-rose-theme {
+  @include custom-components-theme($dusk-rose-theme);
+  @include css-vars($dusk-rose-theme);
   @include theme-overrides(#3f51b5, #fafafa, #7986cb, #000);
 }
 
-.pink-bluegrey-theme {
-  @include custom-components-theme($pink-bluegrey-theme);
-  @include css-vars($pink-bluegrey-theme);
+.coral-slate-theme {
+  @include custom-components-theme($coral-slate-theme);
+  @include css-vars($coral-slate-theme);
   @include theme-overrides(#c2185b, #303030, #e91e63, #fff);
 }
 
-.purple-green-theme {
-  @include custom-components-theme($purple-green-theme);
-  @include css-vars($purple-green-theme);
+.orchid-fern-theme {
+  @include custom-components-theme($orchid-fern-theme);
+  @include css-vars($orchid-fern-theme);
   @include theme-overrides(#7b1fa2, #303030, #9c27b0, #fff);
 }
 
-.bluegrey-lightgreen-theme {
-  @include custom-components-theme($bluegrey-lightgreen-theme);
-  @include css-vars($bluegrey-lightgreen-theme);
+.lollo-light-green-theme {
+  @include custom-components-theme($lollo-light-green-theme);
+  @include css-vars($lollo-light-green-theme);
 
   // --- Target Theme Overrides ---
 
@@ -462,29 +462,29 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   }
 }
 
-.blue-lightblue-theme {
-  @include custom-components-theme($blue-lightblue-theme);
-  @include css-vars($blue-lightblue-theme);
+.sky-harbor-theme {
+  @include custom-components-theme($sky-harbor-theme);
+  @include css-vars($sky-harbor-theme);
   @include theme-overrides(#1976d2, #fafafa, #29b6f6, #000);
 }
 
-.deeporange-indigo-theme {
-  @include custom-components-theme($deeporange-indigo-theme);
-  @include css-vars($deeporange-indigo-theme);
+.ember-navy-theme {
+  @include custom-components-theme($ember-navy-theme);
+  @include css-vars($ember-navy-theme);
   @include theme-overrides(#e64a19, #fafafa, #ff5722, #000);
 }
 
-.lime-green-theme {
-  @include custom-components-theme($lime-green-theme);
-  @include css-vars($lime-green-theme);
+.moss-field-theme {
+  @include custom-components-theme($moss-field-theme);
+  @include css-vars($moss-field-theme);
   @include theme-overrides(#cddc39, #303030, #ddee48, #000);
 }
 
-.neon-fire-theme {
-  @include custom-components-theme($neon-fire-theme);
-  @include css-vars($neon-fire-theme);
+.solar-flare-theme {
+  @include custom-components-theme($solar-flare-theme);
+  @include css-vars($solar-flare-theme);
 
-  @include score-star-theme($neon-fire-theme); // Re-include to fix empty-star color
+  @include score-star-theme($solar-flare-theme); // Re-include to fix empty-star color
 
   // --- Neon Fire Theme Overrides ---
 
@@ -512,7 +512,7 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   --mat-sys-outline: #ff2d55;
   --mat-sys-outline-variant: #e60039;
 
-  // Extra system tokens for neon-fire colors
+  // Extra system tokens for solar-flare colors
   --mat-sys-primary: #ff2d55;
   --mat-sys-on-primary: #000;
   --mat-sys-tertiary: #fc0;

@@ -53,7 +53,7 @@ export function getUserProfile () {
     let username = user.username
 
     const themeKey = config.get<string>('application.theme') as keyof typeof themes
-    const theme = themes[themeKey] || themes['bluegrey-lightgreen']
+    const theme = themes[themeKey] || themes['lollo-light-green']
 
     if (utils.isChallengeEnabled(challenges.usernameXssChallenge)) {
       if (username?.match(/#{(.*)}/) !== null) {

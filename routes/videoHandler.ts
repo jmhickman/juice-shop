@@ -55,7 +55,7 @@ export const promotionVideo = () => {
       const subs = getSubsFromFile()
 
       const themeKey = config.get<string>('application.theme') as keyof typeof themes
-      const theme = themes[themeKey] || themes['bluegrey-lightgreen']
+      const theme = themes[themeKey] || themes['lollo-light-green']
       template = template.replace(/_title_/g, entities.encode(config.get<string>('application.name')))
       template = template.replace(/_favicon_/g, favicon())
       template = template.replace(/_bgColor_/g, theme.bgColor)

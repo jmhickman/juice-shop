@@ -7,137 +7,137 @@
 @include mat.core();
 @include mat.elevation-classes();
 
-$deeppurple-amber-config: (
+$midnight-plum-config: (
   color: (
     theme-type: light,
     primary: mat.$violet-palette,
     tertiary: mat.$yellow-palette,
   )
 );
-$deeppurple-amber-theme: mat.define-theme($deeppurple-amber-config);
+$midnight-plum-theme: mat.define-theme($midnight-plum-config);
 
-.deeppurple-amber-theme {
-  @include mat.theme($deeppurple-amber-config);
+.midnight-plum-theme {
+  @include mat.theme($midnight-plum-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$indigo-pink-config: (
+$dusk-rose-config: (
   color: (
     theme-type: light,
     primary: mat.$azure-palette,
     tertiary: mat.$rose-palette,
   )
 );
-$indigo-pink-theme: mat.define-theme($indigo-pink-config);
+$dusk-rose-theme: mat.define-theme($dusk-rose-config);
 
-.indigo-pink-theme {
-  @include mat.theme($indigo-pink-config);
+.dusk-rose-theme {
+  @include mat.theme($dusk-rose-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$pink-bluegrey-config: (
+$coral-slate-config: (
   color: (
     theme-type: dark,
     primary: mat.$rose-palette,
     tertiary: mat.$cyan-palette,
   )
 );
-$pink-bluegrey-theme: mat.define-theme($pink-bluegrey-config);
+$coral-slate-theme: mat.define-theme($coral-slate-config);
 
-.pink-bluegrey-theme {
-  @include mat.theme($pink-bluegrey-config);
+.coral-slate-theme {
+  @include mat.theme($coral-slate-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$purple-green-config: (
+$orchid-fern-config: (
   color: (
     theme-type: dark,
     primary: mat.$violet-palette,
     tertiary: mat.$green-palette,
   )
 );
-$purple-green-theme: mat.define-theme($purple-green-config);
+$orchid-fern-theme: mat.define-theme($orchid-fern-config);
 
-.purple-green-theme {
-  @include mat.theme($purple-green-config);
+.orchid-fern-theme {
+  @include mat.theme($orchid-fern-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$blue-lightblue-config: (
+$sky-harbor-config: (
   color: (
     theme-type: light,
     primary: mat.$blue-palette,
     tertiary: mat.$cyan-palette,
   )
 );
-$blue-lightblue-theme: mat.define-theme($blue-lightblue-config);
+$sky-harbor-theme: mat.define-theme($sky-harbor-config);
 
-.blue-lightblue-theme {
-  @include mat.theme($blue-lightblue-config);
+.sky-harbor-theme {
+  @include mat.theme($sky-harbor-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$bluegrey-lightgreen-config: (
+$lollo-light-green-config: (
   color: (
     theme-type: dark,
     primary: mat.$azure-palette,
     tertiary: mat.$chartreuse-palette,
   )
 );
-$bluegrey-lightgreen-theme: mat.define-theme($bluegrey-lightgreen-config);
+$lollo-light-green-theme: mat.define-theme($lollo-light-green-config);
 
-.bluegrey-lightgreen-theme {
-  @include mat.theme($bluegrey-lightgreen-config);
+.lollo-light-green-theme {
+  @include mat.theme($lollo-light-green-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$deeporange-indigo-config: (
+$ember-navy-config: (
   color: (
     theme-type: light,
     primary: mat.$orange-palette,
     tertiary: mat.$azure-palette,
   )
 );
-$deeporange-indigo-theme: mat.define-theme($deeporange-indigo-config);
+$ember-navy-theme: mat.define-theme($ember-navy-config);
 
-.deeporange-indigo-theme {
-  @include mat.theme($deeporange-indigo-config);
+.ember-navy-theme {
+  @include mat.theme($ember-navy-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$lime-green-config: (
+$moss-field-config: (
   color: (
     theme-type: dark,
     primary: mat.$chartreuse-palette,
     tertiary: mat.$green-palette,
   )
 );
-$lime-green-theme: mat.define-theme($lime-green-config);
+$moss-field-theme: mat.define-theme($moss-field-config);
 
-.lime-green-theme {
-  @include mat.theme($lime-green-config);
+.moss-field-theme {
+  @include mat.theme($moss-field-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
 
-$neon-fire-config: (
+$solar-flare-config: (
   color: (
     theme-type: dark,
     primary: mat.$rose-palette,
     tertiary: mat.$yellow-palette,
   )
 );
-$neon-fire-theme: mat.define-theme($neon-fire-config);
+$solar-flare-theme: mat.define-theme($solar-flare-config);
 
-.neon-fire-theme {
-  @include mat.theme($neon-fire-config);
+.solar-flare-theme {
+  @include mat.theme($solar-flare-config);
   color: var(--mat-sys-on-surface);
   background-color: var(--mat-sys-surface);
 }
