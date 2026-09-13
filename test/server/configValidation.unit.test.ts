@@ -25,10 +25,10 @@ void describe('configValidation', () => {
   void describe('checkUnambiguousMandatorySpecialProducts', () => {
     void it('should accept a valid config', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Melon Juice', fileForRetrieveBlueprintChallenge: 'foobar', exifForBlueprintChallenge: ['OpenSCAD'] },
-        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', keywordsForPastebinDataLeakChallenge: ['bla', 'blubb'] }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Melon Juice', blueprintFile: 'foobar', blueprintExifData: ['OpenSCAD'] },
+        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', dataLeakKeywords: ['bla', 'blubb'] }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialProducts(products), true)
@@ -36,10 +36,10 @@ void describe('configValidation', () => {
 
     void it('should fail if multiple products are configured for the same challenge', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Melon Bike', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Melon Juice', fileForRetrieveBlueprintChallenge: 'foobar', exifForBlueprintChallenge: ['OpenSCAD'] }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Melon Bike', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Melon Juice', blueprintFile: 'foobar', blueprintExifData: ['OpenSCAD'] }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialProducts(products), false)
@@ -47,8 +47,8 @@ void describe('configValidation', () => {
 
     void it('should fail if a required challenge product is missing', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialProducts(products), false)
@@ -58,21 +58,21 @@ void describe('configValidation', () => {
   void describe('checkNecessaryExtraKeysOnSpecialProducts', () => {
     void it('should accept a valid config', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Melon Juice', fileForRetrieveBlueprintChallenge: 'foobar', exifForBlueprintChallenge: ['OpenSCAD'] },
-        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', keywordsForPastebinDataLeakChallenge: ['bla', 'blubb'] }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Melon Juice', blueprintFile: 'foobar', blueprintExifData: ['OpenSCAD'] },
+        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', dataLeakKeywords: ['bla', 'blubb'] }
       ]
 
       assert.equal(checkNecessaryExtraKeysOnSpecialProducts(products), true)
     })
 
-    void it('should fail if product has no exifForBlueprintChallenge', () => {
+    void it('should fail if product has no blueprintExifData', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Melon Juice', fileForRetrieveBlueprintChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', keywordsForPastebinDataLeakChallenge: ['bla', 'blubb'] }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Melon Juice', blueprintFile: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', dataLeakKeywords: ['bla', 'blubb'] }
       ]
 
       assert.equal(checkNecessaryExtraKeysOnSpecialProducts(products), false)
@@ -82,10 +82,10 @@ void describe('configValidation', () => {
   void describe('checkUniqueSpecialOnProducts', () => {
     void it('should accept a valid config', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true },
-        { ...COMMON_PRODUCT, name: 'Orange Juice', urlForProductTamperingChallenge: 'foobar' },
-        { ...COMMON_PRODUCT, name: 'Melon Juice', fileForRetrieveBlueprintChallenge: 'foobar', exifForBlueprintChallenge: ['OpenSCAD'] },
-        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', keywordsForPastebinDataLeakChallenge: ['bla', 'blubb'] }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true },
+        { ...COMMON_PRODUCT, name: 'Orange Juice', productInfoUrl: 'foobar' },
+        { ...COMMON_PRODUCT, name: 'Melon Juice', blueprintFile: 'foobar', blueprintExifData: ['OpenSCAD'] },
+        { ...COMMON_PRODUCT, name: 'Rippertuer Special Juice', dataLeakKeywords: ['bla', 'blubb'] }
       ]
 
       assert.equal(checkUniqueSpecialOnProducts(products), true)
@@ -93,7 +93,7 @@ void describe('configValidation', () => {
 
     void it('should fail if a product is configured for multiple challenges', () => {
       const products: Product[] = [
-        { ...COMMON_PRODUCT, name: 'Apple Juice', useForChristmasSpecialChallenge: true, urlForProductTamperingChallenge: 'foobar' }
+        { ...COMMON_PRODUCT, name: 'Apple Juice', seasonalSpecial: true, productInfoUrl: 'foobar' }
       ]
 
       assert.equal(checkUniqueSpecialOnProducts(products), false)

@@ -12,8 +12,8 @@ import * as security from '../../lib/insecurity'
 import type { Product as ProductConfig } from '../../lib/config.schema'
 import { createTestApp } from './helpers/setup'
 
-const christmasProduct = config.get<ProductConfig[]>('products').filter(({ useForChristmasSpecialChallenge }) => useForChristmasSpecialChallenge)[0]
-const pastebinLeakProduct = config.get<ProductConfig[]>('products').filter(({ keywordsForPastebinDataLeakChallenge }) => keywordsForPastebinDataLeakChallenge)[0]
+const christmasProduct = config.get<ProductConfig[]>('products').filter(({ seasonalSpecial }) => seasonalSpecial)[0]
+const pastebinLeakProduct = config.get<ProductConfig[]>('products').filter(({ dataLeakKeywords }) => dataLeakKeywords)[0]
 
 let app: Express
 

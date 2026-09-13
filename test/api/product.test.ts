@@ -14,7 +14,7 @@ import { challenges } from '../../data/datacache'
 import * as security from '../../lib/insecurity'
 import * as utils from '../../lib/utils'
 
-const tamperingProductId = config.get<ProductConfig[]>('products').findIndex((product) => !!product.urlForProductTamperingChallenge) + 1
+const tamperingProductId = config.get<ProductConfig[]>('products').findIndex((product) => !!product.productInfoUrl) + 1
 
 let app: Express
 const authHeader = { Authorization: 'Bearer ' + security.authorize(), 'content-type': 'application/json' }

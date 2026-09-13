@@ -273,17 +273,17 @@ async function createProducts () {
   })
 
   // add Challenge specific information
-  const christmasChallengeProduct = products.find(({ useForChristmasSpecialChallenge }) => useForChristmasSpecialChallenge)
-  const pastebinLeakChallengeProduct = products.find(({ keywordsForPastebinDataLeakChallenge }) => keywordsForPastebinDataLeakChallenge)
-  const tamperingChallengeProduct = products.find(({ urlForProductTamperingChallenge }) => urlForProductTamperingChallenge)
-  const blueprintRetrievalChallengeProduct = products.find(({ fileForRetrieveBlueprintChallenge }) => fileForRetrieveBlueprintChallenge)
+  const christmasChallengeProduct = products.find(({ seasonalSpecial }) => seasonalSpecial)
+  const pastebinLeakChallengeProduct = products.find(({ dataLeakKeywords }) => dataLeakKeywords)
+  const tamperingChallengeProduct = products.find(({ productInfoUrl }) => productInfoUrl)
+  const blueprintRetrievalChallengeProduct = products.find(({ blueprintFile }) => blueprintFile)
 
   if (christmasChallengeProduct) {
     christmasChallengeProduct.description += ' (Seasonal special offer! Limited availability!)'
     christmasChallengeProduct.deletedDate = '2014-12-27 00:00:00.000 +00:00'
   }
   if (tamperingChallengeProduct) {
-    tamperingChallengeProduct.description += ' <a href="' + tamperingChallengeProduct.urlForProductTamperingChallenge + '" target="_blank">More...</a>'
+    tamperingChallengeProduct.description += ' <a href="' + tamperingChallengeProduct.productInfoUrl + '" target="_blank">More...</a>'
     delete tamperingChallengeProduct.deletedDate
   }
   if (pastebinLeakChallengeProduct) {
@@ -291,7 +291,7 @@ async function createProducts () {
     pastebinLeakChallengeProduct.deletedDate = '2019-02-1 00:00:00.000 +00:00'
   }
   if (blueprintRetrievalChallengeProduct) {
-    let blueprint = blueprintRetrievalChallengeProduct.fileForRetrieveBlueprintChallenge!
+    let blueprint = blueprintRetrievalChallengeProduct.blueprintFile!
     if (utils.isUrl(blueprint)) {
       const blueprintUrl = blueprint
       blueprint = utils.extractFilename(blueprint)
@@ -302,7 +302,7 @@ async function createProducts () {
 
   return await Promise.all(
     products.map(
-      async ({ reviews = [], useForChristmasSpecialChallenge = false, urlForProductTamperingChallenge = false, fileForRetrieveBlueprintChallenge = false, deletedDate = false, ...product }) =>
+      async ({ reviews = [], seasonalSpecial = false, productInfoUrl = false, blueprintFile = false, deletedDate = false, ...product }) =>
         await ProductModel.create({
           name: product.name,
           description: product.description,
@@ -315,8 +315,8 @@ async function createProducts () {
           }
         ).then(async (persistedProduct) => {
           if (persistedProduct != null) {
-            if (useForChristmasSpecialChallenge) { datacache.products.christmasSpecial = persistedProduct }
-            if (urlForProductTamperingChallenge) {
+            if (seasonalSpecial) { datacache.products.christmasSpecial = persistedProduct }
+            if (productInfoUrl) {
               datacache.products.osaft = persistedProduct
             }
             if (deletedDate) void deleteProduct(persistedProduct.id) // TODO Rename into "isDeleted" or "deletedFlag" in config for v14.x release

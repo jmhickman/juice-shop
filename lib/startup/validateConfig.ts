@@ -12,10 +12,10 @@ import type { Memory as MemoryConfig, Product as ProductConfig } from '../config
 import logger from '../logger'
 
 const specialProducts = [
-  { name: '"Christmas Special" challenge product', key: 'useForChristmasSpecialChallenge', extra: null },
-  { name: '"Product Tampering" challenge product', key: 'urlForProductTamperingChallenge', extra: null },
-  { name: '"Retrieve Blueprint" challenge product', key: 'fileForRetrieveBlueprintChallenge', extra: { key: 'exifForBlueprintChallenge', name: 'list of EXIF metadata properties' } },
-  { name: '"Leaked Unsafe Product" challenge product', key: 'keywordsForPastebinDataLeakChallenge', extra: null }
+  { name: '"Christmas Special" challenge product', key: 'seasonalSpecial', extra: null },
+  { name: '"Product Tampering" challenge product', key: 'productInfoUrl', extra: null },
+  { name: '"Retrieve Blueprint" challenge product', key: 'blueprintFile', extra: { key: 'blueprintExifData', name: 'list of EXIF metadata properties' } },
+  { name: '"Leaked Unsafe Product" challenge product', key: 'dataLeakKeywords', extra: null }
 ] as const
 
 const specialMemories = [

@@ -17,8 +17,8 @@ let app: Express
 let blueprint: string
 
 for (const product of config.get<ProductConfig[]>('products')) {
-  if (product.fileForRetrieveBlueprintChallenge) {
-    blueprint = product.fileForRetrieveBlueprintChallenge
+  if (product.blueprintFile) {
+    blueprint = product.blueprintFile
     break
   }
 }

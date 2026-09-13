@@ -29,9 +29,9 @@ void describe('blueprint', () => {
   let pathToImage: string = 'assets/public/images/products/'
 
   void describe('checkExifData', () => {
-    void it('should contain properties from exifForBlueprintChallenge', async () => {
+    void it('should contain properties from blueprintExifData', async () => {
       for (const product of products) {
-        if (product.fileForRetrieveBlueprintChallenge && product.image) {
+        if (product.blueprintFile && product.image) {
           if (utils.isUrl(product.image)) {
             pathToImage = path.resolve('frontend/dist/frontend', pathToImage, product.image.substring(product.image.lastIndexOf('/') + 1))
             const response = await fetch(product.image)
@@ -45,11 +45,11 @@ void describe('blueprint', () => {
             pathToImage = path.resolve('frontend/src', pathToImage, product.image)
           }
 
-          if (product.exifForBlueprintChallenge?.[0]) {
+          if (product.blueprintExifData?.[0]) {
             try {
               const exifData = await parseExifData(pathToImage)
               const properties = Object.values(exifData.image)
-              for (const property of product.exifForBlueprintChallenge) {
+              for (const property of product.blueprintExifData) {
                 assert.ok(properties.includes(property))
               }
             } catch (error) {

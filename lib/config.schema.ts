@@ -109,13 +109,13 @@ export const ProductSchema = z.object({
   deluxePrice: z.number().optional(),
   limitPerUser: z.number().optional(),
   reviews: z.array(z.object({ text: z.string(), author: z.string() })).optional(),
-  urlForProductTamperingChallenge: z.string().optional(),
-  useForChristmasSpecialChallenge: z.boolean().optional(),
-  keywordsForPastebinDataLeakChallenge: z.array(z.string()).optional(),
+  productInfoUrl: z.string().optional(),
+  seasonalSpecial: z.boolean().optional(),
+  dataLeakKeywords: z.array(z.string()).optional(),
   deletedDate: z.string().optional(),
   quantity: z.number().optional(),
-  fileForRetrieveBlueprintChallenge: z.string().optional(),
-  exifForBlueprintChallenge: z.array(z.string()).optional()
+  blueprintFile: z.string().optional(),
+  blueprintExifData: z.array(z.string()).optional()
 })
 
 export const MemorySchema = z.object({

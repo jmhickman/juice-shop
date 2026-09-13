@@ -138,19 +138,19 @@ products:
     description: 'PortHound is an easy to use tool to show information about SSL certificates and tests the SSL connection according given list of ciphers and various SSL configurations.'
     price: 0.01
     image: ssl_analyzer.jpg
-    urlForProductTamperingChallenge: 'https://www.example.com/index.php/PortHound'
+    productInfoUrl: 'https://www.example.com/index.php/PortHound'
   -
     name: 'Winter Gala Surprise Crate (2014 Edition)'
     description: 'Contains a random selection of 10 items from our finest catalog and an extra crew tee for an unbeatable price!'
     price: 29.99
     image: undefined.jpg
-    useForChristmasSpecialChallenge: true
+    seasonalSpecial: true
   -
     name: 'Riptide Exotic Sample Case'
     description: 'Contains a magical collection of the rarest botanicals gathered from all around the world, like Cherymoya Annona cherimola, Jabuticaba Myrciaria cauliflora, Bael Aegle marmelos... and others, at an unbelievable price! <br/><span style="color:red;">This item has been made unavailable because of lack of safety standards.</span>'
     price: 16.99
     image: undefined.jpg
-    keywordsForPastebinDataLeakChallenge:
+    dataLeakKeywords:
       - hueteroneel
       - eurogium edule
   -
@@ -239,8 +239,8 @@ products:
     description: 'This rare item was designed and handcrafted in Sweden. This is why it is so incredibly expensive despite its complete lack of purpose.'
     price: 99.99
     image: keychain_trophy.jpg # Exif metadata contains "OpenSCAD" as subtle hint...
-    fileForRetrieveBlueprintChallenge: lollo_crate.stl # ...to blueprint file type
-    exifForBlueprintChallenge:
+    blueprintFile: lollo_crate.stl # ...to blueprint file type
+    blueprintExifData:
       - OpenSCAD
   -
     name: 'Depot Mural Study'
@@ -388,7 +388,7 @@ products:
       - { text: "I'll be there! Will you, too?", author: weber }
   -
     name: 'Raspberry Pi Server Rack Kit'
-    description: 'Want to run a depot CTF in style? Build <a href="https://example.com/lego/server-rack.pdf" target="_blank">your own server rack tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules running a Kubernetes cluster! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
+    description: 'Want to run a home lab cluster in style? Build <a href="https://example.com/lego/server-rack.pdf" target="_blank">your own server rack tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules running a Kubernetes cluster! Wire to a switch and connect to your network to have an out-of-the-box ready depot network rack up in no time!'
     price: 799
     quantity: 3
     limitPerUser: 1

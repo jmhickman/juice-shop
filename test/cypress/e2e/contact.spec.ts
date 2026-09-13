@@ -239,7 +239,7 @@ describe('/#/contact', () => {
       cy.get('#rating').type('{rightarrow}{rightarrow}{rightarrow}')
       cy.task<ProductConfig>('GetPastebinLeakProduct').then((pastebinLeakProduct: ProductConfig) => {
         cy.get('#comment').type(
-          pastebinLeakProduct.keywordsForPastebinDataLeakChallenge ? pastebinLeakProduct.keywordsForPastebinDataLeakChallenge.toString() : '?'
+          pastebinLeakProduct.dataLeakKeywords ? pastebinLeakProduct.dataLeakKeywords.toString() : '?'
         )
       })
       cy.get('#submitButton').should('not.be.disabled').click()

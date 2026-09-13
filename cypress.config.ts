@@ -25,15 +25,15 @@ export default defineConfig({
         },
         GetBlueprint () {
           for (const product of config.get<ProductConfig[]>('products')) {
-            if (product.fileForRetrieveBlueprintChallenge) {
-              const blueprint = product.fileForRetrieveBlueprintChallenge
+            if (product.blueprintFile) {
+              const blueprint = product.blueprintFile
               return blueprint
             }
           }
         },
         GetChristmasProduct () {
           return config.get<ProductConfig[]>('products').filter(
-            (product) => product.useForChristmasSpecialChallenge
+            (product) => product.seasonalSpecial
           )[0]
         },
         GetFromMemories (property: string) {
@@ -51,13 +51,13 @@ export default defineConfig({
         },
         GetPastebinLeakProduct () {
           return config.get<ProductConfig[]>('products').filter(
-            (product) => product.keywordsForPastebinDataLeakChallenge
+            (product) => product.dataLeakKeywords
           )[0]
         },
         GetTamperingProductId () {
           const products = config.get<ProductConfig[]>('products')
           for (let i = 0; i < products.length; i++) {
-            if (products[i].urlForProductTamperingChallenge) {
+            if (products[i].productInfoUrl) {
               return i + 1
             }
           }
