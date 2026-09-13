@@ -548,7 +548,7 @@ describe('NavbarComponent', () => {
             delete (window as any).location
             ;(window as any).location = { ...originalLocation, replace: replaceSpy }
             component.goToDataErasurePage()
-            expect(replaceSpy).toHaveBeenCalledWith(environment.hostServer + '/dataerasure')
+            expect(replaceSpy).toHaveBeenCalledWith(environment.hostServer + '/privacy/erase')
             ;(window as any).location = originalLocation
         })
 

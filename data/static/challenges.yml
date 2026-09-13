@@ -67,7 +67,7 @@
   tags:
     - Danger Zone
     - Prerequisite
-  description: 'Overwrite the <a href="/ftp/legal.md">Legal Information</a> file.'
+  description: 'Overwrite the <a href="/archive/legal.md">Legal Information</a> file.'
   difficulty: 6
   hints:
     - 'Look out for a tweet praising new functionality of the web shop. Then find a third party vulnerability associated with it.'

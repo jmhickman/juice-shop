@@ -38,14 +38,14 @@ const trivialChallenges = ['errorHandlingChallenge', 'privacyPolicyChallenge']
 const solves: Array<{ challenge: any, phase: string, timestamp: Date, cheatScore: number }> = [{ challenge: {}, phase: 'server start', timestamp: new Date(), cheatScore: 0 }] // seed with server start timestamp
 
 const preSolveInteractions: Array<{ challengeKey: ChallengeKey, urlFragments: string[], interactions: boolean[] }> = [
-  { challengeKey: 'directoryListingChallenge', urlFragments: ['/ftp'], interactions: [false] },
-  { challengeKey: 'forgottenDevBackupChallenge', urlFragments: ['/ftp', '/ftp/store-backend.json.bak'], interactions: [false, false] },
-  { challengeKey: 'forgottenBackupChallenge', urlFragments: ['/ftp', '/ftp/promo-codes-2019.md.bak'], interactions: [false, false] },
-  { challengeKey: 'loginSupportChallenge', urlFragments: ['/ftp', '/ftp/support-vault.kdbx'], interactions: [false, false] },
-  { challengeKey: 'misplacedSignatureFileChallenge', urlFragments: ['/ftp', '/ftp/error-signatures.yml'], interactions: [false, false] },
+  { challengeKey: 'directoryListingChallenge', urlFragments: ['/archive'], interactions: [false] },
+  { challengeKey: 'forgottenDevBackupChallenge', urlFragments: ['/archive', '/archive/store-backend.json.bak'], interactions: [false, false] },
+  { challengeKey: 'forgottenBackupChallenge', urlFragments: ['/archive', '/archive/promo-codes-2019.md.bak'], interactions: [false, false] },
+  { challengeKey: 'loginSupportChallenge', urlFragments: ['/archive', '/archive/support-vault.kdbx'], interactions: [false, false] },
+  { challengeKey: 'misplacedSignatureFileChallenge', urlFragments: ['/archive', '/archive/error-signatures.yml'], interactions: [false, false] },
   { challengeKey: 'misplacedIacFiles', urlFragments: ['/infrastructure'], interactions: [false] },
-  { challengeKey: 'rceChallenge', urlFragments: ['/api-docs', '/b2b/v2/orders'], interactions: [false, false] },
-  { challengeKey: 'rceOccupyChallenge', urlFragments: ['/api-docs', '/b2b/v2/orders'], interactions: [false, false] }
+  { challengeKey: 'rceChallenge', urlFragments: ['/enterprise/docs', '/enterprise/v1/orders'], interactions: [false, false] },
+  { challengeKey: 'rceOccupyChallenge', urlFragments: ['/enterprise/docs', '/enterprise/v1/orders'], interactions: [false, false] }
 ]
 
 const challengeSourceFiles: Record<string, string[]> = {

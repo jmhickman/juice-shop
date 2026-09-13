@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   -
-    url: /b2b/v2
+    url: /enterprise/v1
 info:
   version: 2.0.0
   title: 'NextGen B2B API'

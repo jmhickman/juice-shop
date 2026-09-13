@@ -317,7 +317,7 @@ describe('SidenavComponent', () => {
             })
             component.goToDataErasurePage()
             expect(replaceSpy).toHaveBeenCalled()
-            expect(replaceSpy.mock.calls[0][0]).toContain('/dataerasure')
+            expect(replaceSpy.mock.calls[0][0]).toContain('/privacy/erase')
         })
 
         it('should emit on onToggleSidenav', () => {
