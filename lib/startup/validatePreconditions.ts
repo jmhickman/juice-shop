@@ -35,7 +35,7 @@ export const domainDependencies: Record<string, Dependency> = {
     documentation: 'https://lollo-logistics.example.com/docs/web3-setup',
     dependentChallenges: ['"Mint the Honey Pot" challenge', '"Wallet Depletion" challenge']
   },
-  [config.get<string>('application.chatBot.llmApiUrl')]: {
+  [config.get<string>('application.supportAssistant.llmApiUrl')]: {
     dependency: 'LLM API',
     documentation: 'https://lollo-logistics.example.com/docs/llm-setup',
     dependentChallenges: ['"Chatbot Prompt Injection" challenge', '"Greedy Chatbot Manipulation" challenge', '"AI Debugging" challenge', '"System Prompt Extraction" challenge']
@@ -74,13 +74,13 @@ const validatePreconditions = async ({ exitOnFailure = true } = {}) => {
   if (!alchemyDomainReachable || !alchemyEnvVarExists) {
     logger.info(`Check ${colors.bold('https://lollo-logistics.example.com/docs/web3-setup')} for instructions on how to set up and configure the Alchemy API`)
   }
-  const llmApiUrl = config.get<string>('application.chatBot.llmApiUrl')
+  const llmApiUrl = config.get<string>('application.supportAssistant.llmApiUrl')
   const llmApiReachable = await checkIfDomainReachable(llmApiUrl)
   let llmApiKeyEnvVarExists = true
   let llmModelAvailable = true
   preconditionResults[llmApiUrl] = llmApiReachable
   if (llmApiReachable) {
-    const llmModel = config.get<string>('application.chatBot.model')
+    const llmModel = config.get<string>('application.supportAssistant.model')
     llmModelAvailable = await checkIfLlmModelAvailable(llmApiUrl)
     variableDependencies[llmModel] = {
       dependency: 'LLM Model',
@@ -231,7 +231,7 @@ export const isOllamaUrl = (url: string): boolean => {
 }
 
 export const checkIfLlmModelAvailable = async (llmApiUrl: string) => {
-  const model = config.get<string>('application.chatBot.model')
+  const model = config.get<string>('application.supportAssistant.model')
   try {
     const response = await fetch(`${llmApiUrl}/models`, { signal: AbortSignal.timeout(5000) })
     if (!response.ok) return false

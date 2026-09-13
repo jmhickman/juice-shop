@@ -143,7 +143,7 @@ type SafetyModeSetting = 'enabled' | 'disabled' | 'auto'
 type isEnvironmentFunction = () => boolean
 
 export function getChallengeEnablementStatus (challenge: Challenge,
-  safetyModeSetting: SafetyModeSetting = config.get<SafetyModeSetting>('scoring.safetyMode'),
+  safetyModeSetting: SafetyModeSetting = 'disabled',
   isEnvironmentFunctions: {
     isDocker: isEnvironmentFunction
     isHeroku: isEnvironmentFunction

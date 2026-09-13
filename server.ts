@@ -53,21 +53,18 @@ import { SecurityQuestionModel } from './models/securityQuestion'
 import logger from './lib/logger'
 import { errorPage } from './lib/errorPage'
 import * as utils from './lib/utils'
-import * as antiCheat from './lib/antiCheat'
 import * as security from './lib/insecurity'
 import validateConfig from './lib/startup/validateConfig'
 import cleanupFtpFolder from './lib/startup/cleanupFtpFolder'
 import customizeEasterEgg from './lib/startup/customizeEasterEgg' // vuln-code-snippet hide-line
 import customizeApplication from './lib/startup/customizeApplication'
 import validatePreconditions, { preconditionsReady } from './lib/startup/validatePreconditions'
-import registerWebsocketEvents from './lib/startup/registerWebsocketEvents'
 import restoreOverwrittenFilesWithOriginals from './lib/startup/restoreOverwrittenFilesWithOriginals'
 
 import datacreator from './data/datacreator'
 import locales from './data/static/locales.json'
 
 import { login } from './routes/login'
-import * as verify from './routes/verify'
 import * as address from './routes/address'
 import * as metrics from './routes/metrics'
 import * as payment from './routes/payment'
@@ -87,7 +84,6 @@ import { saveLoginIp } from './routes/saveLoginIp'
 import { serveKeyFiles } from './routes/keyServer'
 import * as basketItems from './routes/basketItems'
 import { performRedirect } from './routes/redirect'
-import { serveEasterEgg } from './routes/easterEgg'
 import { getLanguageList } from './routes/languages'
 import { getUserProfile } from './routes/userProfile'
 import { serveAngularClient } from './routes/angular'
@@ -96,34 +92,25 @@ import { serveLogFiles } from './routes/logfileServer'
 import { servePublicFiles } from './routes/fileServer'
 import { addMemory, getMemories } from './routes/memory'
 import { changePassword } from './routes/changePassword'
-import { regionNames } from './routes/regionNames'
 import { retrieveAppVersion } from './routes/appVersion'
 import { captchas, verifyCaptcha } from './routes/captcha'
-import * as restoreProgress from './routes/restoreProgress'
-import { checkKeys, nftUnlocked } from './routes/checkKeys'
 import { retrieveLoggedInUser } from './routes/currentUser'
 import authenticatedUsers from './routes/authenticatedUsers'
 import { securityQuestion } from './routes/securityQuestion'
-import { servePremiumContent } from './routes/premiumReward'
-import { contractExploitListener } from './routes/web3Wallet'
 import { updateUserProfile } from './routes/updateUserProfile'
 import { getVideo, promotionVideo } from './routes/videoHandler'
 import { likeProductReviews } from './routes/likeProductReviews'
-import { repeatNotification } from './routes/repeatNotification'
 import { serveQuarantineFiles } from './routes/quarantineServer'
 import { showProductReviews } from './routes/showProductReviews'
-import { nftMintListener, walletNFTVerify } from './routes/nftMint'
 import { createProductReviews } from './routes/createProductReviews'
 import { getWalletBalance, addWalletBalance } from './routes/wallet'
 import { retrieveAppConfiguration } from './routes/appConfiguration'
 import { updateProductReviews } from './routes/updateProductReviews'
-import { servePrivacyPolicyProof } from './routes/privacyPolicyProof'
 import { profileImageUrlUpload } from './routes/profileImageUrlUpload'
 import { profileImageFileUpload } from './routes/profileImageFileUpload'
 import { imageCaptchas, verifyImageCaptcha } from './routes/imageCaptcha'
 import { upgradeToDeluxe, deluxeMembershipStatus } from './routes/deluxe'
 import { orderHistory, allOrders, toggleDeliveryStatus } from './routes/orderHistory'
-import { continueCode, continueCodeFindIt, continueCodeFixIt } from './routes/continueCode'
 import { ensureFileIsPassed, handleZipFileUpload, checkUploadSize, checkFileType, handleXmlUpload, handleYamlUpload } from './routes/fileUpload'
 
 const app = express()
@@ -206,7 +193,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   /* Security Policy */
   const securityTxtExpiration = new Date()
   securityTxtExpiration.setFullYear(securityTxtExpiration.getFullYear() + 1)
-  app.get(['/.well-known/security.txt', '/security.txt'], verify.accessControlChallenges())
   app.use(['/.well-known/security.txt', '/security.txt'], securityTxt({
     contact: config.get('application.securityTxt.contact'),
     encryption: config.get('application.securityTxt.encryption'),
@@ -221,16 +207,10 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.use(robots({ UserAgent: '*', Disallow: '/archive' }))
 
   /* Check for any URLs having been called that would be expected for challenge solving without cheating */
-  app.use(antiCheat.checkForPreSolveInteractions())
 
   /* Checks for challenges solved by retrieving a file implicitly or explicitly */
-  app.use('/assets/public/images/padding', verify.accessControlChallenges())
-  app.use('/assets/public/images/products', verify.accessControlChallenges())
-  app.use('/assets/public/images/uploads', verify.accessControlChallenges())
-  app.use('/assets/i18n', verify.accessControlChallenges())
 
   /* Checks for challenges solved by abusing SSTi and SSRF bugs */
-  app.use('/internal/progress-check', verify.serverSideChallenges())
 
   /* Create middleware to change paths from the serve-index plugin from absolute to relative */
   const serveIndexMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -261,7 +241,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
 
   /* /infrastructure directory browsing */
   app.use('/infrastructure', serveIndexMiddleware, serveIndex('infrastructure', { icons: true, view: 'details', filter: (filename) => filename !== 'README.md' }))
-  app.use('/infrastructure', verify.accessControlChallenges())
   app.use('/infrastructure', (req: Request, res: Response, next: NextFunction) => {
     const filePath = path.resolve('infrastructure', path.normalize(req.path).replace(/^[\\/]+/, ''))
     if (!filePath.startsWith(path.resolve('infrastructure')) || filePath.endsWith('README.md')) {
@@ -293,7 +272,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
 
   /* /logs directory browsing */ // vuln-code-snippet neutral-line accessLogDisclosureChallenge
   app.use('/help/logs', serveIndexMiddleware, serveIndex('logs', { icons: true, view: 'details' })) // vuln-code-snippet vuln-line accessLogDisclosureChallenge
-  app.use('/help/logs', verify.accessControlChallenges()) // vuln-code-snippet hide-line
   app.use('/help/logs/:file', serveLogFiles()) // vuln-code-snippet vuln-line accessLogDisclosureChallenge
 
   /* Swagger documentation for B2B v2 endpoints */
@@ -364,7 +342,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   // vuln-code-snippet start changeProductChallenge
   /** Authorization **/
   /* Checks on JWT in Authorization header */ // vuln-code-snippet hide-line
-  app.use(verify.jwtChallenges()) // vuln-code-snippet hide-line
   app.use(security.updateAuthenticatedUsers()) // vuln-code-snippet hide-line
   /* Baskets: Unauthorized users are not allowed to access baskets */
   app.use('/shop/cart', security.isAuthorized(), security.appendUserId())
@@ -383,7 +360,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/api/items', security.isAuthorized()) // vuln-code-snippet neutral-line changeProductChallenge
   // app.put('/api/items/:id', security.isAuthorized()) // vuln-code-snippet vuln-line changeProductChallenge
   app.delete('/api/items/:id', security.denyAll())
-  /* Challenges: GET list of challenges allowed. Everything else forbidden entirely */
   app.post('/api/objectives', security.denyAll())
   app.use('/api/objectives/:id', security.denyAll())
   /* Hints: GET and PUT hints allowed. Everything else forbidden */
@@ -398,7 +374,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   /* Recycles: POST and GET allowed when logged in only */
   app.get('/api/returns', recycles.blockRecycleItems())
   app.post('/api/returns', security.isAuthorized())
-  /* Challenge evaluation before finale takes over */
   app.get('/api/returns/:id', recycles.getRecycleItem())
   app.put('/api/returns/:id', security.denyAll())
   app.delete('/api/returns/:id', security.denyAll())
@@ -412,13 +387,8 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.use('/shop/auth/details', security.isAuthorized())
   app.use('/shop/cart/:id', security.isAuthorized())
   app.use('/shop/cart/:id/confirmation', security.isAuthorized())
-  /* Challenge evaluation before finale takes over */ // vuln-code-snippet hide-start
-  app.post('/api/feedback', verify.forgedFeedbackChallenge())
-  /* Captcha verification before finale takes over */
   app.post('/api/feedback', utils.asyncHandler(verifyCaptcha()))
   /* Captcha Bypass challenge verification */
-  app.post('/api/feedback', verify.captchaBypassChallenge())
-  /* User registration challenge verifications before finale takes over */
   app.post('/api/accounts', (req: Request, res: Response, next: NextFunction) => {
     if (req.body.email !== undefined && req.body.password !== undefined && req.body.passwordRepeat !== undefined) {
       if (req.body.email.length !== 0 && req.body.password.length !== 0) {
@@ -431,9 +401,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     }
     next()
   })
-  app.post('/api/accounts', verify.registerAdminChallenge())
-  app.post('/api/accounts', verify.passwordRepeatChallenge()) // vuln-code-snippet hide-end
-  app.post('/api/accounts', verify.emptyUserRegistration())
   /* Unauthorized users are not allowed to access B2B API */
   app.use('/enterprise/v1', security.isAuthorized())
   /* Check if the quantity is available in stock and limit per user not exceeded, then add item to basket */
@@ -488,7 +455,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     utils.asyncHandler(twoFactorAuth.disable)
   )
   /* Verifying DB related challenges can be postponed until the next request for challenges is coming via finale */
-  app.use(verify.databaseRelatedChallenges())
 
   // vuln-code-snippet start registerAdminChallenge
   /* Generated API endpoints */
@@ -499,7 +465,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     { name: 'Product', path: 'items', exclude: [], model: ProductModel },
     { name: 'Feedback', path: 'feedback', exclude: [], model: FeedbackModel },
     { name: 'BasketItem', path: 'cart-items', exclude: [], model: BasketItemModel },
-    { name: 'Challenge', path: 'objectives', exclude: [], model: ChallengeModel, include: [ChallengeDependencyModel] },
     { name: 'Complaint', path: 'complaints', exclude: [], model: ComplaintModel },
     { name: 'Recycle', path: 'returns', exclude: [], model: RecycleModel },
     { name: 'SecurityQuestion', path: 'recovery-questions', exclude: [], model: SecurityQuestionModel },
@@ -508,16 +473,15 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     { name: 'PrivacyRequest', path: 'data-requests', exclude: [], model: PrivacyRequestModel },
     { name: 'Card', path: 'payment-methods', exclude: [], model: CardModel },
     { name: 'Quantity', path: 'quantities', exclude: [], model: QuantityModel },
-    { name: 'Hint', path: 'tips', exclude: [], model: HintModel }
   ]
 
-  for (const { name, path, exclude, model, include } of autoModels) {
+  for (const { name, path, exclude, model } of autoModels) {
     const resource = finale.resource({
       model,
       endpoints: [`/api/${path}`, `/api/${path}/:id`],
       excludeAttributes: exclude,
       pagination: false,
-      include
+      
     })
 
     // create a wallet when a new user is registered using API
@@ -531,26 +495,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     } // vuln-code-snippet neutral-line registerAdminChallenge
     // vuln-code-snippet end registerAdminChallenge
 
-    // translate challenge descriptions on-the-fly
-    if (name === 'Challenge') {
-      resource.list.fetch.after((req: Request, res: Response, context: { instance: string | any[], continue: any }) => {
-        for (let i = 0; i < context.instance.length; i++) {
-          let description = context.instance[i].description
-          if (description?.includes('<em>(This challenge is <strong>')) {
-            const warning = description.substring(description.indexOf(' <em>(This challenge is <strong>'))
-            description = description.substring(0, description.indexOf(' <em>(This challenge is <strong>'))
-            context.instance[i].description = req.__(description) + req.__(warning)
-          } else {
-            context.instance[i].description = req.__(description)
-          }
-        }
-        return context.continue
-      })
-      resource.read.send.before((req: Request, res: Response, context: { instance: { description: string, hint: string }, continue: any }) => {
-        context.instance.description = req.__(context.instance.description)
-        return context.continue
-      })
-    }
+
 
     // translate security questions on-the-fly
     if (name === 'SecurityQuestion') {
@@ -566,19 +511,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
       })
     }
 
-    // translate hints on-the-fly
-    if (name === 'Hint') {
-      resource.list.fetch.after((req: Request, res: Response, context: { instance: string | any[], continue: any }) => {
-        for (let i = 0; i < context.instance.length; i++) {
-          context.instance[i].text = req.__(context.instance[i].text)
-        }
-        return context.continue
-      })
-      resource.read.send.before((req: Request, res: Response, context: { instance: { text: string }, continue: any }) => {
-        context.instance.text = req.__(context.instance.text)
-        return context.continue
-      })
-    }
+
 
     // translate product names and descriptions on-the-fly
     if (name === 'Product') {
@@ -619,17 +552,9 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.put('/shop/cart/:id/promo/:promo', utils.asyncHandler(applyCoupon()))
   app.get('/shop/system/version', utils.asyncHandler(retrieveAppVersion()))
   app.get('/shop/system/configuration', utils.asyncHandler(retrieveAppConfiguration()))
-  app.get('/shop/system/notification', utils.asyncHandler(repeatNotification()))
-  app.get('/shop/progress/token', utils.asyncHandler(continueCode()))
-  app.get('/shop/progress/find-it', utils.asyncHandler(continueCodeFindIt()))
-  app.get('/shop/progress/fix-it', utils.asyncHandler(continueCodeFixIt()))
-  app.put('/shop/progress/find-it/apply/:continueCode', utils.asyncHandler(restoreProgress.restoreProgressFindIt()))
-  app.put('/shop/progress/fix-it/apply/:continueCode', utils.asyncHandler(restoreProgress.restoreProgressFixIt()))
-  app.put('/shop/progress/token/apply/:continueCode', utils.asyncHandler(restoreProgress.restoreProgress()))
   app.get('/shop/check-code', utils.asyncHandler(captchas()))
   app.get('/shop/check-image', utils.asyncHandler(imageCaptchas()))
   app.get('/shop/tracking/:id', trackOrder())
-  app.get('/shop/country-catalog', utils.asyncHandler(regionNames()))
   app.get('/shop/auth/client-ip', utils.asyncHandler(saveLoginIp()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(verifyImageCaptcha()))
   app.post('/shop/auth/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
@@ -652,19 +577,12 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/shop/assistant', utils.asyncHandler(chat()))
 
   /* Web3 API endpoints */
-  app.post('/shop/loyalty/redeem', utils.asyncHandler(checkKeys()))
-  app.get('/shop/loyalty/unlocked', nftUnlocked())
-  app.get('/shop/loyalty/enroll', utils.asyncHandler(nftMintListener()))
-  app.post('/shop/loyalty/verify', walletNFTVerify())
-  app.post('/shop/loyalty/register-device', utils.asyncHandler(contractExploitListener()))
 
   /* B2B Order API */
   app.post('/enterprise/v1/orders', b2bOrder())
 
   /* File Serving */
-  app.get('/site/decor/thank-you-card', serveEasterEgg())
-  app.get('/premium/vault-access', servePremiumContent())
-  app.get('/legal/liability-statement', servePrivacyPolicyProof())
+
 
   /* Route for dataerasure page */
   app.use('/privacy/erase', dataErasure)
@@ -693,7 +611,6 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.use(utils.asyncHandler(serveAngularClient()))
 
   /* Error Handling */
-  app.use(verify.errorHandlingChallenge())
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof Error) err.stack = err.message // never leak stack traces (paths, deps, layout) to clients
     next(err)
@@ -766,7 +683,6 @@ export async function start (readyCallback?: () => void) {
     if (process.env.BASE_PATH !== '') {
       logger.info(colors.cyan(`Server using proxy base path ${colors.bold(`${process.env.BASE_PATH}`)} for redirects`))
     }
-    registerWebsocketEvents(server)
     if (readyCallback) {
       readyCallback()
     }

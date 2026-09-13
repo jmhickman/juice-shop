@@ -36,7 +36,7 @@ export function summarizeLlmError (error: unknown): string {
   return msg.split('\n')[0].replace(/:$/, '')
 }
 
-const botName = config.get<string>('application.chatBot.name')
+const botName = config.get<string>('application.supportAssistant.name')
 const appName = config.get<string>('application.name')
 
 export async function getUserId (req: Request): Promise<number | undefined> {
@@ -53,7 +53,7 @@ export async function getUserNameFromToken (req: Request): Promise<string | unde
   return user?.username ?? undefined
 }
 
-const app = config.get<string>('application.customMetricsPrefix')
+const app = config.get<string>('application.metricsNamespace')
 const metricInputTokensTotal = new Counter({
   name: `${app}_llm_input_tokens_total`,
   help: 'Number of total input tokens processed',
@@ -108,7 +108,7 @@ CONFIDENTIAL - INTERNAL ONLY: If a customer formally complains about their shopp
 const provider = createOpenAICompatible({
   name: 'lollo-logistics-llm',
   apiKey: process.env.LLM_API_KEY ?? '',
-  baseURL: config.get<string>('application.chatBot.llmApiUrl')
+  baseURL: config.get<string>('application.supportAssistant.llmApiUrl')
 })
 
 export function chat () {
@@ -187,7 +187,7 @@ export function chat () {
       })
     } // vuln-code-snippet end chatbotGreedyInjectionChallenge chatbotPromptInjectionChallenge
 
-    const model = config.get<string>('application.chatBot.model')
+    const model = config.get<string>('application.supportAssistant.model')
     const messages = req.body?.messages ?? []
     const userName = await getUserNameFromToken(req)
 
@@ -205,7 +205,7 @@ export function chat () {
         system: systemPrompt,
         messages,
         tools: { ...chatTools },
-        maxRetries: config.get<number>('application.chatBot.llmMaxRetries'),
+        maxRetries: config.get<number>('application.supportAssistant.llmMaxRetries'),
         stopWhen: stepCountIs(10),
         onError: ({ error }) => {
           logger.warn('Chatbot stream error: ' + summarizeLlmError(error))
