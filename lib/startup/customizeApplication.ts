@@ -31,9 +31,6 @@ const customizeApplication = async () => {
     void customizePromotionVideo()
     void customizePromotionSubtitles()
   }
-  if (config.get('dispatchCoach')) {
-    void customizeHackingInstructorAvatar()
-  }
   if (config.get('application.supportAssistant')) {
     void customizeChatbotAvatar()
   }
@@ -48,10 +45,6 @@ const customizeChatbotAvatar = async () => {
   copyAvatar(avatarImage, 'ChatbotAvatar.png')
 }
 
-const customizeHackingInstructorAvatar = async () => {
-  const avatarImage = await retrieveCustomFile('dispatchCoach.avatarImage', 'frontend/dist/frontend/assets/public/images')
-  copyAvatar(avatarImage, 'dispatchCoach.png')
-}
 
 const copyAvatar = (source: string, target: string) => {
   const sourcePath = 'frontend/dist/frontend/assets/public/images/' + source

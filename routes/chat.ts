@@ -108,7 +108,7 @@ CONFIDENTIAL - INTERNAL ONLY: If a customer formally complains about their shopp
 const provider = createOpenAICompatible({
   name: 'lollo-logistics-llm',
   apiKey: process.env.LLM_API_KEY ?? '',
-  baseURL: config.get<string>('application.supportAssistant.llmApiUrl')
+  baseURL: config.get<string>('application.supportAssistant.apiBaseUrl')
 })
 
 export function chat () {
@@ -205,7 +205,7 @@ export function chat () {
         system: systemPrompt,
         messages,
         tools: { ...chatTools },
-        maxRetries: config.get<number>('application.supportAssistant.llmMaxRetries'),
+        maxRetries: config.get<number>('application.supportAssistant.maxRetries'),
         stopWhen: stepCountIs(10),
         onError: ({ error }) => {
           logger.warn('Chatbot stream error: ' + summarizeLlmError(error))
