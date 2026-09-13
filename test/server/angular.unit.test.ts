@@ -14,36 +14,41 @@ void describe('angular', () => {
 
   beforeEach(() => {
     req = { }
-    res = { sendFile: mock.fn() }
+    res = { redirect: mock.fn() }
     next = mock.fn()
   })
 
-  void it('should serve index.html for any URL', () => {
+  void it('should redirect unknown URLs to the root view', () => {
     req.url = '/any/thing'
 
     serveAngularClient()(req, res, next)
 
-    assert.equal(res.sendFile.mock.calls.length, 1)
-    assert.match(res.sendFile.mock.calls[0].arguments[0], /index\.html/)
+    assert.equal(res.redirect.mock.calls.length, 1)
+    assert.equal(res.redirect.mock.calls[0].arguments[0], '/')
+    assert.equal(next.mock.calls.length, 0)
   })
 
-  void it('should raise error for /api endpoint URL', () => {
+  void it('should raise 404 error for /api endpoint URL', () => {
     req.url = '/api'
 
     serveAngularClient()(req, res, next)
 
-    assert.equal(res.sendFile.mock.calls.length, 0)
+    assert.equal(res.redirect.mock.calls.length, 0)
     assert.equal(next.mock.calls.length, 1)
-    assert.ok(next.mock.calls[0].arguments[0] instanceof Error)
+    const err = next.mock.calls[0].arguments[0]
+    assert.equal((err as any).status, 404)
+    assert.ok(err instanceof Error)
   })
 
-  void it('should raise error for /rest endpoint URL', () => {
-    req.url = '/rest'
+  void it('should raise 404 error for /shop endpoint URL', () => {
+    req.url = '/shop/bogus'
 
     serveAngularClient()(req, res, next)
 
-    assert.equal(res.sendFile.mock.calls.length, 0)
+    assert.equal(res.redirect.mock.calls.length, 0)
     assert.equal(next.mock.calls.length, 1)
-    assert.ok(next.mock.calls[0].arguments[0] instanceof Error)
+    const err = next.mock.calls[0].arguments[0]
+    assert.equal((err as any).status, 404)
+    assert.ok(err instanceof Error)
   })
 })

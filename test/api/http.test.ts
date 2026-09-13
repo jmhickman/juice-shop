@@ -48,9 +48,9 @@ void describe('HTTP', () => {
     assert.equal(res.headers['x-xss-protection'], undefined)
   })
 
-  void it('unexpected path under known sub-path caught by generic error handler', async () => {
-    const res = await request(app).get('/rest/x')
-    assert.equal(res.status, 500)
-    assert.ok(res.text.includes('<title>Error: Unexpected path: /rest/x</title>'))
+  void it('unknown non-API path redirects to the root view', async () => {
+    const res = await request(app).get('/whatever/dead/path')
+    assert.equal(res.status, 302)
+    assert.equal(res.headers.location, '/')
   })
 })
