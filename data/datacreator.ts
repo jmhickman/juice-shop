@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Lollo Logistics contributors.
+ * Copyright (c) 2017-2026 Lollo Logistics.
  * SPDX-License-Identifier: MIT
  */
 
@@ -225,12 +225,12 @@ async function createMemories () {
         tmpImageFileName = utils.extractFilename(memory.image)
         void utils.downloadToFile(imageUrl, 'frontend/dist/frontend/assets/public/images/uploads/' + tmpImageFileName)
       }
-      if (memory.geoStalkingMetaSecurityQuestion && memory.geoStalkingMetaSecurityAnswer) {
-        await createSecurityAnswer(datacache.users.john.id, memory.geoStalkingMetaSecurityQuestion, memory.geoStalkingMetaSecurityAnswer)
+      if (memory.travelMetaSecurityQuestion && memory.travelMetaSecurityAnswer) {
+        await createSecurityAnswer(datacache.users.john.id, memory.travelMetaSecurityQuestion, memory.travelMetaSecurityAnswer)
         memory.user = 'john'
       }
-      if (memory.geoStalkingVisualSecurityQuestion && memory.geoStalkingVisualSecurityAnswer) {
-        await createSecurityAnswer(datacache.users.emma.id, memory.geoStalkingVisualSecurityQuestion, memory.geoStalkingVisualSecurityAnswer)
+      if (memory.workplaceVisualSecurityQuestion && memory.workplaceVisualSecurityAnswer) {
+        await createSecurityAnswer(datacache.users.emma.id, memory.workplaceVisualSecurityQuestion, memory.workplaceVisualSecurityAnswer)
         memory.user = 'emma'
       }
       if (!memory.user) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Lollo Logistics contributors.
+ * Copyright (c) 2017-2026 Lollo Logistics.
  * SPDX-License-Identifier: MIT
  */
 import express, { type NextFunction, type Request, type Response } from 'express'

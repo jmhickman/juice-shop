@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Lollo Logistics contributors.
+ * Copyright (c) 2017-2026 Lollo Logistics.
  * SPDX-License-Identifier: MIT
  */
 
@@ -19,8 +19,8 @@ const specialProducts = [
 ] as const
 
 const specialMemories = [
-  { name: '"Meta Geo Stalking" challenge memory', user: 'john', keys: ['geoStalkingMetaSecurityQuestion', 'geoStalkingMetaSecurityAnswer'] },
-  { name: '"Visual Geo Stalking" challenge memory', user: 'emma', keys: ['geoStalkingVisualSecurityQuestion', 'geoStalkingVisualSecurityAnswer'] }
+  { name: '"Meta Geo Stalking" challenge memory', user: 'john', keys: ['travelMetaSecurityQuestion', 'travelMetaSecurityAnswer'] },
+  { name: '"Visual Geo Stalking" challenge memory', user: 'emma', keys: ['workplaceVisualSecurityQuestion', 'workplaceVisualSecurityAnswer'] }
 ] as const
 
 const validateConfig = async ({ products, memories, exitOnFailure = true }: { products?: ProductConfig[], memories?: MemoryConfig[], exitOnFailure: boolean }) => {

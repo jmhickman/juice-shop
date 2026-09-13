@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Lollo Logistics contributors.
+ * Copyright (c) 2017-2026 Lollo Logistics.
  * SPDX-License-Identifier: MIT
  */
 
@@ -122,10 +122,10 @@ export const MemorySchema = z.object({
   image: z.string(),
   caption: z.string(),
   user: z.string().optional(),
-  geoStalkingMetaSecurityQuestion: z.number().optional(),
-  geoStalkingMetaSecurityAnswer: z.string().optional(),
-  geoStalkingVisualSecurityQuestion: z.number().optional(),
-  geoStalkingVisualSecurityAnswer: z.string().optional()
+  travelMetaSecurityQuestion: z.number().optional(),
+  travelMetaSecurityAnswer: z.string().optional(),
+  workplaceVisualSecurityQuestion: z.number().optional(),
+  workplaceVisualSecurityAnswer: z.string().optional()
 })
 
 export const AppConfigSchema = z.object({

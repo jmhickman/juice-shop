@@ -126,8 +126,8 @@ void describe('configValidation', () => {
   void describe('checkUnambiguousMandatorySpecialMemories', () => {
     void it('should accept a valid config', () => {
       const memories = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' },
-        { image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' },
+        { image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialMemories(memories), true)
@@ -135,9 +135,9 @@ void describe('configValidation', () => {
 
     void it('should fail if multiple memories are configured for the same challenge', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' },
-        { image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' },
-        { image: 'lalala.png', caption: 'Lalala', geoStalkingMetaSecurityQuestion: 46, geoStalkingMetaSecurityAnswer: 'foobarfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' },
+        { image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' },
+        { image: 'lalala.png', caption: 'Lalala', travelMetaSecurityQuestion: 46, travelMetaSecurityAnswer: 'foobarfoo' }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialMemories(memories), false)
@@ -145,7 +145,7 @@ void describe('configValidation', () => {
 
     void it('should fail if a required challenge memory is missing', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialMemories(memories), false)
@@ -153,8 +153,8 @@ void describe('configValidation', () => {
 
     void it('should fail if memories have mixed up the required challenge keys', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingVisualSecurityAnswer: 'foobar' },
-        { image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingMetaSecurityAnswer: 'barfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, workplaceVisualSecurityAnswer: 'foobar' },
+        { image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, travelMetaSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkUnambiguousMandatorySpecialMemories(memories), false)
@@ -164,8 +164,8 @@ void describe('configValidation', () => {
   void describe('checkThatThereIsOnlyOneMemoryPerSpecial', () => {
     void it('should accept a valid config', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' },
-        { image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' },
+        { image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkUniqueSpecialOnMemories(memories), true)
@@ -173,7 +173,7 @@ void describe('configValidation', () => {
 
     void it('should fail if a memory is configured for multiple challenges', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkUniqueSpecialOnMemories(memories), false)
@@ -183,8 +183,8 @@ void describe('configValidation', () => {
   void describe('checkSpecialMemoriesHaveNoUserAssociated', () => {
     void it('should accept a valid config', () => {
       const memories: Memory[] = [
-        { image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' },
-        { image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' }
+        { image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' },
+        { image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkSpecialMemoriesHaveNoUserAssociated(memories), true)
@@ -192,8 +192,8 @@ void describe('configValidation', () => {
 
     void it('should accept a config where the default users are associated', () => {
       const memories: Memory[] = [
-        { user: 'john', image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' },
-        { user: 'emma', image: 'blubb.png', caption: 'Blubb', geoStalkingVisualSecurityQuestion: 43, geoStalkingVisualSecurityAnswer: 'barfoo' }
+        { user: 'john', image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' },
+        { user: 'emma', image: 'blubb.png', caption: 'Blubb', workplaceVisualSecurityQuestion: 43, workplaceVisualSecurityAnswer: 'barfoo' }
       ]
 
       assert.equal(checkSpecialMemoriesHaveNoUserAssociated(memories), true)
@@ -201,7 +201,7 @@ void describe('configValidation', () => {
 
     void it('should fail if a memory is linked to another user', () => {
       const memories: Memory[] = [
-        { user: 'admin', image: 'bla.png', caption: 'Bla', geoStalkingMetaSecurityQuestion: 42, geoStalkingMetaSecurityAnswer: 'foobar' }
+        { user: 'admin', image: 'bla.png', caption: 'Bla', travelMetaSecurityQuestion: 42, travelMetaSecurityAnswer: 'foobar' }
       ]
 
       assert.equal(checkSpecialMemoriesHaveNoUserAssociated(memories), false)
