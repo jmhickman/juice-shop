@@ -30,7 +30,7 @@ describe('ChallengeService', () => {
         let res: any
         service.find().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/api/Challenges/')
+        const req = httpMock.expectOne('http://localhost:3000/api/objectives/')
         req.flush({ data: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -150,7 +150,7 @@ describe('ChallengeService', () => {
 
         let capturedError: any
         service.find().subscribe({ next: () => { throw new Error('expected error') }, error: e => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Challenges/')
+        const req = httpMock.expectOne('http://localhost:3000/api/objectives/')
         req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
         expect(req.request.method).toBe('GET')
         expect(capturedError.status).toBe(500)

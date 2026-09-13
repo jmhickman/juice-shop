@@ -372,57 +372,57 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   /* Baskets: Unauthorized users are not allowed to access baskets */
   app.use('/shop/cart', security.isAuthorized(), security.appendUserId())
   /* BasketItems: API only accessible for authenticated users */
-  app.use('/api/BasketItems', security.isAuthorized())
-  app.use('/api/BasketItems/:id', security.isAuthorized())
+  app.use('/api/cart-items', security.isAuthorized())
+  app.use('/api/cart-items/:id', security.isAuthorized())
   /* Feedbacks: GET allowed for feedback carousel, POST allowed in order to provide feedback without being logged in */
-  app.use('/api/Feedbacks/:id', security.isAuthorized())
+  app.use('/api/feedback/:id', security.isAuthorized())
   /* Users: Only POST is allowed in order to register a new user */
-  app.get('/api/Users', security.isAuthorized())
-  app.route('/api/Users/:id')
+  app.get('/api/accounts', security.isAuthorized())
+  app.route('/api/accounts/:id')
     .get(security.isAuthorized())
     .put(security.denyAll())
     .delete(security.denyAll())
   /* Products: Only GET is allowed in order to view products */ // vuln-code-snippet neutral-line changeProductChallenge
-  app.post('/api/Products', security.isAuthorized()) // vuln-code-snippet neutral-line changeProductChallenge
-  // app.put('/api/Products/:id', security.isAuthorized()) // vuln-code-snippet vuln-line changeProductChallenge
-  app.delete('/api/Products/:id', security.denyAll())
+  app.post('/api/items', security.isAuthorized()) // vuln-code-snippet neutral-line changeProductChallenge
+  // app.put('/api/items/:id', security.isAuthorized()) // vuln-code-snippet vuln-line changeProductChallenge
+  app.delete('/api/items/:id', security.denyAll())
   /* Challenges: GET list of challenges allowed. Everything else forbidden entirely */
-  app.post('/api/Challenges', security.denyAll())
-  app.use('/api/Challenges/:id', security.denyAll())
+  app.post('/api/objectives', security.denyAll())
+  app.use('/api/objectives/:id', security.denyAll())
   /* Hints: GET and PUT hints allowed. Everything else forbidden */
-  app.post('/api/Hints', security.denyAll())
-  app.route('/api/Hints/:id')
+  app.post('/api/tips', security.denyAll())
+  app.route('/api/tips/:id')
     .get(security.denyAll())
     .delete(security.denyAll())
   /* Complaints: POST and GET allowed when logged in only */
-  app.get('/api/Complaints', security.isAuthorized())
-  app.post('/api/Complaints', security.isAuthorized())
-  app.use('/api/Complaints/:id', security.denyAll())
+  app.get('/api/complaints', security.isAuthorized())
+  app.post('/api/complaints', security.isAuthorized())
+  app.use('/api/complaints/:id', security.denyAll())
   /* Recycles: POST and GET allowed when logged in only */
-  app.get('/api/Recycles', recycles.blockRecycleItems())
-  app.post('/api/Recycles', security.isAuthorized())
+  app.get('/api/returns', recycles.blockRecycleItems())
+  app.post('/api/returns', security.isAuthorized())
   /* Challenge evaluation before finale takes over */
-  app.get('/api/Recycles/:id', recycles.getRecycleItem())
-  app.put('/api/Recycles/:id', security.denyAll())
-  app.delete('/api/Recycles/:id', security.denyAll())
+  app.get('/api/returns/:id', recycles.getRecycleItem())
+  app.put('/api/returns/:id', security.denyAll())
+  app.delete('/api/returns/:id', security.denyAll())
   /* SecurityQuestions: Only GET list of questions allowed. */
-  app.post('/api/SecurityQuestions', security.denyAll())
-  app.use('/api/SecurityQuestions/:id', security.denyAll())
+  app.post('/api/recovery-questions', security.denyAll())
+  app.use('/api/recovery-questions/:id', security.denyAll())
   /* SecurityAnswers: Only POST of answer allowed. */
-  app.get('/api/SecurityAnswers', security.denyAll())
-  app.use('/api/SecurityAnswers/:id', security.denyAll())
+  app.get('/api/recovery-answers', security.denyAll())
+  app.use('/api/recovery-answers/:id', security.denyAll())
   /* REST API */
   app.use('/shop/auth/details', security.isAuthorized())
   app.use('/shop/cart/:id', security.isAuthorized())
   app.use('/shop/cart/:id/confirmation', security.isAuthorized())
   /* Challenge evaluation before finale takes over */ // vuln-code-snippet hide-start
-  app.post('/api/Feedbacks', verify.forgedFeedbackChallenge())
+  app.post('/api/feedback', verify.forgedFeedbackChallenge())
   /* Captcha verification before finale takes over */
-  app.post('/api/Feedbacks', utils.asyncHandler(verifyCaptcha()))
+  app.post('/api/feedback', utils.asyncHandler(verifyCaptcha()))
   /* Captcha Bypass challenge verification */
-  app.post('/api/Feedbacks', verify.captchaBypassChallenge())
+  app.post('/api/feedback', verify.captchaBypassChallenge())
   /* User registration challenge verifications before finale takes over */
-  app.post('/api/Users', (req: Request, res: Response, next: NextFunction) => {
+  app.post('/api/accounts', (req: Request, res: Response, next: NextFunction) => {
     if (req.body.email !== undefined && req.body.password !== undefined && req.body.passwordRepeat !== undefined) {
       if (req.body.email.length !== 0 && req.body.password.length !== 0) {
         req.body.email = req.body.email.trim()
@@ -434,41 +434,41 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
     }
     next()
   })
-  app.post('/api/Users', verify.registerAdminChallenge())
-  app.post('/api/Users', verify.passwordRepeatChallenge()) // vuln-code-snippet hide-end
-  app.post('/api/Users', verify.emptyUserRegistration())
+  app.post('/api/accounts', verify.registerAdminChallenge())
+  app.post('/api/accounts', verify.passwordRepeatChallenge()) // vuln-code-snippet hide-end
+  app.post('/api/accounts', verify.emptyUserRegistration())
   /* Unauthorized users are not allowed to access B2B API */
   app.use('/b2b/v2', security.isAuthorized())
   /* Check if the quantity is available in stock and limit per user not exceeded, then add item to basket */
-  app.put('/api/BasketItems/:id', security.appendUserId(), utils.asyncHandler(basketItems.quantityCheckBeforeBasketItemUpdate()))
-  app.post('/api/BasketItems', security.appendUserId(), utils.asyncHandler(basketItems.quantityCheckBeforeBasketItemAddition()), utils.asyncHandler(basketItems.addBasketItem()))
+  app.put('/api/cart-items/:id', security.appendUserId(), utils.asyncHandler(basketItems.quantityCheckBeforeBasketItemUpdate()))
+  app.post('/api/cart-items', security.appendUserId(), utils.asyncHandler(basketItems.quantityCheckBeforeBasketItemAddition()), utils.asyncHandler(basketItems.addBasketItem()))
   /* Accounting users are allowed to check and update quantities */
-  app.delete('/api/Quantitys/:id', security.denyAll())
-  app.post('/api/Quantitys', security.denyAll())
-  app.use('/api/Quantitys/:id', security.isAccounting(), IpFilter(['123.456.789'], { mode: 'allow' }))
+  app.delete('/api/quantities/:id', security.denyAll())
+  app.post('/api/quantities', security.denyAll())
+  app.use('/api/quantities/:id', security.isAccounting(), IpFilter(['123.456.789'], { mode: 'allow' }))
   /* Feedbacks: Do not allow changes of existing feedback */
-  app.put('/api/Feedbacks/:id', security.denyAll())
+  app.put('/api/feedback/:id', security.denyAll())
   /* PrivacyRequests: Only allowed for authenticated users */
-  app.use('/api/PrivacyRequests', security.isAuthorized())
-  app.use('/api/PrivacyRequests/:id', security.isAuthorized())
+  app.use('/api/data-requests', security.isAuthorized())
+  app.use('/api/data-requests/:id', security.isAuthorized())
   /* PaymentMethodRequests: Only allowed for authenticated users */
-  app.post('/api/Cards', security.appendUserId())
-  app.get('/api/Cards', security.appendUserId(), utils.asyncHandler(payment.getPaymentMethods()))
-  app.put('/api/Cards/:id', security.denyAll())
-  app.delete('/api/Cards/:id', security.appendUserId(), utils.asyncHandler(payment.delPaymentMethodById()))
-  app.get('/api/Cards/:id', security.appendUserId(), utils.asyncHandler(payment.getPaymentMethodById()))
+  app.post('/api/payment-methods', security.appendUserId())
+  app.get('/api/payment-methods', security.appendUserId(), utils.asyncHandler(payment.getPaymentMethods()))
+  app.put('/api/payment-methods/:id', security.denyAll())
+  app.delete('/api/payment-methods/:id', security.appendUserId(), utils.asyncHandler(payment.delPaymentMethodById()))
+  app.get('/api/payment-methods/:id', security.appendUserId(), utils.asyncHandler(payment.getPaymentMethodById()))
   /* PrivacyRequests: Only POST allowed for authenticated users */
-  app.post('/api/PrivacyRequests', security.isAuthorized())
-  app.get('/api/PrivacyRequests', security.denyAll())
-  app.use('/api/PrivacyRequests/:id', security.denyAll())
+  app.post('/api/data-requests', security.isAuthorized())
+  app.get('/api/data-requests', security.denyAll())
+  app.use('/api/data-requests/:id', security.denyAll())
 
-  app.post('/api/Addresss', security.appendUserId())
-  app.get('/api/Addresss', security.appendUserId(), utils.asyncHandler(address.getAddress()))
-  app.put('/api/Addresss/:id', security.appendUserId())
-  app.delete('/api/Addresss/:id', security.appendUserId(), utils.asyncHandler(address.delAddressById()))
-  app.get('/api/Addresss/:id', security.appendUserId(), utils.asyncHandler(address.getAddressById()))
-  app.get('/api/Deliverys', utils.asyncHandler(delivery.getDeliveryMethods()))
-  app.get('/api/Deliverys/:id', utils.asyncHandler(delivery.getDeliveryMethod()))
+  app.post('/api/addresses', security.appendUserId())
+  app.get('/api/addresses', security.appendUserId(), utils.asyncHandler(address.getAddress()))
+  app.put('/api/addresses/:id', security.appendUserId())
+  app.delete('/api/addresses/:id', security.appendUserId(), utils.asyncHandler(address.delAddressById()))
+  app.get('/api/addresses/:id', security.appendUserId(), utils.asyncHandler(address.getAddressById()))
+  app.get('/api/deliveries', utils.asyncHandler(delivery.getDeliveryMethods()))
+  app.get('/api/deliveries/:id', utils.asyncHandler(delivery.getDeliveryMethod()))
   // vuln-code-snippet end changeProductChallenge
 
   /* Verify the 2FA Token */
@@ -498,26 +498,26 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   finale.initialize({ app, sequelize: seq })
 
   const autoModels = [
-    { name: 'User', exclude: ['password', 'totpSecret'], model: UserModel },
-    { name: 'Product', exclude: [], model: ProductModel },
-    { name: 'Feedback', exclude: [], model: FeedbackModel },
-    { name: 'BasketItem', exclude: [], model: BasketItemModel },
-    { name: 'Challenge', exclude: [], model: ChallengeModel, include: [ChallengeDependencyModel] },
-    { name: 'Complaint', exclude: [], model: ComplaintModel },
-    { name: 'Recycle', exclude: [], model: RecycleModel },
-    { name: 'SecurityQuestion', exclude: [], model: SecurityQuestionModel },
-    { name: 'SecurityAnswer', exclude: [], model: SecurityAnswerModel },
-    { name: 'Address', exclude: [], model: AddressModel },
-    { name: 'PrivacyRequest', exclude: [], model: PrivacyRequestModel },
-    { name: 'Card', exclude: [], model: CardModel },
-    { name: 'Quantity', exclude: [], model: QuantityModel },
-    { name: 'Hint', exclude: [], model: HintModel }
+    { name: 'User', path: 'accounts', exclude: ['password', 'totpSecret'], model: UserModel },
+    { name: 'Product', path: 'items', exclude: [], model: ProductModel },
+    { name: 'Feedback', path: 'feedback', exclude: [], model: FeedbackModel },
+    { name: 'BasketItem', path: 'cart-items', exclude: [], model: BasketItemModel },
+    { name: 'Challenge', path: 'objectives', exclude: [], model: ChallengeModel, include: [ChallengeDependencyModel] },
+    { name: 'Complaint', path: 'complaints', exclude: [], model: ComplaintModel },
+    { name: 'Recycle', path: 'returns', exclude: [], model: RecycleModel },
+    { name: 'SecurityQuestion', path: 'recovery-questions', exclude: [], model: SecurityQuestionModel },
+    { name: 'SecurityAnswer', path: 'recovery-answers', exclude: [], model: SecurityAnswerModel },
+    { name: 'Address', path: 'addresses', exclude: [], model: AddressModel },
+    { name: 'PrivacyRequest', path: 'data-requests', exclude: [], model: PrivacyRequestModel },
+    { name: 'Card', path: 'payment-methods', exclude: [], model: CardModel },
+    { name: 'Quantity', path: 'quantities', exclude: [], model: QuantityModel },
+    { name: 'Hint', path: 'tips', exclude: [], model: HintModel }
   ]
 
-  for (const { name, exclude, model, include } of autoModels) {
+  for (const { name, path, exclude, model, include } of autoModels) {
     const resource = finale.resource({
       model,
-      endpoints: [`/api/${name}s`, `/api/${name}s/:id`],
+      endpoints: [`/api/${path}`, `/api/${path}/:id`],
       excludeAttributes: exclude,
       pagination: false,
       include

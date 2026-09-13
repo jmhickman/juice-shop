@@ -29,7 +29,7 @@ describe('ComplaintService', () => {
 
         let res: any
         service.save(null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Complaints/')
+        const req = httpMock.expectOne('http://localhost:3000/api/complaints/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(req.request.body).toBeNull()
@@ -43,7 +43,7 @@ describe('ComplaintService', () => {
 
         let capturedError: any
         service.save({ foo: 'bar' }).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Complaints/')
+        const req = httpMock.expectOne('http://localhost:3000/api/complaints/')
         req.flush(null, { status: 400, statusText: 'Bad Request' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(400)

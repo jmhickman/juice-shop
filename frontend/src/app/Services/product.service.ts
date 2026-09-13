@@ -15,7 +15,7 @@ export class ProductService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Products'
+  private readonly host = this.hostServer + '/api/items'
 
   search (criteria: string) {
     return this.http.get(`${this.hostServer}/rest/products/search?q=${criteria}`).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

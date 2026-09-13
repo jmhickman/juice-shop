@@ -15,7 +15,7 @@ export class FeedbackService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Feedbacks'
+  private readonly host = this.hostServer + '/api/feedback'
 
   find (params?: any) {
     return this.http.get(this.host + '/', {

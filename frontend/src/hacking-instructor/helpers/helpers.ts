@@ -16,7 +16,7 @@ const playbackDelays = {
 
 export async function isChallengeSolved (challengeName: string): Promise<boolean> {
   try {
-    const res = await fetch('/api/Challenges/')
+    const res = await fetch('/api/objectives/')
     const json = await res.json()
     const challenges: { name: string, solved: boolean }[] = json.data || []
     return challenges.some(c => c.name === challengeName && c.solved)

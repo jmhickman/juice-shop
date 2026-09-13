@@ -23,7 +23,7 @@ export class UserService {
 
   public isLoggedIn = new Subject<any>()
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Users'
+  private readonly host = this.hostServer + '/api/accounts'
 
   find (params?: any) {
     return this.http.get(this.hostServer + '/shop/auth/details/', { params }).pipe(map((response: any) =>

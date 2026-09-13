@@ -28,7 +28,7 @@ describe('DeliveryService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Deliverys')
+        const req = httpMock.expectOne('http://localhost:3000/api/deliveries')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('DeliveryService', () => {
 
         let res
         service.getById(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Deliverys/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/deliveries/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('DeliveryService', () => {
 
         let capturedError: any
         service.get().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Deliverys')
+        const req = httpMock.expectOne('http://localhost:3000/api/deliveries')
         req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
         expect(capturedError.status).toBe(500)
         httpMock.verify()
@@ -66,7 +66,7 @@ describe('DeliveryService', () => {
 
         let capturedError: any
         service.getById(1).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Deliverys/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/deliveries/1')
         req.error(new ErrorEvent('Not Found'), { status: 404, statusText: 'Not Found' })
         expect(capturedError.status).toBe(404)
         httpMock.verify()

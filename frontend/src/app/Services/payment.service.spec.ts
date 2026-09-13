@@ -28,7 +28,7 @@ describe('PaymentService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('PaymentService', () => {
 
         let res
         service.getById(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('PaymentService', () => {
 
         let res
         service.save({}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards/')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(res).toBe('apiResponse')
@@ -67,7 +67,7 @@ describe('PaymentService', () => {
 
         let res
         service.del(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('DELETE')
         expect(res).toBe('apiResponse')
@@ -80,7 +80,7 @@ describe('PaymentService', () => {
 
         let errorResponse: any
         service.get().subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.status).toBe(500)
@@ -93,7 +93,7 @@ describe('PaymentService', () => {
 
         let errorResponse: any
         service.save({}).subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/api/Cards/')
+        const req = httpMock.expectOne('http://localhost:3000/api/payment-methods/')
         req.error(new ErrorEvent('Network'))
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.error).toBeTruthy()

@@ -17,7 +17,7 @@ export class HintService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Hints'
+  private readonly host = this.hostServer + '/api/tips'
 
   getAll (): Observable<Hint[]> {
     return this.http.get(this.host + '/').pipe(map((response: any) => response.data), catchError((err) => { throw err }))

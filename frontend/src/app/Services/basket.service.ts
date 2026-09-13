@@ -29,7 +29,7 @@ export class BasketService {
 
   public hostServer = environment.hostServer
   public itemTotal = new Subject<any>()
-  private readonly host = this.hostServer + '/api/BasketItems'
+  private readonly host = this.hostServer + '/api/cart-items'
   private readonly guestBasketKey = 'guestBasket'
 
   find (id?: number) {

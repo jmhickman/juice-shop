@@ -29,7 +29,7 @@ describe('RecycleService', () => {
 
         let res: any
         service.find().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Recycles/')
+        const req = httpMock.expectOne('http://localhost:3000/api/returns/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(req.request.params.toString()).toBeFalsy()
@@ -43,7 +43,7 @@ describe('RecycleService', () => {
 
         let res: any
         service.save(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Recycles/')
+        const req = httpMock.expectOne('http://localhost:3000/api/returns/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(req.request.body).toBe(1)
@@ -57,7 +57,7 @@ describe('RecycleService', () => {
 
         let capturedError: any
         service.find().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Recycles/')
+        const req = httpMock.expectOne('http://localhost:3000/api/returns/')
         req.error(new ErrorEvent('Request failed'), { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError.status).toBe(503)
         httpMock.verify()

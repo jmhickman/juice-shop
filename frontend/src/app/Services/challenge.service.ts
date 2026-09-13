@@ -17,7 +17,7 @@ export class ChallengeService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Challenges'
+  private readonly host = this.hostServer + '/api/objectives'
 
   find (params?: any): Observable<Challenge[]> {
     return this.http.get(this.host + '/', { params }).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

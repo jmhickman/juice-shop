@@ -15,7 +15,7 @@ export class QuantityService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Quantitys'
+  private readonly host = this.hostServer + '/api/quantities'
 
   getAll () {
     return this.http.get(this.host + '/').pipe(map((response: any) => response.data), catchError((err) => { throw err }))

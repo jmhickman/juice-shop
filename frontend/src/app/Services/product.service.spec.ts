@@ -42,7 +42,7 @@ describe('ProductService', () => {
 
         let res: any
         service.find(null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Products/')
+        const req = httpMock.expectOne('http://localhost:3000/api/items/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(req.request.params.toString()).toBeFalsy()
@@ -56,7 +56,7 @@ describe('ProductService', () => {
 
         let res: any
         service.get(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Products/1?d=' + encodeURIComponent(new Date().toDateString()))
+        const req = httpMock.expectOne('http://localhost:3000/api/items/1?d=' + encodeURIComponent(new Date().toDateString()))
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -82,7 +82,7 @@ describe('ProductService', () => {
 
         let errorResponse: any
         service.get(1).subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/api/Products/1?d=' + encodeURIComponent(new Date().toDateString()))
+        const req = httpMock.expectOne('http://localhost:3000/api/items/1?d=' + encodeURIComponent(new Date().toDateString()))
         req.error(new ErrorEvent('Network error'))
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.error).toBeTruthy()

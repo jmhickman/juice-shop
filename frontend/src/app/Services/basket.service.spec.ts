@@ -42,7 +42,7 @@ describe('BasketService', () => {
 
         let res: any
         service.get(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/BasketItems/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/cart-items/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -55,7 +55,7 @@ describe('BasketService', () => {
 
         let res: any
         service.save().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/BasketItems/')
+        const req = httpMock.expectOne('http://localhost:3000/api/cart-items/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(res).toBe('apiResponse')
@@ -68,7 +68,7 @@ describe('BasketService', () => {
 
         let res: any
         service.put(1, {}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/BasketItems/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/cart-items/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(res).toBe('apiResponse')
@@ -81,7 +81,7 @@ describe('BasketService', () => {
 
         let res: any
         service.del(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/BasketItems/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/cart-items/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('DELETE')
         expect(res).toBe('apiResponse')
@@ -218,12 +218,12 @@ describe('BasketService', () => {
             }
         })
 
-        const putReq = httpMock.expectOne('http://localhost:3000/api/BasketItems/100')
+        const putReq = httpMock.expectOne('http://localhost:3000/api/cart-items/100')
         expect(putReq.request.method).toBe('PUT')
         expect(putReq.request.body).toEqual({ quantity: 7 })
         putReq.error(new ErrorEvent('Merge failed'), { status: 500, statusText: 'Internal Error' })
 
-        const postReq = httpMock.expectOne('http://localhost:3000/api/BasketItems/')
+        const postReq = httpMock.expectOne('http://localhost:3000/api/cart-items/')
         expect(postReq.request.method).toBe('POST')
         expect(postReq.request.body).toEqual({ ProductId: 2, BasketId: 42, quantity: 3 })
         postReq.flush({ data: {} })
@@ -332,7 +332,7 @@ describe('BasketService', () => {
         const findReq = httpMock.expectOne('http://localhost:3000/rest/basket/42')
         findReq.error(new ErrorEvent('Find failed'), { status: 500, statusText: 'Internal Error' })
 
-        const postReq = httpMock.expectOne('http://localhost:3000/api/BasketItems/')
+        const postReq = httpMock.expectOne('http://localhost:3000/api/cart-items/')
         postReq.flush({ data: {} })
 
         expect(sessionStorage.getItem('guestBasket')).toBeNull()

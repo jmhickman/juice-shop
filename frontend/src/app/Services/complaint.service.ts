@@ -15,7 +15,7 @@ export class ComplaintService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Complaints'
+  private readonly host = this.hostServer + '/api/complaints'
 
   save (params: any) {
     return this.http.post(this.host + '/', params).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

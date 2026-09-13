@@ -15,7 +15,7 @@ export class SecurityQuestionService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/SecurityQuestions'
+  private readonly host = this.hostServer + '/api/recovery-questions'
 
   find (params: any) {
     return this.http.get(this.host + '/', { params }).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

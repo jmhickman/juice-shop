@@ -15,7 +15,7 @@ export class RecycleService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Recycles'
+  private readonly host = this.hostServer + '/api/returns'
 
   find (params?: any) {
     return this.http.get(this.host + '/', {

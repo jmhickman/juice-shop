@@ -15,7 +15,7 @@ export class PaymentService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Cards'
+  private readonly host = this.hostServer + '/api/payment-methods'
 
   get () {
     return this.http.get(this.host).pipe(map((response: any) => response.data), catchError((err) => { throw err }))

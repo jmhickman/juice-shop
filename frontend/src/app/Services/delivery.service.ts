@@ -26,7 +26,7 @@ export class DeliveryService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/api/Deliverys'
+  private readonly host = this.hostServer + '/api/deliveries'
 
   get () {
     return this.http.get(this.host).pipe(map((response: DeliveryMultipleMethodResponse) => response.data), catchError((err) => { throw err }))

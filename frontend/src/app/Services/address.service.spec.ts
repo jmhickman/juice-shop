@@ -28,7 +28,7 @@ describe('AddressService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('AddressService', () => {
 
         let res
         service.getById(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('AddressService', () => {
 
         let res
         service.save({}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss/')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(res).toBe('apiResponse')
@@ -67,7 +67,7 @@ describe('AddressService', () => {
 
         let res
         service.put(1, {}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(res).toBe('apiResponse')
@@ -80,7 +80,7 @@ describe('AddressService', () => {
 
         let res
         service.del(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('DELETE')
         expect(res).toBe('apiResponse')
@@ -93,7 +93,7 @@ describe('AddressService', () => {
 
         let capturedError: any
         service.getById(1).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses/1')
         req.error(new ErrorEvent('Not Found'), { status: 404, statusText: 'Not Found' })
         expect(capturedError.status).toBe(404)
         httpMock.verify()
@@ -105,7 +105,7 @@ describe('AddressService', () => {
 
         let capturedError: any
         service.get().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Addresss')
+        const req = httpMock.expectOne('http://localhost:3000/api/addresses')
         req.error(new ErrorEvent('Internal Server Error'), { status: 500, statusText: 'Internal Server Error' })
         expect(capturedError.status).toBe(500)
         httpMock.verify()

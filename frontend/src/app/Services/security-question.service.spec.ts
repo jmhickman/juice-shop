@@ -29,7 +29,7 @@ describe('SecurityQuestionService', () => {
 
         let res: any
         service.find(null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/SecurityQuestions/')
+        const req = httpMock.expectOne('http://localhost:3000/api/recovery-questions/')
         req.flush({ data: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')

@@ -29,7 +29,7 @@ describe('FeedbackService', () => {
 
         let res: any
         service.find(null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(req.request.params.toString()).toBeFalsy()
@@ -43,7 +43,7 @@ describe('FeedbackService', () => {
 
         let res: any
         service.del(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('DELETE')
         expect(res).toBe('apiResponse')
@@ -56,7 +56,7 @@ describe('FeedbackService', () => {
 
         let res: any
         service.save(null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(req.request.body).toBeNull()
@@ -70,7 +70,7 @@ describe('FeedbackService', () => {
 
         let capturedError: any
         service.find(null).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/')
         req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
         expect(capturedError.status).toBe(500)
         httpMock.verify()
@@ -82,7 +82,7 @@ describe('FeedbackService', () => {
 
         let capturedError: any
         service.save({ foo: 'bar' }).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/')
         req.error(new ErrorEvent('Bad Request'), { status: 400, statusText: 'Bad Request' })
         expect(capturedError.status).toBe(400)
         httpMock.verify()
@@ -94,7 +94,7 @@ describe('FeedbackService', () => {
 
         let capturedError: any
         service.del(1).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Feedbacks/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/feedback/1')
         req.error(new ErrorEvent('Not Found'), { status: 404, statusText: 'Not Found' })
         expect(capturedError.status).toBe(404)
         httpMock.verify()

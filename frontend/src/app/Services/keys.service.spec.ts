@@ -54,7 +54,7 @@ describe('KeysService', () => {
     service.checkNftMinted().subscribe((res) => {
       expect(res).toBe('apiResponse')
     })
-    const req = httpMock.expectOne('http://localhost:3000/api/Challenges/?key=nftMintChallenge')
+    const req = httpMock.expectOne('http://localhost:3000/api/objectives/?key=nftMintChallenge')
     expect(req.request.method).toBe('GET')
     req.flush('apiResponse')
   })
@@ -108,7 +108,7 @@ describe('KeysService', () => {
   it('should handle error in checkNftMinted', () => {
     let capturedError: any
     service.checkNftMinted().subscribe({ next: () => expect(true).toBe(false), error: (e) => { capturedError = e } })
-    const req = httpMock.expectOne('http://localhost:3000/api/Challenges/?key=nftMintChallenge')
+    const req = httpMock.expectOne('http://localhost:3000/api/objectives/?key=nftMintChallenge')
     req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
     expect(capturedError.status).toBe(500)
   })

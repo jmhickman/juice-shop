@@ -46,7 +46,7 @@ describe('UserService', () => {
         let res: any
         service.get(1).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/api/Users/1')
+        const req = httpMock.expectOne('http://localhost:3000/api/accounts/1')
         req.flush({ data: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -61,7 +61,7 @@ describe('UserService', () => {
         let res: any
         service.save(null).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/api/Users/')
+        const req = httpMock.expectOne('http://localhost:3000/api/accounts/')
         req.flush({ data: 'apiResponse' })
 
         expect(req.request.method).toBe('POST')

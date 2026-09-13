@@ -29,7 +29,7 @@ describe('HintService', () => {
 
         let res
         service.getAll().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Hints/')
+        const req = httpMock.expectOne('http://localhost:3000/api/tips/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(req.request.params.toString()).toBeFalsy()
@@ -43,7 +43,7 @@ describe('HintService', () => {
 
         let res
         service.put(42, {}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/api/Hints/42')
+        const req = httpMock.expectOne('http://localhost:3000/api/tips/42')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(req.request.body).toEqual({})
@@ -57,7 +57,7 @@ describe('HintService', () => {
 
         let capturedError: any
         service.getAll().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Hints/')
+        const req = httpMock.expectOne('http://localhost:3000/api/tips/')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(500)
@@ -70,7 +70,7 @@ describe('HintService', () => {
 
         let capturedError: any
         service.put(42, {}).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/api/Hints/42')
+        const req = httpMock.expectOne('http://localhost:3000/api/tips/42')
         req.flush(null, { status: 400, statusText: 'Bad Request' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(400)
