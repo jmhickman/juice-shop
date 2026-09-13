@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { ServerStartedNotificationComponent } from './server-started-notification/server-started-notification.component'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -13,7 +12,6 @@ import { AppComponent } from './app.component'
 import { NavbarComponent } from './navbar/navbar.component'
 import { SidenavComponent } from './sidenav/sidenav.component'
 import { WelcomeComponent } from './welcome/welcome.component'
-import { ChallengeSolvedNotificationComponent } from './challenge-solved-notification/challenge-solved-notification.component'
 
 import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -61,8 +59,6 @@ describe('AppComponent', () => {
         NavbarComponent,
         WelcomeComponent,
         SidenavComponent,
-        ChallengeSolvedNotificationComponent,
-        ServerStartedNotificationComponent,
         MatSearchBarComponent,
         AppComponent],
       providers: [TranslateService, LoginGuard, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideZoneChangeDetection()]

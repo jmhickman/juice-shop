@@ -21,7 +21,6 @@ import { of, throwError } from 'rxjs'
 import { DomSanitizer } from '@angular/platform-browser'
 import { BasketService } from '../Services/basket.service'
 import { EventEmitter } from '@angular/core'
-import { SocketIoService } from '../Services/socket-io.service'
 import { QuantityService } from '../Services/quantity.service'
 import { DeluxeGuard } from '../app.guard'
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
@@ -34,15 +33,6 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
     } as any
 }
 
-class MockSocket {
-    on(str: string, callback: any) {
-        callback(str)
-    }
-
-    emit() {
-        return null
-    }
-}
 
 class MockActivatedRoute {
     snapshot = { queryParams: { q: '' } }
@@ -61,8 +51,6 @@ describe('SearchResultComponent', () => {
     let activatedRoute: MockActivatedRoute
     let dialog: any
     let sanitizer: any
-    let socketIoService: any
-    let mockSocket: MockSocket
     let quantityService: any
     let deluxeGuard: any
     let snackBar: any
@@ -112,11 +100,6 @@ describe('SearchResultComponent', () => {
         sanitizer.bypassSecurityTrustHtml.mockReturnValue(of({}))
         sanitizer.sanitize.mockReturnValue('')
         activatedRoute = new MockActivatedRoute()
-        mockSocket = new MockSocket()
-        socketIoService = {
-            socket: vi.fn().mockName("SocketIoService.socket")
-        }
-        socketIoService.socket.mockReturnValue(mockSocket as unknown as ReturnType<SocketIoService['socket']>)
         deluxeGuard = {
             isDeluxe: vi.fn()
         }
@@ -141,7 +124,6 @@ describe('SearchResultComponent', () => {
                 { provide: ProductService, useValue: productService },
                 { provide: DomSanitizer, useValue: sanitizer },
                 { provide: ActivatedRoute, useValue: activatedRoute },
-                { provide: SocketIoService, useValue: socketIoService },
                 { provide: QuantityService, useValue: quantityService },
                 { provide: DeluxeGuard, useValue: deluxeGuard },
                 provideHttpClient(withInterceptorsFromDi()),
@@ -201,13 +183,6 @@ describe('SearchResultComponent', () => {
         expect(console.log).toHaveBeenCalledWith('Error')
     })
 
-    it('should notify socket if search query includes DOM XSS payload while filtering table', () => {
-        activatedRoute.setQueryParameter('<iframe src="javascript:alert(`xss`)"> Payload')
-        vi.spyOn(mockSocket, 'emit')
-        component.filterTable()
-        expect(vi.mocked(mockSocket.emit as any).mock.lastCall[0]).toBe('verifyLocalXssChallenge')
-        expect(vi.mocked(mockSocket.emit as any).mock.lastCall[1]).toBe(activatedRoute.snapshot.queryParams.q)
-    })
 
     it('should trim the queryparameter while filtering the datasource', () => {
         activatedRoute.setQueryParameter('  Product Search   ')
@@ -375,24 +350,6 @@ describe('SearchResultComponent', () => {
         })
     })
 
-    describe('hacking instructor integration', () => {
-        it('should start the hacking instructor when challenge param and hacking-instructor URL are present', () => {
-            const spy = vi.spyOn(component, 'startHackingInstructor').mockImplementation(() => {})
-            ;(activatedRoute.snapshot as any).queryParams.challenge = 'Score Board'
-            ;(activatedRoute.snapshot as any).url = { join: () => 'hacking-instructor' }
-            component.ngAfterViewInit()
-            fixture.detectChanges()
-            expect(spy).toHaveBeenCalledWith('Score Board')
-        })
-
-        it('should log to console and call startHackingInstructorFor when startHackingInstructor is called', async () => {
-            const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
-            component.startHackingInstructor('Score Board')
-            expect(consoleSpy).toHaveBeenCalledWith('Starting instructions for challenge "Score Board"')
-            // Testing the dynamic import and the subsequent call is harder,
-            // but at least we covered the first line and the start of the promise.
-        })
-    })
 
     describe('auth and deluxe helpers', () => {
         it('should report isLoggedIn=false when no token is set', () => {

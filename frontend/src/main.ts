@@ -50,12 +50,10 @@ import { OrderHistoryService } from './app/Services/order-history.service'
 import { WalletService } from './app/Services/wallet.service'
 import { QuantityService } from './app/Services/quantity.service'
 import { AddressService } from './app/Services/address.service'
-import { KeysService } from './app/Services/keys.service'
 import { ImageCaptchaService } from './app/Services/image-captcha.service'
 import { PaymentService } from './app/Services/payment.service'
 import { AdminGuard, LoginGuard, AccountingGuard, DeluxeGuard } from './app/app.guard'
 import { CookieService, CookieModule } from 'ngy-cookie'
-import { ChallengeService } from './app/Services/challenge.service'
 import { BasketService } from './app/Services/basket.service'
 import { RecycleService } from './app/Services/recycle.service'
 import { TrackOrderService } from './app/Services/track-order.service'
@@ -102,7 +100,6 @@ bootstrapApplication(AppComponent, {
         TrackOrderService,
         RecycleService,
         BasketService,
-        ChallengeService,
         CookieService,
         AdminGuard,
         LoginGuard,
@@ -110,7 +107,6 @@ bootstrapApplication(AppComponent, {
         AccountingGuard,
         DeluxeGuard,
         ImageCaptchaService,
-        KeysService,
         AddressService,
         QuantityService,
         WalletService,

@@ -27,7 +27,6 @@ export class WelcomeBannerComponent implements OnInit {
 
   public title = 'Welcome to Lollo Logistics!'
   public message = "<p>Lollo Logistics is your one-stop shop for premium shipping supplies, logistics equipment, and delivery services. Browse our catalog of carefully curated products designed to keep your shipments moving smoothly.</p><h1><a href='https://lollo-logistics.shop' target='_blank'>https://lollo-logistics.shop</a></h1>"
-  public showHackingInstructor = true
   public showDismissBtn = true
 
   private readonly welcomeBannerStatusCookieKey = 'welcomebanner_status'
@@ -39,28 +38,11 @@ export class WelcomeBannerComponent implements OnInit {
           this.title = config.application.welcomeBanner.title
           this.message = config.application.welcomeBanner.message
         }
-        this.showHackingInstructor = config?.hackingInstructor?.isEnabled
-        // Don't allow to skip the tutorials when restrictToTutorialsFirst and showHackingInstructor are enabled
-        if (this.showHackingInstructor && config?.challenges?.restrictToTutorialsFirst) {
-          this.dialogRef.disableClose = true
-          this.showDismissBtn = false
-        }
       },
       error: (err) => { console.log(err) }
     })
   }
 
-  startHackingInstructor () {
-    this.closeWelcome()
-    console.log('Starting instructions for challenge "Score Board"')
-    this.launchHackingInstructor('Score Board')
-  }
-
-  protected launchHackingInstructor (challengeName: string) {
-    import('../../hacking-instructor').then(module => {
-      module.startHackingInstructorFor(challengeName)
-    })
-  }
 
   closeWelcome (): void {
     this.dialogRef.close()

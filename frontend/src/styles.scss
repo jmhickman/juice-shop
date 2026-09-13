@@ -9,8 +9,6 @@
 @use './styles/theme' as *;
 @use './styles/variables' as *;
 
-@use './hacking-instructor/hacking-instructor.scss';
-
 @mixin link-theme($theme) {
   a:link,
   a:visited {
@@ -306,7 +304,6 @@
   }
 }
 
-$bg-hacking-instructor: rgba(0, 0, 0, 0.3);
 
 .midnight-plum-theme {
   @include custom-components-theme($midnight-plum-theme);
@@ -776,13 +773,7 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   }
 }
 
-#hacking-instructor code {
-  background-color: $bg-hacking-instructor;
-  border-radius: 1px;
-  font-family: monospace;
-  padding: 0 $space-2xs;
-}
-
+ 
 .cm-editor {
   border-radius: 16px;
 }

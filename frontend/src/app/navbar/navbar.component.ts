@@ -5,14 +5,12 @@
 
 import { Component, EventEmitter, NgZone, type OnInit, Output, inject, ChangeDetectionStrategy } from '@angular/core'
 import { environment } from '../../environments/environment'
-import { ChallengeService } from '../Services/challenge.service'
 import { UserService } from '../Services/user.service'
 import { AdministrationService } from '../Services/administration.service'
 import { ConfigurationService } from '../Services/configuration.service'
 import { CookieService } from 'ngy-cookie'
 import { TranslateService, TranslateModule } from '@ngx-translate/core'
 import { Router, RouterLink } from '@angular/router'
-import { SocketIoService } from '../Services/socket-io.service'
 import { LanguagesService } from '../Services/languages.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { BasketService } from '../Services/basket.service'
@@ -86,14 +84,12 @@ library.add(faLanguage, faSearch, faSignInAlt, faSignOutAlt, faComment, faBomb, 
 })
 export class NavbarComponent implements OnInit {
   private readonly administrationService = inject(AdministrationService)
-  private readonly challengeService = inject(ChallengeService)
   private readonly configurationService = inject(ConfigurationService)
   private readonly userService = inject(UserService)
   private readonly ngZone = inject(NgZone)
   private readonly cookieService = inject(CookieService)
   private readonly router = inject(Router)
   private readonly translate = inject(TranslateService)
-  private readonly io = inject(SocketIoService)
   private readonly langService = inject(LanguagesService)
   private readonly loginGuard = inject(LoginGuard)
   private readonly snackBar = inject(MatSnackBar)
@@ -109,7 +105,6 @@ export class NavbarComponent implements OnInit {
   public applicationName = 'Lollo Logistics'
   public showGitHubLink = true
   public logoSrc = 'assets/public/images/lollo_logo.png'
-  public scoreBoardVisible = false
   public shortKeyLang = 'placeholder'
   public itemTotal = 0
 
@@ -165,15 +160,6 @@ export class NavbarComponent implements OnInit {
       }
     })
 
-    this.getScoreBoardStatus()
-
-    this.ngZone.runOutsideAngular(() => {
-      this.io.socket().on('challenge solved', (challenge) => {
-        if (challenge.key === 'scoreBoardChallenge') {
-          this.scoreBoardVisible = true
-        }
-      })
-    })
   }
 
   filterLanguages (): void {
@@ -266,17 +252,6 @@ export class NavbarComponent implements OnInit {
         this.windowRefService.nativeWindow.location.reload()
       })
     }
-  }
-
-  getScoreBoardStatus () {
-    this.challengeService.find({ name: 'Score Board' }).subscribe({
-      next: (challenges: any) => {
-        this.ngZone.run(() => {
-          this.scoreBoardVisible = challenges[0].solved
-        })
-      },
-      error: (err) => { console.log(err) }
-    })
   }
 
   goToProfilePage () {

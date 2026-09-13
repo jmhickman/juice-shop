@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { ChallengeService } from '../Services/challenge.service'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
-import { SocketIoService } from '../Services/socket-io.service'
 import { ConfigurationService } from '../Services/configuration.service'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -24,22 +22,14 @@ import { AdministrationService } from '../Services/administration.service'
 import { UserService } from '../Services/user.service'
 import { Location } from '@angular/common'
 
-class MockSocket {
-    on(str: string, callback: any) {
-        callback(str)
-    }
-}
 
 describe('SidenavComponent', () => {
     let component: SidenavComponent
     let fixture: ComponentFixture<SidenavComponent>
-    let challengeService: any
     let cookieService: any
     let configurationService: any
     let userService: any
     let administractionService: any
-    let mockSocket: any
-    let socketIoService: any
     let loginGuard
     let location: Location
 
@@ -48,10 +38,6 @@ describe('SidenavComponent', () => {
             getApplicationConfiguration: vi.fn().mockName("ConfigurationService.getApplicationConfiguration")
         }
         configurationService.getApplicationConfiguration.mockReturnValue(of({ application: { welcomeBanner: {} }, hackingInstructor: {} }))
-        challengeService = {
-            find: vi.fn().mockName("ChallengeService.find")
-        }
-        challengeService.find.mockReturnValue(of([{ solved: false }]))
         userService = {
             whoAmI: vi.fn().mockName("UserService.whoAmI"),
             getLoggedInState: vi.fn().mockName("UserService.getLoggedInState"),
@@ -73,11 +59,6 @@ describe('SidenavComponent', () => {
             get: vi.fn().mockName("CookieService.get"),
             put: vi.fn().mockName("CookieService.put")
         }
-        mockSocket = new MockSocket()
-        socketIoService = {
-            socket: vi.fn().mockName("SocketIoService.socket")
-        }
-        socketIoService.socket.mockReturnValue(mockSocket)
         loginGuard = {
             tokenDecode: vi.fn().mockName("LoginGuard.tokenDecode")
         }
@@ -95,11 +76,9 @@ describe('SidenavComponent', () => {
                 SidenavComponent],
             providers: [
                 { provide: ConfigurationService, useValue: configurationService },
-                { provide: ChallengeService, useValue: challengeService },
                 { provide: UserService, useValue: userService },
                 { provide: AdministrationService, useValue: administractionService },
                 { provide: CookieService, useValue: cookieService },
-                { provide: SocketIoService, useValue: socketIoService },
                 { provide: LoginGuard, useValue: loginGuard },
                 TranslateService,
                 provideHttpClient(withInterceptorsFromDi())
@@ -142,19 +121,7 @@ describe('SidenavComponent', () => {
         expect(component.version).toBe('v1.2.3')
     })
 
-    it('should hide Score Board link when Score Board was not discovered yet', () => {
-        challengeService.find.mockReturnValue(of([{ name: 'Score Board', solved: false }]))
-        component.getScoreBoardStatus()
 
-        expect(component.scoreBoardVisible).toBe(false)
-    })
-
-    it('should show Score Board link when Score Board was already discovered', () => {
-        challengeService.find.mockReturnValue(of([{ name: 'Score Board', solved: true }]))
-        component.getScoreBoardStatus()
-
-        expect(component.scoreBoardVisible).toBe(true)
-    })
 
     it('should remove authentication token from localStorage', () => {
         const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem')
@@ -199,13 +166,6 @@ describe('SidenavComponent', () => {
         component.logout()
         await fixture.whenStable()
         expect(location.path()).toBe('/')
-    })
-
-    it('should handle error when getting scoreboard status', () => {
-        challengeService.find.mockReturnValue(throwError('Error'))
-        console.log = vi.fn()
-        component.getScoreBoardStatus()
-        expect(console.log).toHaveBeenCalledWith('Error')
     })
 
     it('should handle error when getting user details', () => {
@@ -253,47 +213,7 @@ describe('SidenavComponent', () => {
         })
     })
 
-    describe('socket subscription', () => {
-        it('should set scoreBoardVisible to true when challenge solved is the scoreBoardChallenge', () => {
-            const handlers: Record<string, (challenge: any) => void> = {}
-            mockSocket.on = (event: string, cb: any) => { handlers[event] = cb }
-            component.scoreBoardVisible = false
-            component.ngOnInit()
-            handlers['challenge solved']({ key: 'scoreBoardChallenge' })
-            expect(component.scoreBoardVisible).toBe(true)
-        })
 
-        it('should not change scoreBoardVisible for unrelated challenge keys', () => {
-            const handlers: Record<string, (challenge: any) => void> = {}
-            mockSocket.on = (event: string, cb: any) => { handlers[event] = cb }
-            component.scoreBoardVisible = false
-            component.ngOnInit()
-            handlers['challenge solved']({ key: 'somethingElse' })
-            expect(component.scoreBoardVisible).toBe(false)
-        })
-    })
-
-    describe('application configuration branches', () => {
-        it('should apply custom application name from configuration', () => {
-            configurationService.getApplicationConfiguration.mockReturnValue(of({
-                application: { name: 'My Shop', showGitHubLinks: false, welcomeBanner: { showOnFirstStart: true } },
-                hackingInstructor: { isEnabled: true }
-            }))
-            component.getApplicationDetails()
-            expect(component.applicationName).toBe('My Shop')
-            expect(component.showGitHubLink).toBe(false)
-            expect(component.offerScoreBoardTutorial).toBe(true)
-        })
-
-        it('should not offer score-board tutorial when hacking instructor is disabled', () => {
-            configurationService.getApplicationConfiguration.mockReturnValue(of({
-                application: { name: 'My Shop', showGitHubLinks: true, welcomeBanner: { showOnFirstStart: true } },
-                hackingInstructor: { isEnabled: false }
-            }))
-            component.getApplicationDetails()
-            expect(component.offerScoreBoardTutorial).toBe(false)
-        })
-    })
 
     describe('navigation helpers', () => {
         it('should replace window.location with profile URL on goToProfilePage', () => {
@@ -349,17 +269,6 @@ describe('SidenavComponent', () => {
         })
     })
 
-    describe('startHackingInstructor', () => {
-        it('should emit toggle and log when starting the instructor for the Score Board', async () => {
-            const emitSpy = vi.spyOn(component.sidenavToggle, 'emit')
-            const launchSpy = vi.spyOn(component as any, 'launchHackingInstructor').mockImplementation(() => {})
-            console.log = vi.fn()
-            component.startHackingInstructor()
-            expect(emitSpy).toHaveBeenCalled()
-            expect(console.log).toHaveBeenCalledWith('Starting instructions for challenge "Score Board"')
-            expect(launchSpy).toHaveBeenCalledWith('Score Board')
-        })
-    })
 
     describe('template rendering', () => {
         it('should render the toolbar with the application name and a navigation list', () => {
@@ -463,23 +372,7 @@ describe('SidenavComponent', () => {
             expect(compiled.querySelector('a[aria-label="Go to photo wall"]')).toBeTruthy()
         })
 
-        it('should render the score-board link when scoreBoardVisible is true', () => {
-            component.scoreBoardVisible = true
-            component.offerScoreBoardTutorial = false
-            fixture.detectChanges()
-            const compiled: HTMLElement = fixture.nativeElement
-            expect(compiled.querySelector('a[aria-label="Open score-board"]')).toBeTruthy()
-            expect(compiled.querySelector('a[aria-label="Launch beginners tutorial"]')).toBeNull()
-        })
 
-        it('should render the beginners tutorial entry when score board is hidden and tutorial is offered', () => {
-            component.scoreBoardVisible = false
-            component.offerScoreBoardTutorial = true
-            fixture.detectChanges()
-            const compiled: HTMLElement = fixture.nativeElement
-            expect(compiled.querySelector('a[aria-label="Launch beginners tutorial"]')).toBeTruthy()
-            expect(compiled.querySelector('a[aria-label="Open score-board"]')).toBeNull()
-        })
 
         it('should render the GitHub link when showGitHubLink is true', () => {
             component.showGitHubLink = true
@@ -487,12 +380,6 @@ describe('SidenavComponent', () => {
             expect((fixture.nativeElement as HTMLElement).querySelector('a[aria-label="Go to OWASP Juice Shop GitHub page"]')).toBeTruthy()
         })
 
-        it('should not render the GitHub link when showGitHubLink is false', () => {
-            component.showGitHubLink = false
-            component.scoreBoardVisible = false
-            fixture.detectChanges()
-            expect((fixture.nativeElement as HTMLElement).querySelector('a[aria-label="Go to OWASP Juice Shop GitHub page"]')).toBeNull()
-        })
 
         it('should render the application name and version in the footer', () => {
             component.applicationName = 'JuiceShop'

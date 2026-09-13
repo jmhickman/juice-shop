@@ -37,24 +37,9 @@ import { DeliveryMethodComponent } from './delivery-method/delivery-method.compo
 import { PhotoWallComponent } from './photo-wall/photo-wall.component'
 import { DeluxeUserComponent } from './deluxe-user/deluxe-user.component'
 import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
-import { NFTUnlockComponent } from './nft-unlock/nft-unlock.component'
 import { ChatbotComponent } from './chatbot/chatbot.component'
 import { ChatWelcomePageComponent } from './chatbot/chat-welcome-page/chat-welcome-page.component'
 import { ChatConversationComponent } from './chatbot/chat-conversation/chat-conversation.component'
-
-const loadFaucetModule = async () => {
-  const module = await import('./faucet/faucet.module')
-  return module.FaucetModule
-}
-const loadWeb3WalletModule = async () => {
-  const module = await import('./wallet-web3/wallet-web3.module')
-  return module.WalletWeb3Module
-}
-
-const loadWeb3SandboxModule = async () => {
-  const module = await import('./web3-sandbox/web3-sandbox.module')
-  return module.Web3SandboxModule
-}
 
 const loadRecycleComponent = async () => {
   const module = await import('./recycle/recycle.component')
@@ -172,14 +157,6 @@ const routes: Routes = [
     component: SearchResultComponent
   },
   {
-    path: 'hacking-instructor',
-    component: SearchResultComponent
-  },
-  { // vuln-code-snippet neutral-line scoreBoardChallenge
-    path: 'score-board', // vuln-code-snippet vuln-line scoreBoardChallenge
-    component: SearchResultComponent // vuln-code-snippet neutral-line scoreBoardChallenge
-  }, // vuln-code-snippet neutral-line scoreBoardChallenge
-  {
     path: 'track-result',
     component: TrackResultComponent
   },
@@ -221,18 +198,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'lollo-nft',
-    component: NFTUnlockComponent
-  },
-  {
-    path: 'wallet-web3',
-    loadChildren: async () => await loadWeb3WalletModule()
-  },
-  { // vuln-code-snippet neutral-line web3SandboxChallenge
-    path: 'web3-sandbox', // vuln-code-snippet vuln-line web3SandboxChallenge
-    loadChildren: async () => await loadWeb3SandboxModule() // vuln-code-snippet neutral-line web3SandboxChallenge
-  }, // vuln-code-snippet neutral-line web3SandboxChallenge
-  {
     path: 'chatbot',
     component: ChatbotComponent,
     children: [
@@ -241,17 +206,9 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'bee-haven',
-    loadChildren: async () => await loadFaucetModule()
-  },
-  {
     matcher: oauthMatcher,
     data: { params: (window.location.href).substr(window.location.href.indexOf('#')) },
     component: OAuthComponent
-  },
-  {
-    path: 'coding-challenge/:challengeKey',
-    component: SearchResultComponent
   },
   {
     path: '403',

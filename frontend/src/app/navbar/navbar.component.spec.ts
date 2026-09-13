@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { ChallengeService } from '../Services/challenge.service'
 import { SearchResultComponent } from '../search-result/search-result.component'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { UserService } from '../Services/user.service'
@@ -23,7 +22,6 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { CookieModule, CookieService } from 'ngy-cookie'
-import { SocketIoService } from '../Services/socket-io.service'
 import { of, throwError } from 'rxjs'
 import { MatCardModule } from '@angular/material/card'
 import { MatInputModule } from '@angular/material/input'
@@ -43,11 +41,6 @@ import { WindowRefService } from '../Services/window-ref.service'
 import { Subject } from 'rxjs'
 import { environment } from '../../environments/environment'
 
-class MockSocket {
-    on(str: string, callback: any) {
-        callback(str)
-    }
-}
 
 describe('NavbarComponent', () => {
     let component: NavbarComponent
@@ -55,11 +48,8 @@ describe('NavbarComponent', () => {
     let administrationService: any
     let configurationService: any
     let userService: any
-    let challengeService: any
     let translateService: any
     let cookieService: any
-    let mockSocket: any
-    let socketIoService: any
     let location: Location
     let loginGuard
     let languagesService: any
@@ -88,21 +78,12 @@ describe('NavbarComponent', () => {
             next: vi.fn().mockName("userService.isLoggedIn.next")
         }
         userService.isLoggedIn.next.mockReturnValue({})
-        challengeService = {
-            find: vi.fn().mockName("ChallengeService.find")
-        }
-        challengeService.find.mockReturnValue(of([{ solved: false }]))
         cookieService = {
             remove: vi.fn().mockName("CookieService.remove"),
             get: vi.fn().mockName("CookieService.get"),
             put: vi.fn().mockName("CookieService.put")
         }
         cookieService.get.mockReturnValue('en')
-        mockSocket = new MockSocket()
-        socketIoService = {
-            socket: vi.fn().mockName("SocketIoService.socket")
-        }
-        socketIoService.socket.mockReturnValue(mockSocket)
         loginGuard = {
             tokenDecode: vi.fn().mockName("LoginGuard.tokenDecode")
         }
@@ -153,9 +134,7 @@ describe('NavbarComponent', () => {
                 { provide: AdministrationService, useValue: administrationService },
                 { provide: ConfigurationService, useValue: configurationService },
                 { provide: UserService, useValue: userService },
-                { provide: ChallengeService, useValue: challengeService },
                 { provide: CookieService, useValue: cookieService },
-                { provide: SocketIoService, useValue: socketIoService },
                 { provide: LoginGuard, useValue: loginGuard },
                 { provide: LanguagesService, useValue: languagesService },
                 { provide: BasketService, useValue: basketService },
@@ -265,17 +244,7 @@ describe('NavbarComponent', () => {
         expect(console.log).toHaveBeenCalledWith('Error')
     })
 
-    it('should hide Score Board menu item when corresponding challenge was not solved yet', () => {
-        challengeService.find.mockReturnValue(of([{ solved: false }]))
-        component.ngOnInit()
-        expect(component.scoreBoardVisible).toBeFalsy()
-    })
 
-    it('should show Score Board menu item if corresponding challenge has been solved', () => {
-        challengeService.find.mockReturnValue(of([{ solved: true }]))
-        component.ngOnInit()
-        expect(component.scoreBoardVisible).toBe(true)
-    })
 
     it('forwards to search result with search query as URL parameter', async () => {
         component.search('lemon juice')
@@ -470,36 +439,6 @@ describe('NavbarComponent', () => {
         })
     })
 
-    describe('score board status', () => {
-        it('should log error when fetching score board status fails', () => {
-            challengeService.find.mockReturnValue(throwError('Error'))
-            console.log = vi.fn()
-            component.ngOnInit()
-            expect(console.log).toHaveBeenCalledWith('Error')
-        })
-
-        it('should make the score board visible when scoreBoardChallenge is solved via socket', () => {
-            mockSocket.on = (event: string, cb: any) => {
-                if (event === 'challenge solved') {
-                    cb({ key: 'scoreBoardChallenge' })
-                }
-            }
-            component.scoreBoardVisible = false
-            component.ngOnInit()
-            expect(component.scoreBoardVisible).toBe(true)
-        })
-
-        it('should ignore unrelated challenge solved events for score board visibility', () => {
-            mockSocket.on = (event: string, cb: any) => {
-                if (event === 'challenge solved') {
-                    cb({ key: 'someOtherChallenge' })
-                }
-            }
-            challengeService.find.mockReturnValue(of([{ solved: false }]))
-            component.ngOnInit()
-            expect(component.scoreBoardVisible).toBeFalsy()
-        })
-    })
 
     describe('miscellaneous behavior', () => {
         it('should update itemTotal when basket emits a new value', () => {

@@ -12,7 +12,6 @@ import { BehaviorSubject, forkJoin, type Subscription } from 'rxjs'
 import { MatTableDataSource } from '@angular/material/table'
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser'
 import { TranslateModule } from '@ngx-translate/core'
-import { SocketIoService } from '../Services/socket-io.service'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons'
@@ -41,7 +40,6 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
   private readonly route = inject(ActivatedRoute)
   private readonly sanitizer = inject(DomSanitizer)
   private readonly ngZone = inject(NgZone)
-  private readonly io = inject(SocketIoService)
   private readonly cdRef = inject(ChangeDetectorRef)
   private readonly elRef = inject(ElementRef)
 
@@ -96,10 +94,6 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
         this.routerSubscription = this.router.events.subscribe(() => {
           this.filterTable()
         })
-        const challenge: string = this.route.snapshot.queryParams.challenge // vuln-code-snippet hide-start
-        if (challenge && this.route.snapshot.url.join('').match(/hacking-instructor/)) {
-          this.startHackingInstructor(decodeURIComponent(challenge))
-        } // vuln-code-snippet hide-end
         this.cdRef.detectChanges()
       },
       error: (err) => { console.log(err) }
@@ -138,7 +132,6 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
     if (queryParam) {
       queryParam = queryParam.trim()
       this.ngZone.runOutsideAngular(() => { // vuln-code-snippet hide-start
-        this.io.socket().emit('verifyLocalXssChallenge', queryParam)
       }) // vuln-code-snippet hide-end
       this.dataSource.filter = queryParam.toLowerCase()
       this.searchValue = this.sanitizer.bypassSecurityTrustHtml(queryParam) // vuln-code-snippet vuln-line localXssChallenge xssBonusChallenge
@@ -195,12 +188,6 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
     this.paginator.pageSizeOptions = this.pageSizeOptions
   }
 
-  startHackingInstructor (challengeName: string) {
-    console.log(`Starting instructions for challenge "${challengeName}"`)
-    import('../../hacking-instructor').then(module => {
-      module.startHackingInstructorFor(challengeName)
-    })
-  }
 
   isLoggedIn (): boolean {
     return localStorage.getItem('token') !== null

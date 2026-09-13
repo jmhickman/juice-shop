@@ -4,9 +4,7 @@
  */
 
 import { environment } from '../../environments/environment'
-import { ChallengeService } from '../Services/challenge.service'
 import { Component, EventEmitter, NgZone, type OnInit, Output, inject, ChangeDetectionStrategy } from '@angular/core'
-import { SocketIoService } from '../Services/socket-io.service'
 import { AdministrationService } from '../Services/administration.service'
 import { Router, RouterLink } from '@angular/router'
 import { UserService } from '../Services/user.service'
@@ -32,9 +30,7 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar'
 })
 export class SidenavComponent implements OnInit {
   private readonly administrationService = inject(AdministrationService)
-  private readonly challengeService = inject(ChallengeService)
   private readonly ngZone = inject(NgZone)
-  private readonly io = inject(SocketIoService)
   private readonly userService = inject(UserService)
   private readonly cookieService = inject(CookieService)
   private readonly router = inject(Router)
@@ -44,12 +40,10 @@ export class SidenavComponent implements OnInit {
   public applicationName = 'Lollo Logistics'
   public showGitHubLink = true
   public userEmail = ''
-  public scoreBoardVisible = false
   public version = ''
   public showPrivacySubmenu = false
   public showOrdersSubmenu = false
   public isShowing = false
-  public offerScoreBoardTutorial = false
   @Output() public sidenavToggle = new EventEmitter()
 
   ngOnInit (): void {
@@ -63,7 +57,6 @@ export class SidenavComponent implements OnInit {
       error: (err) => { console.log(err) }
     })
     this.getApplicationDetails()
-    this.getScoreBoardStatus()
 
     if (localStorage.getItem('token')) {
       this.getUserDetails()
@@ -77,13 +70,6 @@ export class SidenavComponent implements OnInit {
       } else {
         this.userEmail = ''
       }
-    })
-    this.ngZone.runOutsideAngular(() => {
-      this.io.socket().on('challenge solved', (challenge) => {
-        if (challenge.key === 'scoreBoardChallenge') {
-          this.scoreBoardVisible = true
-        }
-      })
     })
   }
 
@@ -113,17 +99,6 @@ export class SidenavComponent implements OnInit {
 
   noop () { }
 
-  getScoreBoardStatus () {
-    this.challengeService.find({ name: 'Score Board' }).subscribe({
-      next: (challenges: any) => {
-        this.ngZone.run(() => {
-          this.scoreBoardVisible = challenges[0].solved
-        })
-      },
-      error: (err) => { console.log(err) }
-    })
-  }
-
   getUserDetails () {
     this.userService.whoAmI(['email']).subscribe({
       next: (user: any) => {
@@ -144,10 +119,7 @@ export class SidenavComponent implements OnInit {
           this.applicationName = config.application.name
         }
         if (config?.application) {
-          this.showGitHubLink = config.application.showGitHubLinks
-        }
-        if (config?.application.welcomeBanner.showOnFirstStart && config.hackingInstructor.isEnabled) {
-          this.offerScoreBoardTutorial = config.application.welcomeBanner.showOnFirstStart && config.hackingInstructor.isEnabled
+          this.showGitHubLink = config.application.showGitHubLinks ?? true
         }
       },
       error: (err) => { console.log(err) }
@@ -159,15 +131,4 @@ export class SidenavComponent implements OnInit {
     return payload?.data?.role === roles.accounting
   }
 
-  startHackingInstructor () {
-    this.onToggleSidenav()
-    console.log('Starting instructions for challenge "Score Board"')
-    this.launchHackingInstructor('Score Board')
-  }
-
-  protected launchHackingInstructor (challengeName: string) {
-    import('../../hacking-instructor').then(module => {
-      module.startHackingInstructorFor(challengeName)
-    })
-  }
 }

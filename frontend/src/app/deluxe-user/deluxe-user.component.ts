@@ -7,7 +7,6 @@ import { Component, NgZone, type OnInit, inject, ChangeDetectionStrategy } from 
 import { UserService } from '../Services/user.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationService } from '../Services/configuration.service'
-import { SocketIoService } from '../Services/socket-io.service'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { TranslateModule } from '@ngx-translate/core'
@@ -27,7 +26,6 @@ export class DeluxeUserComponent implements OnInit {
   private readonly configurationService = inject(ConfigurationService)
   private readonly route = inject(ActivatedRoute)
   private readonly ngZone = inject(NgZone)
-  private readonly io = inject(SocketIoService)
 
   public membershipCost = 0
   public error?: string = undefined
@@ -68,11 +66,6 @@ export class DeluxeUserComponent implements OnInit {
             }
             this.logoSrc = `assets/public/images/${decalParam || logo}`
           }
-        }
-        if (decalParam) {
-          this.ngZone.runOutsideAngular(() => {
-            this.io.socket().emit('verifySvgInjectionChallenge', decalParam)
-          })
         }
       },
       error: (err) => { console.log(err) }
