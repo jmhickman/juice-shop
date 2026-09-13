@@ -15,7 +15,7 @@ export class PhotoWallService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/memories'
+  private readonly host = this.hostServer + '/shop/photo-wall'
 
   addMemory (caption: string, image: File) {
     const postData = new FormData()

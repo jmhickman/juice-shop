@@ -28,7 +28,7 @@ describe('DataSubjectService', () => {
 
         let res: any
         service.erase({}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/erasure-request')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/erasure-request')
         req.flush('apiResponse')
 
         expect(req.request.method).toBe('POST')
@@ -42,7 +42,7 @@ describe('DataSubjectService', () => {
 
         let res: any
         service.dataExport(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/data-export')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/data-export')
         req.flush('apiResponse')
         expect(req.request.method).toBe('POST')
         expect(req.request.body).toBe(1)
@@ -56,7 +56,7 @@ describe('DataSubjectService', () => {
 
         let capturedError: any
         service.erase({ foo: 'bar' }).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/erasure-request')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/erasure-request')
         req.error(new ErrorEvent('Request failed'), { status: 400, statusText: 'Bad Request' })
         expect(capturedError.status).toBe(400)
         httpMock.verify()
@@ -68,7 +68,7 @@ describe('DataSubjectService', () => {
 
         let capturedError: any
         service.dataExport({ id: 1 }).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/data-export')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/data-export')
         req.error(new ErrorEvent('Request failed'), { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError.status).toBe(503)
         httpMock.verify()

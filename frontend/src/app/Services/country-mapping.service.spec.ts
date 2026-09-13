@@ -30,7 +30,7 @@ describe('CountryMappingService', () => {
         let res: any
         service.getCountryMapping().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/country-mapping')
+        const req = httpMock.expectOne('http://localhost:3000/shop/country-catalog')
         req.flush('apiResponse')
 
         expect(req.request.method).toBe('GET')
@@ -46,7 +46,7 @@ describe('CountryMappingService', () => {
         let capturedError: any
         service.getCountryMapping().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/country-mapping')
+        const req = httpMock.expectOne('http://localhost:3000/shop/country-catalog')
         req.error(new ErrorEvent('Request failed'), { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError.status).toBe(503)
         httpMock.verify()

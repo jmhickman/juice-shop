@@ -111,7 +111,7 @@ export class ConfigurationService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/admin'
+  private readonly host = this.hostServer + '/shop/system'
   private configObservable: any
 
   getApplicationConfiguration (): Observable<Config> {

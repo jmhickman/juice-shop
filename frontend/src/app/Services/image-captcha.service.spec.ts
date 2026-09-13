@@ -28,7 +28,7 @@ describe('ImageCaptchaService', () => {
 
         let res: any
         service.getCaptcha().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/image-captcha/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/check-image/')
         req.flush('apiResponse')
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('ImageCaptchaService', () => {
 
         let capturedError: any
         service.getCaptcha().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/image-captcha/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/check-image/')
         req.flush(null, { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(503)

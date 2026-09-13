@@ -28,7 +28,7 @@ describe('WalletService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/wallet/balance')
+        const req = httpMock.expectOne('http://localhost:3000/shop/credit-balance')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('WalletService', () => {
 
         let res
         service.put(1).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/wallet/balance')
+        const req = httpMock.expectOne('http://localhost:3000/shop/credit-balance')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('WalletService', () => {
 
         let capturedError: any
         service.get().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/wallet/balance')
+        const req = httpMock.expectOne('http://localhost:3000/shop/credit-balance')
         req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
         expect(capturedError.status).toBe(500)
         httpMock.verify()
@@ -66,7 +66,7 @@ describe('WalletService', () => {
 
         let capturedError: any
         service.put({ amount: 1 }).subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/wallet/balance')
+        const req = httpMock.expectOne('http://localhost:3000/shop/credit-balance')
         req.error(new ErrorEvent('Bad Request'), { status: 400, statusText: 'Bad Request' })
         expect(capturedError.status).toBe(400)
         httpMock.verify()

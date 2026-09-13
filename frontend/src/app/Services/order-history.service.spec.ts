@@ -28,7 +28,7 @@ describe('OrderHistoryService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('OrderHistoryService', () => {
 
         let res
         service.getAll().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history/orders')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders/orders')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('OrderHistoryService', () => {
 
         let res
         service.toggleDeliveryStatus(1, {}).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history/1/delivery-status')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders/1/delivery-status')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(res).toBe('apiResponse')
@@ -67,7 +67,7 @@ describe('OrderHistoryService', () => {
 
         let capturedError: any
         service.get().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(500)
@@ -80,7 +80,7 @@ describe('OrderHistoryService', () => {
 
         let capturedError: any
         service.getAll().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history/orders')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders/orders')
         req.flush(null, { status: 404, statusText: 'Not Found' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(404)
@@ -93,7 +93,7 @@ describe('OrderHistoryService', () => {
 
         let capturedError: any
         service.toggleDeliveryStatus(1, {}).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/order-history/1/delivery-status')
+        const req = httpMock.expectOne('http://localhost:3000/shop/orders/1/delivery-status')
         req.flush(null, { status: 400, statusText: 'Bad Request' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(400)

@@ -15,7 +15,7 @@ export class AdministrationService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/admin'
+  private readonly host = this.hostServer + '/shop/system'
 
   getApplicationVersion () {
     return this.http.get(this.host + '/application-version').pipe(

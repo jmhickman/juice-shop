@@ -29,7 +29,7 @@ describe('TwoFactorAuthServiceService', () => {
         let res: any
         service.verify('123456').subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/verify')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/verify')
         req.flush({ authentication: 'apiResponse' })
 
         expect(req.request.method).toBe('POST')
@@ -45,7 +45,7 @@ describe('TwoFactorAuthServiceService', () => {
         let res: any
         service.status().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/status')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/status')
         req.flush({ setup: false })
 
         expect(req.request.method).toBe('GET')
@@ -61,7 +61,7 @@ describe('TwoFactorAuthServiceService', () => {
         let res: any
         service.setup('s3cr3t!', 'initialToken', 'setupToken').subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/setup')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/setup')
         req.flush({})
 
         expect(req.request.method).toBe('POST')
@@ -77,7 +77,7 @@ describe('TwoFactorAuthServiceService', () => {
         let res: any
         service.disable('s3cr3t!').subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/disable')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/disable')
         req.flush({})
 
         expect(req.request.method).toBe('POST')
@@ -93,7 +93,7 @@ describe('TwoFactorAuthServiceService', () => {
         localStorage.setItem('totp_tmp_token', '000000')
         let capturedError: any
         service.verify('654321').subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/verify')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/verify')
         req.error(new ErrorEvent('Unauthorized'), { status: 401, statusText: 'Unauthorized' })
         expect(req.request.method).toBe('POST')
         expect(capturedError.status).toBe(401)
@@ -106,7 +106,7 @@ describe('TwoFactorAuthServiceService', () => {
 
         let capturedError: any
         service.status().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/status')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/status')
         req.error(new ErrorEvent('Service Unavailable'), { status: 503, statusText: 'Service Unavailable' })
         expect(req.request.method).toBe('GET')
         expect(capturedError.status).toBe(503)
@@ -119,7 +119,7 @@ describe('TwoFactorAuthServiceService', () => {
 
         let capturedError: any
         service.setup('pwd', 'initial', 'setup').subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/setup')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/setup')
         req.error(new ErrorEvent('Bad Request'), { status: 400, statusText: 'Bad Request' })
         expect(req.request.method).toBe('POST')
         expect(capturedError.status).toBe(400)
@@ -132,7 +132,7 @@ describe('TwoFactorAuthServiceService', () => {
 
         let capturedError: any
         service.disable('pwd').subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/2fa/disable')
+        const req = httpMock.expectOne('http://localhost:3000/shop/mfa/disable')
         req.error(new ErrorEvent('Forbidden'), { status: 403, statusText: 'Forbidden' })
         expect(req.request.method).toBe('POST')
         expect(capturedError.status).toBe(403)

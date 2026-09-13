@@ -29,7 +29,7 @@ describe('CaptchaService', () => {
 
         let res: any
         service.getCaptcha().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/captcha/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/check-code/')
         req.flush('apiResponse')
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -42,7 +42,7 @@ describe('CaptchaService', () => {
 
         let capturedError: any
         service.getCaptcha().subscribe({ next: () => { throw new Error('expected error') }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/captcha/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/check-code/')
         req.error(new ErrorEvent('Request failed'), { status: 500, statusText: 'Internal Server Error' })
         expect(capturedError.status).toBe(500)
         httpMock.verify()

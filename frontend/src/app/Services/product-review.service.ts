@@ -15,7 +15,7 @@ export class ProductReviewService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/products'
+  private readonly host = this.hostServer + '/shop/catalog'
 
   get (id: number) {
     return this.http.get(`${this.host}/${id}/reviews`).pipe(

@@ -8,7 +8,7 @@ import { type Request, type Response, type NextFunction } from 'express'
 
 export function serveAngularClient () {
   return ({ url }: Request, res: Response, next: NextFunction) => {
-    if (!url.startsWith('/api') && !url.startsWith('/rest')) {
+    if (!url.startsWith('/api') && !url.startsWith('/shop')) {
       res.sendFile(path.resolve('frontend/dist/frontend/index.html'))
     } else {
       next(new Error('Unexpected path: ' + url))

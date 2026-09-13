@@ -29,7 +29,7 @@ describe('ProductReviewService', () => {
 
         let res: any
         service.get(42).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/42/reviews')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -42,7 +42,7 @@ describe('ProductReviewService', () => {
 
         let res: any
         service.create(42, { message: 'A', author: 'B' }).subscribe((data: any) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/42/reviews')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PUT')
         expect(req.request.body).toEqual({ message: 'A', author: 'B' })
@@ -59,7 +59,7 @@ describe('ProductReviewService', () => {
             id: string;
             message: string;
         }).subscribe((data: any) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/reviews')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('PATCH')
         expect(req.request.body).toBe(null)
@@ -73,7 +73,7 @@ describe('ProductReviewService', () => {
 
         let capturedError: any
         service.get(42).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/42/reviews')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(500)
@@ -86,7 +86,7 @@ describe('ProductReviewService', () => {
 
         let capturedError: any
         service.create(42, { message: 'A', author: 'B' }).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/42/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/42/reviews')
         req.flush(null, { status: 400, statusText: 'Bad Request' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(400)
@@ -102,7 +102,7 @@ describe('ProductReviewService', () => {
             id: string;
             message: string;
         }).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/reviews')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/reviews')
         req.flush(null, { status: 404, statusText: 'Not Found' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(404)

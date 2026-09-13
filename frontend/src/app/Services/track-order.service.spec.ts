@@ -29,7 +29,7 @@ describe('TrackOrderService', () => {
 
         let res: any
         service.find('5267-f9cd5882f54c75a3').subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/track-order/5267-f9cd5882f54c75a3')
+        const req = httpMock.expectOne('http://localhost:3000/shop/tracking/5267-f9cd5882f54c75a3')
         req.flush('apiResponse')
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -42,7 +42,7 @@ describe('TrackOrderService', () => {
 
         let capturedError: any
         service.find('5267-invalid').subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/track-order/5267-invalid')
+        const req = httpMock.expectOne('http://localhost:3000/shop/tracking/5267-invalid')
         req.flush(null, { status: 404, statusText: 'Not Found' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(404)

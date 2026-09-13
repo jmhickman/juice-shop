@@ -17,6 +17,6 @@ export class LanguagesService {
   private readonly hostServer = environment.hostServer
 
   getLanguages () {
-    return this.http.get(`${this.hostServer}/rest/languages`).pipe(catchError((err) => { throw err }))
+    return this.http.get(`${this.hostServer}/shop/system/languages`).pipe(catchError((err) => { throw err }))
   }
 }

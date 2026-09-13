@@ -28,7 +28,7 @@ describe('PhotoWallService', () => {
 
         let res
         service.get().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/memories/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/photo-wall/')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -41,7 +41,7 @@ describe('PhotoWallService', () => {
 
         let res
         service.addMemory('str', new File([''], 'image')).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/memories')
+        const req = httpMock.expectOne('http://localhost:3000/shop/photo-wall')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(res).toBe('apiResponse')
@@ -54,7 +54,7 @@ describe('PhotoWallService', () => {
 
         let capturedError: any
         service.get().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/memories/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/photo-wall/')
         req.flush(null, { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(503)
@@ -67,7 +67,7 @@ describe('PhotoWallService', () => {
 
         let capturedError: any
         service.addMemory('str', new File([''], 'image')).subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/memories')
+        const req = httpMock.expectOne('http://localhost:3000/shop/photo-wall')
         req.flush(null, { status: 400, statusText: 'Bad Request' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(400)

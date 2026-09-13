@@ -17,6 +17,6 @@ export class ImageCaptchaService {
   private readonly hostServer = environment.hostServer
 
   getCaptcha () {
-    return this.http.get(this.hostServer + '/rest/image-captcha/').pipe(catchError((err) => { throw err }))
+    return this.http.get(this.hostServer + '/shop/check-image/').pipe(catchError((err) => { throw err }))
   }
 }

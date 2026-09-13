@@ -29,7 +29,7 @@ describe('AdministrationService', () => {
 
         let res: any
         service.getApplicationVersion().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/admin/application-version')
+        const req = httpMock.expectOne('http://localhost:3000/shop/system/version')
         req.flush({ version: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -43,7 +43,7 @@ describe('AdministrationService', () => {
 
         let capturedError: any
         service.getApplicationVersion().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/admin/application-version')
+        const req = httpMock.expectOne('http://localhost:3000/shop/system/version')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(500)

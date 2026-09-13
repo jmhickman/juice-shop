@@ -29,7 +29,7 @@ describe('ProductService', () => {
 
         let res: any
         service.search('1').subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/search?q=1')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/search?q=1')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -69,7 +69,7 @@ describe('ProductService', () => {
 
         let errorResponse: any
         service.search('1').subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/rest/products/search?q=1')
+        const req = httpMock.expectOne('http://localhost:3000/shop/catalog/search?q=1')
         req.flush(null, { status: 500, statusText: 'Server Error' })
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.status).toBe(500)

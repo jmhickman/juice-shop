@@ -30,7 +30,7 @@ describe('UserService', () => {
         let res: any
         service.find().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/authentication-details/')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/details/')
         req.flush({ data: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -77,7 +77,7 @@ describe('UserService', () => {
         let res: any
         service.login(null).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/login')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/login')
         req.flush({ authentication: 'apiResponse' })
 
         expect(req.request.method).toBe('POST')
@@ -93,7 +93,7 @@ describe('UserService', () => {
         let res: any
         service.changePassword({ current: 'foo', new: 'bar', repeat: 'bar' }).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/change-password?current=foo&new=bar&repeat=bar')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/change-password?current=foo&new=bar&repeat=bar')
         req.flush({ user: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -108,7 +108,7 @@ describe('UserService', () => {
         let res: any
         service.whoAmI().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/whoami')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/session')
         req.flush({ user: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -123,7 +123,7 @@ describe('UserService', () => {
         let res: any
         service.whoAmI(['id', 'email']).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/whoami?fields=id,email')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/session?fields=id,email')
         req.flush({ user: 'apiResponse' })
 
         expect(req.request.method).toBe('GET')
@@ -139,7 +139,7 @@ describe('UserService', () => {
         const mockObject = { req: 'apiRequest' }
         service.resetPassword(mockObject).subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/reset-password')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/reset-password')
         req.flush({ user: 'apiResponse' })
 
         expect(req.request.method).toBe('POST')
@@ -154,7 +154,7 @@ describe('UserService', () => {
 
         let res
         service.deluxeStatus().subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/deluxe-membership')
+        const req = httpMock.expectOne('http://localhost:3000/shop/premium-plan')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('GET')
         expect(res).toBe('apiResponse')
@@ -167,7 +167,7 @@ describe('UserService', () => {
 
         let res
         service.upgradeToDeluxe('wallet', null).subscribe((data) => (res = data))
-        const req = httpMock.expectOne('http://localhost:3000/rest/deluxe-membership')
+        const req = httpMock.expectOne('http://localhost:3000/shop/premium-plan')
         req.flush({ data: 'apiResponse' })
         expect(req.request.method).toBe('POST')
         expect(res).toBe('apiResponse')
@@ -196,7 +196,7 @@ describe('UserService', () => {
         let res: any
         service.saveLastLoginIp().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/saveLoginIp')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/client-ip')
         req.flush({})
 
         expect(req.request.method).toBe('GET')
@@ -211,7 +211,7 @@ describe('UserService', () => {
 
         let errorResponse: any
         service.login(null).subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/login')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/login')
         req.flush({ message: 'Invalid' }, { status: 401, statusText: 'Unauthorized' })
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.status).toBe(401)
@@ -224,7 +224,7 @@ describe('UserService', () => {
 
         let errorResponse: any
         service.whoAmI().subscribe({ next: () => { }, error: (err) => (errorResponse = err) })
-        const req = httpMock.expectOne('http://localhost:3000/rest/user/whoami')
+        const req = httpMock.expectOne('http://localhost:3000/shop/auth/session')
         req.error(new ErrorEvent('Network'))
         expect(errorResponse).toBeTruthy()
         expect(errorResponse.error).toBeTruthy()

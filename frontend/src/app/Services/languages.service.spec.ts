@@ -27,7 +27,7 @@ describe('LanguagesService', () => {
         let res: any
         service.getLanguages().subscribe((data) => (res = data))
 
-        const req = httpMock.expectOne('http://localhost:3000/rest/languages')
+        const req = httpMock.expectOne('http://localhost:3000/shop/system/languages')
         req.flush('apiResponse')
 
         expect(req.request.method).toBe('GET')
@@ -42,7 +42,7 @@ describe('LanguagesService', () => {
 
         let capturedError: any
         service.getLanguages().subscribe({ next: () => { }, error: (e) => { capturedError = e } })
-        const req = httpMock.expectOne('http://localhost:3000/rest/languages')
+        const req = httpMock.expectOne('http://localhost:3000/shop/system/languages')
         req.flush(null, { status: 503, statusText: 'Service Unavailable' })
         expect(capturedError).toBeTruthy()
         expect(capturedError.status).toBe(503)

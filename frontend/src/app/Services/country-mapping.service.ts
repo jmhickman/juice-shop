@@ -17,6 +17,6 @@ export class CountryMappingService {
   private readonly hostServer = environment.hostServer
 
   getCountryMapping () {
-    return this.http.get(this.hostServer + '/rest/country-mapping').pipe(catchError((err) => { throw err }))
+    return this.http.get(this.hostServer + '/shop/country-catalog').pipe(catchError((err) => { throw err }))
   }
 }

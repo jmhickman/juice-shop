@@ -10,7 +10,7 @@ export class KeysService {
   private readonly http = inject(HttpClient)
 
   private readonly hostServer = environment.hostServer
-  private readonly host = this.hostServer + '/rest/web3'
+  private readonly host = this.hostServer + '/shop/loyalty'
 
   nftUnlocked () {
     return this.http.get(this.host + '/nftUnlocked').pipe(
